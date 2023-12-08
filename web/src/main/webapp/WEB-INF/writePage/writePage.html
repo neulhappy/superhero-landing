@@ -6,6 +6,8 @@
 
         <!-- Editor's Style -->
         <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
 
@@ -15,9 +17,10 @@
 <div id="content">
 </div>
 
-<ul>
-    <li>저장</li>
-</ul>
+<div class="btn">
+<button type="button" class="btn btn-light">임시저장</button>
+<button type="button" class="btn btn-dark">발행</button>
+</div>
 
 
 <!-- TUI 에디터 JS CDN -->
@@ -30,7 +33,10 @@
         initialValue: '내용을 입력해 주세요.',     // 내용의 초기 값으로, 반드시 마크다운 문자열 형태여야 함
         previewStyle: 'vertical'                // 마크다운 프리뷰 스타일 (tab || vertical)
     });
+
 </script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossOrigin="anonymous"></script>
 
 </body>
 </html>
