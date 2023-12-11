@@ -50,5 +50,9 @@ public class Tester {
         return inp;
     }
 
-
+    public static void stringOutput(String... lines) {
+        for (String line : lines) {
+            System.out.println(line);
+        }
+    }
 }
