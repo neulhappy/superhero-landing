@@ -54,4 +54,7 @@ h1 a {text-decoration: none; color: rgb(150,200,10);}
     margin: 50px auto;
 }
 
+.wirte_table{width: 1000px; transform: translate(50px,50px);}
+.wirte_table :nth-child(2){width: 600px;}
+.write_btn{transform: translate(950px, -50px);}
 
