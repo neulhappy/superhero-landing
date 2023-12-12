@@ -1,5 +1,5 @@
 package org.util;
-
+//
 import static org.util.Logger.logger;
 
 public class QueryBuilder {

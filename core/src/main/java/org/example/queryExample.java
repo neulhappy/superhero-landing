@@ -18,6 +18,6 @@ public class queryExample {
 
         QueryBuilder.selectQuery("*", "member", "pwd < 5000", "pwd DESC");
         System.out.println(getSql());
-
+//
     }
 }

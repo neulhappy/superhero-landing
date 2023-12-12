@@ -10,4 +10,7 @@
     <orderEntry type="library" name="jakarta.servlet.jsp.jstl.api" level="project" />
     <orderEntry type="library" name="apache-tomcat-10.1" level="project" />
   </component>
+  <component name="SonarLintModuleSettings">
+    <option name="uniqueId" value="17ebfd77-dc74-4272-9fb6-bbe6fc0a9bf4" />
+  </component>
 </module>
