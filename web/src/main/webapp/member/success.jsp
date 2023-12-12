@@ -5,5 +5,6 @@
 </head>
 <body>
 <h1><%= "회원가입 성공" %></h1>
+<a href="/index.jsp">돌아가기</a>
 </body>
 </html>
