@@ -1,16 +1,20 @@
 package org.util;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-import java.io.IOException;
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
+import java.io.IOException;
 
 public class JoinController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rd = req.getRequestDispatcher("/11/Join.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/member/join.do");
         rd.forward(req, resp);
     }
 
@@ -33,11 +37,11 @@ public class JoinController extends HttpServlet {
             req.setAttribute("joinResult", joinResult);
             HttpSession session = req.getSession();
             session.setAttribute("sessionID", id);
-            RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/index.jsp");
+            RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/success.jsp");
             rd.forward(req, resp);
         } else {
             req.setAttribute("joinResult", 0);
-            RequestDispatcher rd = req.getRequestDispatcher("/11/Join.jsp");
+            RequestDispatcher rd = req.getRequestDispatcher("/member/join.do");
             rd.forward(req, resp);
         }
     }
