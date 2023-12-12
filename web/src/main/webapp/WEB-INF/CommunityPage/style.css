@@ -2,45 +2,35 @@
 
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-html, body {
-    min-height: 100%;
-}
-
-#wrab{
-    background-color: white;
-    overflow: hidden;
-}
-
-#header {
-    width: 100%;
-}
+/* 공통사항 */
+body {overflow-x: hidden; font-family: 'Noto Sans KR', sans-serif; font-size: 1.6rem; line-height: 1.6; color: #000; }
+#wrap {width: 100%; background: black;}
+*{margin: 0; padding: 0;}
 
 ul{list-style: none;}
-
-h1{padding-left: 100px; color: rgb(50,30,10);}
-h1 a {text-decoration: none; color: rgb(150,200,10);}
-
-.login{translate: 1500px; display: flex; font-size: 0.8rem; font-weight: 600;}
+h1{padding: 30px 0 20px 100px; color: rgb(50,30,10);}
+h1 a {text-decoration: none; color: rgb(200, 10, 45);}
+.login{translate: 1500px; display: flex; font-size: 1rem; font-weight: 600;}
 .login li{transform: translate(0, -3px); }
-.login a {text-decoration: none; color: black; padding: 0 10px;}
+.login a {text-decoration: none; color: #fdf7f7; padding: 0 10px;}
 
 #menu{
     width: 100%;
     display: block;
     padding-top: 10px;
 }
-
 #menu ul{
     display: flex;
     justify-content: space-around;
-    background-color: rgba(50,150,20,0.5);
+    background-color: rgba(42, 53, 169, 0.5);
     list-style: none;
     margin: 0;
     padding: 20px;
 }
-
 #menu ul li{
     background-color: transparent;
+    font-weight: 700;
+    font-size: 1.6rem;
 }
 
 #menu ul li a{
@@ -49,12 +39,15 @@ h1 a {text-decoration: none; color: rgb(150,200,10);}
     color: white;
 }
 
+
 #main{
     width: 1200px;
     margin: 50px auto;
 }
 
-.wirte_table{width: 1000px; transform: translate(50px,50px);}
+.wirte_table{width: 1200px; margin: 100px auto; transform: translate(0,20px)}
 .wirte_table :nth-child(2){width: 600px;}
-.write_btn{transform: translate(950px, -50px);}
+.write_btn{transform: translate(950px, -330px);}
+.write_btn img {width: 200px;}
 
+#footer {text-align: center; padding: 100px 0 50px 0; font-size: 1.2rem; color: #8f8a8a;}
