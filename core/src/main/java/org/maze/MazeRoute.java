@@ -25,8 +25,8 @@ public class MazeRoute {
         return route;
     }
 
-    public String proceed(Direction dir) {
-        route += dir.getValue();
-        return route;
-    }
+    //public String proceed(Direction dir) {
+     //   route += dir.getValue();
+      //  return route;
+    //}
 }
