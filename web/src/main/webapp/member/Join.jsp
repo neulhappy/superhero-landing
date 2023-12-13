@@ -76,7 +76,6 @@
     <input type="email" placeholder="Email" name="email" />
     <input type="password" placeholder="Password" name="pw" />
     <button name="submit">Sign Up</button>
-    </div>
 </form>
 </body>
 </html>
