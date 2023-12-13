@@ -1,4 +1,4 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="org.util.JoinController" %>
 <%@ page import="org.util.DBConnPool" %>
 <%@ page import="java.util.ArrayList" %>
@@ -66,9 +66,9 @@
     </script>
 </head>
 <body>
-<c:if test="${ idCheck == 0}">
+<c:if test="${joinResult == 0}">
     <script>
-        alert("아이디가 중복됩니다.")
+        alert("아이디 중복")
     </script>
 </c:if>
 <form class="box" action="join.do" method="post" onsubmit="return validateForm(this);">

@@ -78,24 +78,4 @@ public class MemberDao {
             }
         }
     }
-    public int checkId(String id){
-        String query = " SELECT * FROM game_member INFO WHERE MEMBERID=? ";
-        int idCheck = 0;
-        try {
-            ps = conn.prepareStatement(query);
-            ps.setString(1, id);
-            System.out.println("DB에 검색하는 아이디 값 : " +id);
-            rs = ps.executeQuery();
-            if(rs.next() || id.equals("")) {
-                idCheck = 0;
-                System.out.println("아이디 중복");
-            } else {
-                idCheck = 1;
-                System.out.println("아이디 사용 가능");
-            }
-        }  catch (Exception e) {
-            e.printStackTrace();
-        }
-        return idCheck;
-    }
 }
