@@ -43,6 +43,7 @@ public class MemberDao {
             ps.setString(1, mDto.getMemberId());
             ps.setString(2, mDto.getMemberPw());
             ps.setString(3, mDto.getMemberMail());
+
             result = ps.executeUpdate();
 
         } catch (Exception e) {

@@ -22,6 +22,7 @@ public class JoinController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("doPost 진입 성공!");
         req.setCharacterEncoding("UTF-8");
+
         String id = req.getParameter("id");
         String pw = req.getParameter("pw");
         String email = req.getParameter("email");
