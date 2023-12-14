@@ -1,6 +1,6 @@
-package org.util;
+package org.Model;
 
-public class MemberDto {
+public class MemberDTO {
 
     private String memberId; // 회원 아이디
     private String memberPw; // 회원 비밀번호
