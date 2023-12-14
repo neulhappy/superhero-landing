@@ -34,6 +34,7 @@ public class JoinController extends HttpServlet {
         mDto.setMemberPw(pw);
         int joinResult = mDao.join(mDto);
 
+
         if (joinResult == 1) {
             req.setAttribute("joinResult", joinResult);
             HttpSession session = req.getSession();
@@ -42,7 +43,7 @@ public class JoinController extends HttpServlet {
             rd.forward(req, resp);
         } else {
             req.setAttribute("joinResult", 0);
-            RequestDispatcher rd = req.getRequestDispatcher("/member/Join.jsp");
+            RequestDispatcher rd = req.getRequestDispatcher("../member/Join.jsp");
             rd.forward(req, resp);
         }
     }
