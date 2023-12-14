@@ -1,32 +1,77 @@
 package org.Model;
 
+import java.sql.Date;
+
 public class MemberDTO {
+    private int id;
+    private String user_id;
+    private String password;
+    private String email;
+    private Date regdate;
+    private Date lastchanged;
+    private boolean quit;
+    private int herorecommanded;
 
-    private String memberId; // 회원 아이디
-    private String memberPw; // 회원 비밀번호
-    private String memberMail; // 회원 이메일
-
-    public String getMemberId() {
-        return memberId;
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setMemberId(String memberId) {
-        this.memberId = memberId;
+    public String getUser_id() {
+        return user_id;
     }
 
-    public String getMemberPw() {
-        return memberPw;
+    public void setUser_id(String user_id) {
+        this.user_id = user_id;
     }
 
-    public void setMemberPw(String memberPw) {
-        this.memberPw = memberPw;
+    public String getPassword() {
+        return password;
     }
 
-    public String getMemberMail() {
-        return memberMail;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setMemberMail(String memberMail) {
-        this.memberMail = memberMail;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Date getRegdate() {
+        return regdate;
+    }
+
+    public void setRegdate(Date regdate) {
+        this.regdate = regdate;
+    }
+
+    public Date getLastchanged() {
+        return lastchanged;
+    }
+
+    public void setLastchanged(Date lastchanged) {
+        this.lastchanged = lastchanged;
+    }
+
+    public boolean isQuit() {
+        return quit;
+    }
+
+    public void setQuit(boolean quit) {
+        this.quit = quit;
+    }
+
+    public int getHerorecommanded() {
+        return herorecommanded;
+    }
+
+    public void setHerorecommanded(int herorecommanded) {
+        this.herorecommanded = herorecommanded;
     }
 }
