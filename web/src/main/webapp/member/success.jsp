@@ -5,6 +5,6 @@
 </head>
 <body>
 <h1><%= "회원가입 성공" %></h1>
-<a href="../MainPage.html">돌아가기</a>
+<a href="../WEB-INF/html/MainPage.html">돌아가기</a>
 </body>
 </html>
