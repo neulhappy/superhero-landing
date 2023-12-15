@@ -20,12 +20,5 @@
         <param-name>OraclePwd</param-name>
         <param-value>bitc5600</param-value>
     </context-param>
-    <servlet>
-        <servlet-name>join</servlet-name>
-        <servlet-class>com.util.JoinController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>join</servlet-name>
-        <url-pattern>/member/join.do</url-pattern>
-    </servlet-mapping>
+
 </web-app>

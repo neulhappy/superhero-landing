@@ -10,28 +10,27 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Super Hero Landing</title>
+    <title>Super Hero Story</title>
     <link rel="stylesheet" type="text/css" href="css/mainpagestyle.css"/>
 </head>
 <body>
 <div id="wrap">
     <header id="header">
         <h1>
-            <a href="#">Super Hero Landing</a>
+            <a href="index.jsp">Super Hero Story</a>
         </h1>
 
         <ul class="login">
-            <li><a href="/member/Login.jsp">로그인</a></li>
-            <li><a href="/member/Join.jsp">회원가입</a></li>
+            <li><a href="member1/Login.jsp">로그인</a></li>
+            <li><a href="member1/Join.jsp">회원가입</a></li>
         </ul>
 
         <nav id="menu">
             <ul>
-                <li><a href="#">캐릭터's</a></li>
-                <li><a href="#">게임공략</a></li>
-
-                <input type="button"  style="color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="자유게시판" onclick="location.href='jsp/CommunityPage.jsp'"/>
-                <li><a href="#">FAQ</a></li>
+                <li><a href="jsp/profilePage.jsp">소개</a></li>
+                <li><a href="#">상점</a></li>
+                <li><a href="jsp/CommunityPage.jsp">상품후기</a></li>
+                <li><a href="jsp/faqPage.jsp">FAQ</a></li>
             </ul>
         </nav>
     </header>

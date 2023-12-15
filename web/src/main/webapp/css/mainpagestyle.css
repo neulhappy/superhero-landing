@@ -25,12 +25,12 @@ h1 a {text-decoration: none; color: rgb(200, 10, 45);}
     background-color: rgba(42, 53, 169, 0.5);
     list-style: none;
     margin: 0;
-    padding: 20px;
 }
 #menu ul li{
     background-color: transparent;
     font-weight: 700;
     font-size: 1.6rem;
+    padding: 20px;
 }
 
 #menu ul li a{

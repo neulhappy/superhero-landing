@@ -1,7 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-
-
 <html>
 <head>
     <title>Title</title>
@@ -47,7 +44,7 @@
             font-weight: bold;
         }
         .div_id {
-            top: 5%;
+            top: 9%;
         }
         #div_pwOk, #div_idOk {
             color: green;
@@ -59,13 +56,9 @@
     </style>
 </head>
 <body>
-<c:if test="${joinResult == 0}">
-    <script>
-        alert("아이디 중복")
-    </script>
-</c:if>
+
 <form id="joinform" class="box" action="join.do" method="post" onsubmit="return validateForm(this);">
-    <div class="div_id" id="div_id ">4~10글자 사이, 영어와 숫자로 입력해주세요.</div>
+    <div class="div_id" id="div_id">영어와 숫자로 입력해주세요.</div>
     <div class="div_id" id="div_idOk">사용가능한 아이디입니다.</div>
     <input type="text" placeholder="ID" name="id" id="id" minlength="4" maxlength="10" required>
     <input type="email" placeholder="Email" name="email" id=email />
@@ -85,17 +78,17 @@
         HTMLFormElement.prototype.submit.call(myForm)
     });
     async function validateForm(form) {
-        if(form.id.value == ""){
+        if(form.id.value === ""){
             alert("아이디를 입력하세요.");
             form.id.focus();
             return false;
         }
-        if(form.email.value == ""){
+        if(form.email.value === ""){
             alert("이메일을 입력하세요.");
             form.email.focus();
             return false;
         }
-        if(form.pw.value == ""){
+        if(form.pw.value === ""){
             alert("비밀번호를 입력하세요.");
             form.pw.focus();
             return false;
@@ -126,7 +119,7 @@
         return /^[A-Za-z0-9][A-Za-z0-9]*$/.test(str);
     }
     elInputId.onkeyup = function () {
-        if (elInputId.value.length !== 0) {
+        if (elInputId.value.length >= 4) {
             if (joinId(elInputId.value) === false) {
                 document.getElementById('div_id').style.display = 'block';
                 document.getElementById('div_idOk').style.display = 'none';
@@ -145,7 +138,6 @@
             document.getElementById('div_pwOk').style.display = 'block';
         }
     }
-
 </script>
 </body>
 </html>
