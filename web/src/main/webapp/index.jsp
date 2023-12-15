@@ -17,21 +17,20 @@
 <div id="wrap">
     <header id="header">
         <h1>
-            <a href="#">Super Hero Landing</a>
+            <a href="index.jsp">Super Hero Story</a>
         </h1>
 
         <ul class="login">
-            <li><a href="/member1/Login.jsp">로그인</a></li>
-            <li><a href="/member1/Join.jsp">회원가입</a></li>
+            <li><a href="/member/Login.jsp">로그인</a></li>
+            <li><a href="/member/Join.jsp">회원가입</a></li>
         </ul>
 
         <nav id="menu">
             <ul>
-                <li><a href="#">캐릭터's</a></li>
-                <li><a href="#">게임공략</a></li>
-
-                <input type="button"  style="color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="자유게시판" onclick="location.href='jsp/CommunityPage.jsp'"/>
-                <li><a href="#">FAQ</a></li>
+                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="프로필" onclick="location.href='jsp/CommunityPage.jsp'"/>
+                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="쇼핑몰" onclick="location.href='jsp/CommunityPage.jsp'"/>
+                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="자유게시판" onclick="location.href='jsp/CommunityPage.jsp'"/>
+                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="FAQ" onclick="location.href='jsp/faqPage.jsp'"/>
             </ul>
         </nav>
     </header>
