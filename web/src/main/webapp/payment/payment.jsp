@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Title</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -27,10 +28,13 @@
                 merchant_uid: "merchant_" + new Date().getTime()
             }, function (rsp) {
                 if (rsp.success) {
+
                     var msg = '결제가 완료되었습니다.';
                     msg += '상점 거래ID : ' + rsp.merchant_uid;
                     msg += '결제 금액 : ' + rsp.paid_amount;
+                    // location.href = "payment/paySuccess.jsp";
 
+                    console.log("여기가 실행되나요?");
                     pay_info(rsp);
 
                 } else {
@@ -46,7 +50,7 @@
                 pg: "tosspay.tosstest",
                 pay_method: "card",
                 amount: "9999",
-                name: "히어로 굿즈",
+                name: "hero goods",
                 buyer_email: "구매자 이메일",
                 merchant_uid: "merchant_" + new Date().getTime()
             }, function (rsp) {
@@ -96,16 +100,10 @@
             function pay_info(rsp) {
                 var form = document.createElement('form');
                 var objs;
-
+                console.log(rsp.name)
                 objs = document.createElement('input');
                 objs.setAttribute('type', 'hidden');
-                objs.setAttribute('name', 'buyer_email');
-                objs.setAttribute('value', rsp.buyer_email);
-                form.appendChild(objs);
-
-                objs = document.createElement('input');
-                objs.setAttribute('type', 'hidden');
-                objs.setAttribute('name', 'buy_product_name');
+                objs.setAttribute('name', 'productName');
                 objs.setAttribute('value', rsp.name);
                 form.appendChild(objs);
 
@@ -117,7 +115,7 @@
 
                 objs = document.createElement('input');
                 objs.setAttribute('type', 'hidden');
-                objs.setAttribute('name', 'buyer_merid');
+                objs.setAttribute('name', 'productId');
                 objs.setAttribute('value', rsp.merchant_uid);
                 form.appendChild(objs);
 
@@ -127,16 +125,26 @@
                 objs.setAttribute('value', rsp.paid_amount);
                 form.appendChild(objs);
 
+
                 objs = document.createElement('input');
                 objs.setAttribute('type', 'hidden');
-                objs.setAttribute('name', 'buyer_pay_ok');
-                objs.setAttribute('value', rsp.success);
+                objs.setAttribute('name', 'status');
+                objs.setAttribute('value', rsp.status);
+                form.appendChild(objs);
+
+                objs = document.createElement('input');
+                objs.setAttribute('type', 'hidden');
+                objs.setAttribute('name', 'paymentMethod');
+                objs.setAttribute('value', rsp.pg_provider);
                 form.appendChild(objs);
 
                 form.setAttribute('method', 'post');
                 form.setAttribute('action', "paySuccess.do");
+                form.setAttribute('accept-charset', 'UTF-8');
                 document.body.appendChild(form);
+
                 form.submit();
+
             }
     </script>
 
