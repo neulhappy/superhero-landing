@@ -42,7 +42,7 @@ public class JoinController extends HttpServlet {
             req.setAttribute("joinResult", joinResult);
             HttpSession session = req.getSession();
             session.setAttribute("sessionID", id);
-            RequestDispatcher rd = req.getRequestDispatcher("/member1/success.jsp");
+            RequestDispatcher rd = req.getRequestDispatcher("/member1/joinsuccess.jsp");
             rd.forward(req, resp);
         } else {
             req.setAttribute("joinResult", 0);

@@ -59,7 +59,7 @@
     </style>
 </head>
 <body>
-<form class="box">
+<form class="box" action="login.do" method="post">
     <input type="text" placeholder="ID" name="id">
     <input type="password" placeholder="Password" name="pw" />
     <button name="submit">Login</button>

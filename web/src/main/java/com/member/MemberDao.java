@@ -1,5 +1,7 @@
 package com.member;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 public class MemberDao {
@@ -8,9 +10,7 @@ public class MemberDao {
     private PreparedStatement ps;
     private ResultSet rs;
     private int result;
-    private MemberDao() {
 
-    }
     public static synchronized MemberDao getInstance() {
         if (mDao == null) {
             mDao = new MemberDao();
@@ -54,6 +54,47 @@ public class MemberDao {
         }
         return result;
     }
+    // 로그인 확인 메서드
+    public boolean login(String id, String password) {
+        conn = this.getConn();
+        String query = "SELECT MEMBERPW FROM GAME_MEMBER WHERE MEMBERID = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String storedHashedPassword = rs.getString("MEMBERPW");
+                System.out.println(storedHashedPassword);
+                String inputHashedPassword = hashPassword(password);
+                System.out.println(inputHashedPassword);
+
+                // 저장된 해시된 비밀번호와 입력된 해시된 비밀번호 비교
+                return storedHashedPassword.equals(inputHashedPassword);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            this.close(conn, ps, rs);
+        }
+        return false;
+    }
+
+    // 비밀번호를 해시화하는 메서드
+    private String hashPassword(String password) {
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] bytes = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : bytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Password hashing failed.", e);
+        }
+    }
 
     public void close(Connection conn, PreparedStatement ps, ResultSet rs) {
         if (rs != null) {
@@ -77,5 +118,27 @@ public class MemberDao {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean isIdAvailable(String id) {
+        conn = this.getConn();
+        String query = " SELECT COUNT(*) FROM GAME_MEMBER WHERE MEMBERID = ?";
+        try {
+            ps = conn.prepareStatement(query);
+            ps.setString(1, id);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                // count가 0이면 해당 아이디는 사용 가능
+                return count == 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            this.close(conn, ps, rs);
+        }
+        // 아이디가 이미 존재하거나 예외가 발생한 경우
+        return false;
     }
 }

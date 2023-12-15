@@ -4,7 +4,8 @@
     <title>Title</title>
 </head>
 <body>
-<h1><%= "회원가입 성공" %></h1>
-<a href="../WEB-INF/html/MainPage.html">돌아가기</a>
+<h1><%= "로그인 성공" %></h1>
+<a href="/index.jsp">돌아가기</a>
+<a href="/member1/logout.do">로그아웃</a>
 </body>
 </html>
