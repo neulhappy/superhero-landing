@@ -1,5 +1,7 @@
 package org.util;
 
+import org.Model.MemberDTO;
+
 import java.sql.*;
 
 public class MemberDao {
@@ -33,7 +35,7 @@ public class MemberDao {
         }
         return conn;
     }
-    public int join(MemberDto mDto) {
+    public int join(MemberDTO mDto) {
         System.out.println("join 메소드 실행 됨");
         conn = this.getConn();
         StringBuffer query = new StringBuffer();

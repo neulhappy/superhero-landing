@@ -57,7 +57,7 @@
         alert("아이디 중복")
     </script>
 </c:if>
-<form class="box" action="join.do" method="post" onsubmit="return validateForm(this);">
+<form id="joinform" class="box" action="join.do" method="post" onsubmit="return validateForm(this);">
     <div class="div_id" id="div_id">4~10글자 사이, 영어와 숫자로 입력해주세요.</div>
     <input type="text" placeholder="ID" name="id" id="id">
     <input type="email" placeholder="Email" name="email" id=email />
@@ -67,7 +67,15 @@
 </form>
 
 <script type="text/javascript">
-    function validateForm(form) {
+    const myForm = document.getElementById('joinform');
+    myForm.addEventListener('submit', async function (event) {
+        console.log("1");
+        event.preventDefault(); // 기본 제출 동작을 막음
+        await validateForm(this); // this는 현재 폼을 가리킴
+        HTMLFormElement.prototype.submit.call(myForm)
+    });
+
+    async function validateForm(form) {
         if(form.id.value == ""){
             alert("아이디를 입력하세요.");
             form.id.focus();
@@ -88,18 +96,19 @@
             form.id.focus();
             return false;
         }
-        if (joinPw(elInputPw.value) === false) {
-            alert("비밀번호를 다시 입력해주세요");
-            form.pw.focus();
-            return false;
-        }
+        const hashedPw = await sha256(form.pw.value);
+        console.log(hashedPw);
+        form.pw.value = hashedPw;
     }
+
+    async function sha256(str) {
+        return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
+            .then(buffer => Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join(''));
+    }
+
     let elInputId = document.querySelector('#id')
     let elInputPw= document.querySelector('#pw');
 
-    function joinPw (str) {
-        return /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{4,}$/.test(str);
-    }
     function joinId(str) {
         return /^[A-Za-z0-9][A-Za-z0-9]*$/.test(str);
     }
@@ -112,28 +121,8 @@
             }
         }
     }
-    elInputPw.onkeyup = function () {
-        if (elInputPw.value.length !== 0) {
-            if (joinPw(elInputPw.value) === false) {
-                document.getElementById('div_pw').style.display = 'block'
-                elInputPw.focus()
-                return false;
-            } else if(joinPw(elInputPw.value) === true) {
-                document.getElementById('div_pw').style.display = 'none'
-            }
-        }
-    }
-    const crypto = require('crypto');
-    const salt = crypto.randomBytes(128).toString('base64');
-    app.post('join.do', async function (req, res, next) {
-        const body = req.body;
-        const elInputPw = body.pw;
-        const salt = crypto.randomBytes(128).toString('base64');
-        const hashPassword = crypto
-            .createHash('sha512')
-            .update(elInputPw + salt)
-            .digest('hex');}
-    );
+
+
 </script>
 </body>
 </html>

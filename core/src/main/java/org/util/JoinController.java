@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.Model.MemberDTO;
 
 import java.io.IOException;
 
@@ -28,10 +29,11 @@ public class JoinController extends HttpServlet {
         String email = req.getParameter("email");
 
         MemberDao mDao = MemberDao.getInstance();
-        MemberDto mDto = new MemberDto();
+        MemberDTO mDto = new MemberDTO();
         mDto.setMemberId(id);
         mDto.setMemberMail(email);
         mDto.setMemberPw(pw);
+        System.out.println(pw);
         int joinResult = mDao.join(mDto);
 
 
