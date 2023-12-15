@@ -42,9 +42,9 @@ public class MemberDao {
         query.append(" INSERT INTO GAME_MEMBER ").append(" values(?,?,?) ");
         try {
             ps = conn.prepareStatement(query.toString());
-            ps.setString(1, mDto.getMemberId());
-            ps.setString(2, mDto.getMemberPw());
-            ps.setString(3, mDto.getMemberMail());
+            ps.setInt(1, mDto.getId());
+            ps.setString(2, mDto.getEmail());
+            ps.setString(3, mDto.getPassword());
 
             result = ps.executeUpdate();
 

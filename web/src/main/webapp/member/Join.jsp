@@ -49,6 +49,13 @@
         .div_id {
             top: 5%;
         }
+        #div_pwOk, #div_idOk {
+            color: green;
+        }
+        #div_pw, #div_id {
+            color: red;
+        }
+
     </style>
 </head>
 <body>
@@ -59,14 +66,17 @@
 </c:if>
 <form id="joinform" class="box" action="join.do" method="post" onsubmit="return validateForm(this);">
     <div class="div_id" id="div_id">4~10글자 사이, 영어와 숫자로 입력해주세요.</div>
+    <div class="div_id" id="div_idOk">사용가능한 아이디입니다.</div>
     <input type="text" placeholder="ID" name="id" id="id">
     <input type="email" placeholder="Email" name="email" id=email />
     <input type="password" placeholder="Password" name="pw" id="pw" />
     <div class="div_pw" id="div_pw">4~10글자 사이, 영문, 숫자, 특수문자로 입력해주세요.</div>
+    <div class="div_pw" id="div_pwOk">사용가능한 비밀번호입니다.</div>
     <button name="submit">Sign Up</button>
 </form>
 
 <script type="text/javascript">
+    // 비밀번호 해시화
     const myForm = document.getElementById('joinform');
     myForm.addEventListener('submit', async function (event) {
         console.log("1");
@@ -74,7 +84,6 @@
         await validateForm(this); // this는 현재 폼을 가리킴
         HTMLFormElement.prototype.submit.call(myForm)
     });
-
     async function validateForm(form) {
         if(form.id.value == ""){
             alert("아이디를 입력하세요.");
@@ -91,37 +100,50 @@
             form.pw.focus();
             return false;
         }
-        if (joinId(elInputId.value) === false) {
+        if(joinId(elInputId.value) === false) {
             alert("아이디를 다시 입력해주세요");
             form.id.focus();
             return false;
         }
+        if(joinId(elInputId.value) === false) {
+            alert("아이디를 다시 입력해주세요");
+            form.pw.focus();
+            return false;
+        }
+        // 비밀번호 해시화
         const hashedPw = await sha256(form.pw.value);
-        console.log(hashedPw);
         form.pw.value = hashedPw;
     }
-
     async function sha256(str) {
         return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
             .then(buffer => Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join(''));
     }
-
-    let elInputId = document.querySelector('#id')
-    let elInputPw= document.querySelector('#pw');
+    let elInputId = document.querySelector('#id');
+    let elInputPw = document.querySelector('#pw');
 
     function joinId(str) {
         return /^[A-Za-z0-9][A-Za-z0-9]*$/.test(str);
     }
     elInputId.onkeyup = function () {
-        if (elInputId.value.length !== 0) {
+        if (elInputId.value.length !== 0 && elInputId.value.length >=4 ) {
             if (joinId(elInputId.value) === false) {
-                document.getElementById('div_id').style.display = 'block'
-            } else if(joinId(elInputId.value) === true) {
-                document.getElementById('div_id').style.display = 'none'
+                document.getElementById('div_id').style.display = 'block';
+                document.getElementById('div_idOk').style.display = 'none';
+            } else if(joinId(elInputId.value) === true ) {
+                document.getElementById('div_id').style.display = 'none';
+                document.getElementById('div_idOk').style.display = 'block';
             }
         }
     }
-
+    elInputPw.onkeyup = function () {
+        if(elInputPw.value.length < 4 || elInputPw.value.length > 10) {
+            document.getElementById('div_pw').style.display = 'block';
+            document.getElementById('div_pwOk').style.display = 'none';
+        } else if(elInputPw.value.length >=4 && elInputPw.value.length <= 10){
+            document.getElementById('div_pw').style.display = 'none';
+            document.getElementById('div_pwOk').style.display = 'block';
+        }
+    }
 
 </script>
 </body>

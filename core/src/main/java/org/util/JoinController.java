@@ -24,15 +24,16 @@ public class JoinController extends HttpServlet {
         System.out.println("doPost 진입 성공!");
         req.setCharacterEncoding("UTF-8");
 
-        String id = req.getParameter("id");
+        int id = Integer.parseInt(req.getParameter("id"));
         String pw = req.getParameter("pw");
         String email = req.getParameter("email");
 
         MemberDao mDao = MemberDao.getInstance();
         MemberDTO mDto = new MemberDTO();
-        mDto.setMemberId(id);
-        mDto.setMemberMail(email);
-        mDto.setMemberPw(pw);
+
+        mDto.setId(id);
+        mDto.setEmail(email);
+        mDto.setPassword(pw);
         System.out.println(pw);
         int joinResult = mDao.join(mDto);
 
