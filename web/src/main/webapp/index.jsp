@@ -21,8 +21,8 @@
         </h1>
 
         <ul class="login">
-            <li><a href="/member/Login.jsp">로그인</a></li>
-            <li><a href="/member/Join.jsp">회원가입</a></li>
+            <li><a href="/member1/Login.jsp">로그인</a></li>
+            <li><a href="/member1/Join.jsp">회원가입</a></li>
         </ul>
 
         <nav id="menu">
