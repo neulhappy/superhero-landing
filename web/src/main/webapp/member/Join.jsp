@@ -41,10 +41,10 @@
             border-radius: 4px;
         }
         div {
-            background-color: #fdf9f7;
             position: absolute;
-            font-size: 1.2em;
+            font-size: 1.1em;
             display: none;
+            font-weight: bold;
         }
         .div_id {
             top: 5%;
@@ -65,12 +65,12 @@
     </script>
 </c:if>
 <form id="joinform" class="box" action="join.do" method="post" onsubmit="return validateForm(this);">
-    <div class="div_id" id="div_id">4~10글자 사이, 영어와 숫자로 입력해주세요.</div>
+    <div class="div_id" id="div_id ">4~10글자 사이, 영어와 숫자로 입력해주세요.</div>
     <div class="div_id" id="div_idOk">사용가능한 아이디입니다.</div>
-    <input type="text" placeholder="ID" name="id" id="id">
+    <input type="text" placeholder="ID" name="id" id="id" minlength="4" maxlength="10" required>
     <input type="email" placeholder="Email" name="email" id=email />
-    <input type="password" placeholder="Password" name="pw" id="pw" />
-    <div class="div_pw" id="div_pw">4~10글자 사이, 영문, 숫자, 특수문자로 입력해주세요.</div>
+    <input type="password" placeholder="Password" name="pw" id="pw" minlength="4" maxlength="10" required/>
+    <div class="div_pw" id="div_pw">4~10글자 사이로 입력해주세요.</div>
     <div class="div_pw" id="div_pwOk">사용가능한 비밀번호입니다.</div>
     <button name="submit">Sign Up</button>
 </form>
@@ -105,8 +105,8 @@
             form.id.focus();
             return false;
         }
-        if(joinId(elInputId.value) === false) {
-            alert("아이디를 다시 입력해주세요");
+        if(joinId(elInputPw.value) === false) {
+            alert("비밀번호를 다시 입력해주세요");
             form.pw.focus();
             return false;
         }
@@ -118,6 +118,7 @@
         return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
             .then(buffer => Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join(''));
     }
+    // 아이디,비밀번호 제한 이벤트
     let elInputId = document.querySelector('#id');
     let elInputPw = document.querySelector('#pw');
 
@@ -125,7 +126,7 @@
         return /^[A-Za-z0-9][A-Za-z0-9]*$/.test(str);
     }
     elInputId.onkeyup = function () {
-        if (elInputId.value.length !== 0 && elInputId.value.length >=4 ) {
+        if (elInputId.value.length !== 0) {
             if (joinId(elInputId.value) === false) {
                 document.getElementById('div_id').style.display = 'block';
                 document.getElementById('div_idOk').style.display = 'none';
@@ -136,10 +137,10 @@
         }
     }
     elInputPw.onkeyup = function () {
-        if(elInputPw.value.length < 4 || elInputPw.value.length > 10) {
+        if(elInputPw.value.length < 4) {
             document.getElementById('div_pw').style.display = 'block';
             document.getElementById('div_pwOk').style.display = 'none';
-        } else if(elInputPw.value.length >=4 && elInputPw.value.length <= 10){
+        } else if(elInputPw.value.length >=4){
             document.getElementById('div_pw').style.display = 'none';
             document.getElementById('div_pwOk').style.display = 'block';
         }
