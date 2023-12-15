@@ -1,4 +1,4 @@
-package com.example;
+package com.test;
 
 import com.util.hero.HeroManager;
 import com.util.hero.HeroName;

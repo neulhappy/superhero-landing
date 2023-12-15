@@ -1,6 +1,4 @@
-package com.util;
-
-import com.Model.MemberDTO;
+package com.member;
 
 import java.sql.*;
 

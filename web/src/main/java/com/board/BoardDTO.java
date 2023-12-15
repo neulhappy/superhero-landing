@@ -1,4 +1,4 @@
-package com.Model;
+package com.board;
 
 import java.sql.Date;
 

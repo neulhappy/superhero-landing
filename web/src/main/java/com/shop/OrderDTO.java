@@ -1,4 +1,4 @@
-package com.Model;
+package com.shop;
 
 public class OrderDTO {
     private int id;

@@ -1,4 +1,4 @@
-package com.example;
+package com.test;
 
 import com.util.QueryBuilder;
 
