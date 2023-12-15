@@ -18,6 +18,14 @@ public class queryExample {
 
         QueryBuilder.selectQuery("*", "member", "pwd < 5000", "pwd DESC");
         System.out.println(getSql());
-//
+
+        QueryBuilder.updateQuery("members", "name", "새로운 이름", "member_id = 1");
+        System.out.println(getSql());
+
+        QueryBuilder.updateQuery("members", "name", "새로운 이름");
+        System.out.println(getSql());
+
+        QueryBuilder.updateQuery("order", "payment", "?");
+        System.out.println(getSql());
     }
 }

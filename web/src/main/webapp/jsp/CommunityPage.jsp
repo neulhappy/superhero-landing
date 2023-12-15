@@ -11,7 +11,7 @@
 <html>
 <meta charset="utf-8">
 <head>
-    <title>자유게시판</title>
+    <title>상품후기</title>
     <link rel="stylesheet" type="text/css" href="../css/communitypagestyle.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -21,21 +21,20 @@
 <div id="wrap">
     <header id="header">
         <h1>
-            <a href="#">Super Hero Landing</a>
+            <a href="../index.jsp">Super Hero Story</a>
         </h1>
 
         <ul class="login">
-            <li><a href="#">로그인</a></li>
-            <li><a href="#">회원가입</a></li>
+            <li><a href="../member1/Login.jsp">로그인</a></li>
+            <li><a href="../member1/Join.jsp">회원가입</a></li>
         </ul>
 
         <nav id="menu">
             <ul>
-                <li><a href="#">캐릭터's</a></li>
-                <li><a href="#">게임공략</a></li>
-
-                <li><a href="#">자유게시판</a></li>
-                <li><a href="#">FAQ</a></li>
+                <li><a href="#">소개</a></li>
+                <li><a href="#">상점</a></li>
+                <li><a href="CommunityPage.jsp" >상품후기</a></li>
+                <li><a href="faqPage.jsp">FAQ</a></li>
             </ul>
         </nav>
     </header>

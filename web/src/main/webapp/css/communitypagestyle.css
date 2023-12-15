@@ -4,15 +4,15 @@
 
 /* 공통사항 */
 body {overflow-x: hidden; font-family: 'Noto Sans KR', sans-serif; font-size: 1.6rem; line-height: 1.6; color: #000; }
-#wrap {width: 100%; min-height: 1200px; background: black;}
+#wrap {width: 100%; background: black;}
 *{margin: 0; padding: 0;}
 
 ul{list-style: none;}
-h1{padding: 30px 0 20px 100px; color: rgb(50,30,10);}
-h1 a {text-decoration: none; color: rgb(200, 10, 45);}
-.login{translate: 1500px; display: flex; font-size: 1rem; font-weight: 600;}
+h1{padding: 30px 0 20px 100px; color: rgb(50,30,10); }
+h1 a {text-decoration: none; color: rgb(200, 10, 45); font-weight: 700; font-size: 3rem;}
+.login{translate: 1500px; display: flex; }
 .login li{transform: translate(0, -3px); }
-.login a {text-decoration: none; color: #fdf7f7; padding: 0 10px;}
+.login a {text-decoration: none; color: #fdf7f7; padding: 0 5px; font-size: 1.1rem; font-weight: 700;}
 
 #menu{
     width: 100%;
@@ -25,12 +25,12 @@ h1 a {text-decoration: none; color: rgb(200, 10, 45);}
     background-color: rgba(42, 53, 169, 0.5);
     list-style: none;
     margin: 0;
-    padding: 20px;
 }
 #menu ul li{
     background-color: transparent;
     font-weight: 700;
     font-size: 1.6rem;
+    padding: 20px;
 }
 
 #menu ul li a{
@@ -45,9 +45,8 @@ h1 a {text-decoration: none; color: rgb(200, 10, 45);}
     margin: 50px auto;
 }
 
-.table-hover{width: 1200px; margin: 100px auto; transform: translate(0,20px)}
-.table-hover :nth-child(2){width: 600px;}
-.write_btn{transform: translate(950px, -330px);}
-.write_btn img {width: 200px;}
+.container{min-height: 600px; transform: translate(0, 60px);}
 
-#footer {text-align: center; padding: 300px 0 50px 0; font-size: 1.2rem; color: #8f8a8a;}
+.write_btn img {width: 200px; transform: translate(900px, -330px);}
+
+#footer {text-align: center; padding: 100px 0 50px 0; font-size: 1.2rem; color: #8f8a8a;}
