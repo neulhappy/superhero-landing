@@ -10,7 +10,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Super Hero Landing</title>
+    <title>Super Hero Story</title>
     <link rel="stylesheet" type="text/css" href="css/mainpagestyle.css"/>
 </head>
 <body>
@@ -21,16 +21,16 @@
         </h1>
 
         <ul class="login">
-            <li><a href="/member/Login.jsp">로그인</a></li>
-            <li><a href="/member/Join.jsp">회원가입</a></li>
+            <li><a href="member1/Login.jsp">로그인</a></li>
+            <li><a href="member1/Join.jsp">회원가입</a></li>
         </ul>
 
         <nav id="menu">
             <ul>
-                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="프로필" onclick="location.href='jsp/CommunityPage.jsp'"/>
-                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="쇼핑몰" onclick="location.href='jsp/CommunityPage.jsp'"/>
-                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="자유게시판" onclick="location.href='jsp/CommunityPage.jsp'"/>
-                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="FAQ" onclick="location.href='jsp/faqPage.jsp'"/>
+                <li><a href="jsp/profilePage.jsp">소개</a></li>
+                <li><a href="#">상점</a></li>
+                <li><a href="jsp/CommunityPage.jsp">상품후기</a></li>
+                <li><a href="jsp/faqPage.jsp">FAQ</a></li>
             </ul>
         </nav>
     </header>

@@ -11,7 +11,7 @@
 <html>
 <meta charset="utf-8">
 <head>
-    <title>자유게시판</title>
+    <title>상품후기</title>
     <link rel="stylesheet" type="text/css" href="../css/communitypagestyle.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
@@ -25,16 +25,16 @@
         </h1>
 
         <ul class="login">
-            <li><a href="#">로그인</a></li>
-            <li><a href="#">회원가입</a></li>
+            <li><a href="../member1/Login.jsp">로그인</a></li>
+            <li><a href="../member1/Join.jsp">회원가입</a></li>
         </ul>
 
         <nav id="menu">
             <ul>
-                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="프로필" onclick="location.href='jsp/CommunityPage.jsp'"/>
-                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="쇼핑몰" onclick="location.href='jsp/CommunityPage.jsp'"/>
-                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="자유게시판" onclick="location.href='CommunityPage.jsp'"/>
-                <input type="button"  style="padding: 30px; border: transparent; color: white; font-size: 1.6rem; font-weight: 700; background-color: transparent;" value="FAQ" onclick="location.href='faqPage.jsp'"/>
+                <li><a href="#">소개</a></li>
+                <li><a href="#">상점</a></li>
+                <li><a href="CommunityPage.jsp" >상품후기</a></li>
+                <li><a href="faqPage.jsp">FAQ</a></li>
             </ul>
         </nav>
     </header>
