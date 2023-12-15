@@ -22,7 +22,7 @@
     </context-param>
     <servlet>
         <servlet-name>join</servlet-name>
-        <servlet-class>org.util.JoinController</servlet-class>
+        <servlet-class>com.util.JoinController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>join</servlet-name>
