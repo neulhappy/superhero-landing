@@ -24,14 +24,14 @@ const initGrid = () => {
     Grid.applyTheme('defualt',  {
         cell: {
             normal: {
-                border: '#ddd'
+                border: '#fff'
             },
             header: {
-                background: 'skyblue',
-                text: 'white'
+                background: '#589fad',
+                text: 'white',
             },
             evenRow: {
-                background: '#d9eceb'
+                background: '#e4f2f3'
             }
         }
     });
@@ -61,8 +61,8 @@ const initGrid = () => {
         scrollX: false,
         scrollY: false,
         draggable: false,
-        header: { height: 30 },
-        bodyHeight: 500,
+        header: { height: 50 },
+        bodyHeight: 700,
         contextMenu: null,
         columns: [
             {

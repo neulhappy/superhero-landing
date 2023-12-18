@@ -24,10 +24,10 @@
     <div role="tabpanel">
         <!-- List group -->
         <div class="list-group" id="myList" role="tablist">
-            <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#home" role="tab">Home</a>
-            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#profile" role="tab">Profile</a>
-            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#messages" role="tab">Messages</a>
-            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#settings" role="tab">Settings</a>
+            <a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#home" role="tab">[공지] 작성시 주의사항</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#profile" role="tab">[공지] 문의 방법</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#messages" role="tab">[공지] 상품문의 관련 공지</a>
+            <a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#settings" role="tab">[공지] 오류해결</a>
         </div>
 
         <!-- Tab panes -->
@@ -44,6 +44,8 @@
 <footer id="footer">
 
 </footer>
+
+<jsp:include page="faqPage_grid.jsp"/>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
