@@ -32,8 +32,8 @@
 
         <nav id="menu">
             <ul>
-                <li><a href="#">소개</a></li>
-                <li><a href="#">상점</a></li>
+                <li><a href="profilePage.jsp">소개</a></li>
+                <li><a href="goodsPage.jsp">상점</a></li>
                 <li><a href="CommunityPage.jsp" >상품후기</a></li>
                 <li><a href="faqPage.jsp">FAQ</a></li>
             </ul>
