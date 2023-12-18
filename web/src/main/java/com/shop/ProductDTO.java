@@ -6,7 +6,4 @@ public class ProductDTO {
     private int price;
     private boolean able;
     private int hero;
-    private int rate;
-
-
 }
