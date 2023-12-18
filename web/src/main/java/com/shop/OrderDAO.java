@@ -10,7 +10,7 @@ public class OrderDAO extends DBConnPool {
 
     public int insertOrder(OrderDTO dto) {
      //반환값은 id임
-        int orderId = -1;
+        int orderId = 0;
         try {
             //쿼리 작성
             String query = "INSERT INTO order ( "
