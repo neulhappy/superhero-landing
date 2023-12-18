@@ -7,7 +7,7 @@ public class QueryBuilder {
     public static String insertQuery(String table, String columns){
         try{
             sql = "INSERT INTO " + table
-                    + " VALUES (" + columns + ")" + ";"
+                    + " VALUES (" + columns + ")"
             ;
         }catch (IllegalArgumentException e){
             logger.error("insertQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.");
@@ -19,8 +19,8 @@ public class QueryBuilder {
     public static String updateQuery(String table, String columns, String newValue, String condition){
         try{
             sql = "UPDATE " + table
-                    + " SET " + columns + " = '" + newValue +"'"
-                    + " WHERE " + condition + ";"
+                    + " SET " + columns + " = " + newValue
+                    + " WHERE " + condition
             ;
         }catch (IllegalArgumentException e){
             logger.error("insertQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.");
@@ -32,7 +32,7 @@ public class QueryBuilder {
     public static String updateQuery(String table, String columns, String newValue){
         try{
             sql = "UPDATE " + table
-                    + " SET " + columns + " = '" + newValue +"'"+ ";"
+                    + " SET " + columns + " = " + newValue
             ;
         }catch (IllegalArgumentException e){
             logger.error("insertQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.");
@@ -48,7 +48,7 @@ public class QueryBuilder {
             sql = "SELECT " + columnName
                     + " FROM " + table
                     + " WHERE " + condition
-                    + " ORDER BY " + sortcolumns+ ";"
+                    + " ORDER BY " + sortcolumns
             ;
         }catch (IllegalArgumentException e){
             logger.error("selectQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.");
@@ -60,7 +60,7 @@ public class QueryBuilder {
         try{
             sql = "SELECT " + columnName
                     + " FROM " + table
-                    + " WHERE " + condition+ ";"
+                    + " WHERE " + condition
             ;
         }catch (IllegalArgumentException e){
             logger.error("selectQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.");
@@ -71,7 +71,7 @@ public class QueryBuilder {
     public static String selectQuery(String columnName, String table){
         try{
             sql = "SELECT " + columnName
-                    + " FROM " + table+ ";"
+                    + " FROM " + table
             ;
         }catch (IllegalArgumentException e){
             logger.error("selectQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.");
