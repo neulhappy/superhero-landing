@@ -7,7 +7,9 @@ import java.sql.ResultSet;
 
 public class OrderDAO extends DBConnPool {
 
+
     public int insertOrder(OrderDTO dto) {
+     //반환값은 id임
         int orderId = -1;
         try {
             //쿼리 작성
