@@ -22,7 +22,6 @@
             background-color: #c4dfff;
             border-radius: 7px;
         }
-
         .box input,
         .box button {
             padding: 15px;
@@ -40,44 +39,65 @@
         div {
             position: absolute;
             font-size: 1em;
-            display: none;
             font-weight: bold;
         }
-        .div_id {
-            top:37%;
-        }
-        #div_pwOk, #div_idOk {
-            color: green;
-        }
-        #div_pw, #div_id {
-            color: red;
-        }
-        #div_pw, #div_pwOk {
-            bottom: 25%;
-        }
         #idCheckResult {
-            top: 8%;
-            display: block;
+            top: 9%;
+        }
+        #emCheckResult{
+            top: 28%;
         }
 
     </style>
 </head>
 <body>
 <form id="joinform" class="box" action="join.do" method="post" onsubmit="return validateForm(this);">
-    <div class="div_id" id="div_id">영어와 숫자로 입력해주세요.</div>
-    <div class="div_id" id="div_idOk">아이디 중복확인을 해주세요.</div>
-    <button type="button" onclick="checkDuplicate()">아이디 중복 확인</button>
     <div id="idCheckResult"></div>
-    <input type="text" placeholder="ID" name="id" id="id" minlength="4" maxlength="10" required>
-    <input type="email" placeholder="Email" name="email" id=email />
-    <input type="password" placeholder="Password" name="pw" id="pw" minlength="4" maxlength="10" required/>
-    <div class="div_pw" id="div_pw">4~10글자 사이로 입력해주세요.</div>
-    <div class="div_pw" id="div_pwOk">사용가능한 비밀번호입니다.</div>
+    <input type="text" onkeyup="checkId()" placeholder="ID" name="id" id="id" minlength="4" maxlength="10" required>
+    <input type="email" placeholder="Email" onkeyup="checkEm()" name="email" id=email />
+    <div id="emCheckResult"></div>
+    <input type="password" onkeyup="checkPw()" placeholder="Password" name="pw" id="pw" minlength="4" maxlength="10" required/>
+    <div id="pwCheckResult"></div>
     <button name="submit">Sign Up</button>
 </form>
 
 <script type="text/javascript">
-    function checkDuplicate() {
+    const elInputId = document.querySelector('#id');
+    const elInputPw = document.querySelector('#pw');
+    const elInputEm = document.querySelector('#email');
+    // 아이디 유효성 검사
+    function joinId(str) {
+        return /^[A-Za-z0-9][A-Za-z0-9]*$/.test(str);
+    }
+
+    function joinEmail(asValue) {
+        return /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(asValue);
+    }
+
+    function checkEm() {
+        const emCk = document.getElementById("emCheckResult");
+        if(joinEmail(elInputEm.value) === true) {
+            emCk.innerText = "사용 가능한 이메일입니다.";
+            emCk.style.color = "green";
+        } else if(joinEmail(elInputEm.value) === false) {
+        emCk.innerText = "이메일 형식을 확인해주세요.";
+        emCk.style.color = "red";
+        }
+    }
+
+    // 비밀번호 조건
+    function checkPw() {
+        const pwCk = document.getElementById("pwCheckResult");
+        if(elInputPw.value.length >= 4) {
+            pwCk.innerText = "사용 가능한 비밀번호입니다.";
+            pwCk.style.color = "green";
+        } else if(elInputPw.value.length < 4) {
+            pwCk.innerText = "4~10글자, 영어와 숫자로 입력해주세요.";
+            pwCk.style.color = "red";
+        }
+    }
+    // 아이디 중복 확인
+    function checkId() {
         var id = document.getElementById("id").value; // 입력된 아이디 가져오기
 
         // 서버로 중복 확인 요청을 보냅니다.
@@ -89,16 +109,25 @@
                 var result = xhr.responseText; // 서버에서 받은 결과 (true 또는 false)
                 var resultDiv = document.getElementById("idCheckResult");
 
-                if (result === "true") {
-                    resultDiv.innerHTML = "사용 가능한 아이디입니다.";
-                    resultDiv.style.color = "green";
+                if(elInputId.value.length >= 4){
+                    if(joinId(elInputId.value) === true ) {
+                        if (result === "true") {
+                            resultDiv.innerHTML = "사용 가능한 아이디입니다.";
+                            resultDiv.style.color = "green";
+                        } else if ( result === "false") {
+                            resultDiv.innerHTML = "이미 사용 중인 아이디입니다.";
+                            resultDiv.style.color = "red";
+                        }
+                    } else  {
+                        resultDiv.innerHTML = "영어와 숫자로 입력해주세요.";
+                        resultDiv.style.color = "red";
+                    }
                 } else {
-                    resultDiv.innerHTML = "이미 사용 중인 아이디입니다.";
+                    resultDiv.innerHTML = "4~10글자, 영어와 숫자로 입력하세요."
                     resultDiv.style.color = "red";
                 }
             }
         }
-
         // 서버로 아이디를 전송합니다.
         var data = "id=" + encodeURIComponent(id);
         xhr.send(data);
@@ -111,13 +140,17 @@
         event.preventDefault(); // 기본 제출 동작을 막음
         await validateForm(this); // this는 현재 폼을 가리킴
         HTMLFormElement.prototype.submit.call(myForm)
-    });
+    })
     async function validateForm(form) {
-        if(joinId(elInputId.value) === false) {
+        if(!joinId(elInputId.value)) {
             alert("아이디를 다시 입력해주세요");
             elInputId.focus();
-            return false;
-    // 아이디가 유효하지 않으면 submit 방지
+            return joinId(str); // 아이디가 유효하지 않으면 submit 방지
+        }
+        if(!joinEmail(elInputEm.value)){
+            alert("이메일을 다시 입력해주세요.");
+            elInputEm.focus();
+            return joinEmail(asValue);
         }
         // 비밀번호 해시화
         const hashedPw = await sha256(form.pw.value);
@@ -127,28 +160,6 @@
         return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
             .then(buffer => Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join(''));
     }
-    // 아이디,비밀번호 제한 이벤트
-    let elInputId = document.querySelector('#id');
-    let elInputPw = document.querySelector('#pw');
-
-    function joinId(str) {
-        return /^[A-Za-z0-9][A-Za-z0-9]*$/.test(str);
-    }
-    function updateIdValidation() {
-        const isValid = elInputId.value.length >= 4 && joinId(elInputId.value);
-        document.getElementById('div_id').style.display = isValid ? 'none' : 'block';
-        document.getElementById('div_idOk').style.display = isValid ? 'block' : 'none';
-    }
-    function updatePwValidation() {
-        const isValid = elInputPw.value.length >= 4;
-        document.getElementById('div_pw').style.display = isValid ? 'none' : 'block';
-        document.getElementById('div_pwOk').style.display = isValid ? 'block' : 'none';
-    }
-    elInputId.addEventListener('input', updateIdValidation);
-    elInputPw.addEventListener('input', updatePwValidation);
-    // 페이지 로드 시에는 두 div 요소를 숨김
-    document.getElementById('div_id').style.display = 'none';
-    document.getElementById('div_pw').style.display = 'none';
 </script>
 </body>
 </html>

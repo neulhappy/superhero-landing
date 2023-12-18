@@ -12,8 +12,6 @@ import java.io.IOException;
 
 @WebServlet("/member1/login.do")
 public class LoginController extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
