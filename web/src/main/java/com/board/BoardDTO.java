@@ -85,4 +85,5 @@ public class BoardDTO {
     public void setIs_notice(boolean is_notice) {
         this.is_notice = is_notice;
     }
+
 }

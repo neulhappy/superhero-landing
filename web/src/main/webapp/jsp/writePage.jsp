@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 2023-12-14
@@ -23,14 +24,30 @@
 <body>
 
     <h1>게시글 작성</h1>
-    <form name="writeFrm" method="post" action="WriteProcess.jsp" onsubmit="return validateForm(this)">
+    <form name="writeFrm" method="post" action="CommunityPage.jsp" onsubmit="return validateForm(this)">
         <input type="hidden" name="board_id" value="">
         <input type="hidden" name="content" value="1">
         <table border="1" style="width: 100%; min-height: 50px;">
             <tr>
-                <td style="text-align: center; font-size: 1.6rem; font-weight: 700">제목</td>
+                <td style="text-align: center; font-size: 1.6rem; font-weight: 700; border-bottom: 1px solid black">제목</td>
                 <td style="border: 0.5px solid black"><input type="text" name="title" style="width: 90%; height: 40px;"
                                                              placeholder="제목을 입력해주세요"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: center; font-size: 1.6rem; font-weight: 700; border-bottom: 1px solid black">작성자</td>
+                <td style="border: 0.5px solid black"><input type="text" name="name" style="width: 90%; height: 40px;"
+                                                             placeholder="이름을 입력해주세요"/></td>
+            </tr>
+            <tr>
+                <td style="text-align: center; font-size: 1.4rem; font-weight: 400">작성일</td>
+                <td style="border: 0.5px solid black" name="postdate" style="width: 90%; height: 40px;">
+                    <%
+                        Date date = new Date();
+                        SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+                        String strDate = simpleDate.format(date);
+                    %>
+                    <%=strDate%>
+                </td>
             </tr>
         </table>
 
@@ -39,8 +56,8 @@
         </div>
 
         <div class="btn">
-            <input type="button" class="btn btn-light" value="임시저장" onclick="location.href='../jsp/CommunityPage.jsp'"/>
-            <input type="button" class="btn btn-dark" value="발행" onclick="submitPost()"/>
+            <input type="button" class="btn btn-light" value="취소" onclick="history.back()"/>
+            <input type="submit" class="btn btn-dark" value="발행"/>
         </div>
 
 
