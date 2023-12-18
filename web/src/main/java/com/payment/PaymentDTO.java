@@ -1,6 +1,6 @@
 package com.payment;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class PaymentDTO {
 
