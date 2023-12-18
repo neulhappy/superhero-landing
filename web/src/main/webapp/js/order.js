@@ -127,3 +127,34 @@ function pay_info(rsp) {
         productList.appendChild(product);
     }
 
+function sendData() {
+    var validPhonenumber = validatePhoneNumber();
+    if(!validPhonenumber){
+        return;
+    }
+    // 폼 데이터 가져오기
+    var formData = {
+        customer_id: document.getElementById('customer_id').value,
+        purchaser_name: document.getElementById('purchaser_name').value,
+        recipient_name: document.getElementById('recipient_name').value,
+        address: document.getElementById('address').value,
+        contact: document.getElementById('contact').value
+        // 다른 필드들도 추가할 수 있습니다.
+    };
+
+    // AJAX를 이용한 데이터 전송
+    $.ajax({
+        type: 'POST',
+        url: '/shop/order.jsp', // 데이터를 처리할 서버의 엔드포인트 URL을 입력하세요.
+        data: formData,
+        success: function(response) {
+            // 성공 시 실행되는 코드
+            alert('주문지 작성이 성공적으로 완료되었습니다.');
+            // 추가 작업을 할 수 있습니다.
+        },
+        error: function(error) {
+            // 실패 시 실행되는 코드
+            alert('주문지 작성에 실패했습니다.');
+        }
+    });
+}
