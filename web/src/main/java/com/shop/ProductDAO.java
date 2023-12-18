@@ -6,12 +6,12 @@ import com.util.Logger;
 import java.sql.SQLException;
 
 public class ProductDAO extends DBConnPool {
-    public ProductDTO selectProduct(String idx) {
+    public ProductDTO selectProduct(String id) {
         ProductDTO dto = new ProductDTO();
         String query = "SELECT * FROM product WHERE id=?";
         try {
             psmt = con.prepareStatement(query);
-            psmt.setString(1, idx);
+            psmt.setString(1, id);
             rs = psmt.executeQuery();
 
             if (rs.next()) {
