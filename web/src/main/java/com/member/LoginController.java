@@ -24,9 +24,9 @@ public class LoginController extends HttpServlet {
         if (mDao.login(id, pw)) {
             // 로그인 성공
             HttpSession session = req.getSession();
-            session.setAttribute("sessionID", id);
+            session.setAttribute("userID", id);
             // 로그인 후 이동할 페이지로 리다이렉트 또는 포워딩
-            resp.sendRedirect("/member1/loginsuccess.jsp");
+            resp.sendRedirect("/index.jsp");
         } else {
             // 로그인 실패
             req.setAttribute("loginResult", "fail");
