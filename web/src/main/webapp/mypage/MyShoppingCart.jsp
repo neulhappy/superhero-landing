@@ -58,7 +58,6 @@
             <li><a href="MyQnA.jsp">나의 문의내역</a></li>
             <li><a href="MyReview.jsp">나의 후기</a></li>
             <li><a href="MyShoppingCart.jsp"><span>장바구니</span></a></li>
-            <li><a href="MyInformation.jsp">회원정보</a></li>
         </ul>
     </div>
 </div>

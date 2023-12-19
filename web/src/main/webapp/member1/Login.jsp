@@ -75,6 +75,7 @@
     }
 </script>
 <form class="box" action="login.do" method="post">
+    <input type="hidden" name="mode" value="login">
     <input type="text" placeholder="ID" name="id">
     <input type="password" placeholder="Password" name="pw" />
     <button name="submit">Login</button>

@@ -39,6 +39,7 @@
         li > a {
             color: #2d2d2d;
         }
+
         a {
             text-decoration: none;
         }
@@ -74,26 +75,26 @@
     </style>
 </head>
 <body>
-<h1>
-    <a href="/index.jsp">Super Hero Landing</a>
-</h1>
-<div class="mypage">
-    <div class="nav">
-        <ul>
-            <li><a href="OrderMypage.jsp">주문내역</a></li>
-            <li><a href="MyQnA.jsp">나의 문의내역</a></li>
-            <li><a href="MyReview.jsp">나의 후기</a></li>
-            <li><a href="MyShoppingCart.jsp">장바구니</a></li>
-            <li><a href="MyInformation.jsp">회원정보</a></li>
-        </ul>
+    <h1>
+        <a href="/index.jsp">Super Hero Landing</a>
+    </h1>
+    <div class="mypage">
+        <div class="nav">
+            <ul>
+                <li><a href="OrderMypage.jsp">주문내역</a></li>
+                <li><a href="MyQnA.jsp">나의 문의내역</a></li>
+                <li><a href="MyReview.jsp">나의 후기</a></li>
+                <li><a href="MyShoppingCart.jsp">장바구니</a></li>
+            </ul>
+        </div>
+        <div class="login">
+            <form class="box" action="member1/login.do">
+                <input type="hidden" name="mode" value="inform">
+                <input type="hidden" name="id">
+                <input type="password" placeholder="Password" name="pw"/>
+                <button name="submit">인증하기</button>
+            </form>
+        </div>
     </div>
-    <div class="login">
-        <form class="box" action="MyInformation.jsp">
-            <input type="hidden" placeholder="ID" name="id">
-            <input type="password" placeholder="Password" name="pw"/>
-            <button name="submit">인증하기</button>
-        </form>
-    </div>
-</div>
 </body>
 </html>
