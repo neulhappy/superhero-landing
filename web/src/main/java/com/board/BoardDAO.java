@@ -174,4 +174,26 @@ public class BoardDAO extends DBConnPool {
 
         return result;
     }
+
+    public int selectCount(Map<String, Object> map, String boardId) {
+        String table = "board-" + boardId;
+        int totalCount = 0;
+        String query = "SELECT COUNT(*) FROM " + table;
+        if (map.get("searchWord") != null) {
+            query += " WHERE " + map.get("searchFiled") + " "
+                    + " LIKE '%" + map.get("searchWord") + "%'";
+        }
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+            rs.next();
+            totalCount = rs.getInt(1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("selectCount 오류 발생");
+        }
+
+        return totalCount;
+    }
 }
+
