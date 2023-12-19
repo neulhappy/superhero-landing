@@ -6,6 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
+<%@ page import="com.util.hero.HeroManager" %>
+<%@ page import="com.util.hero.HeroName" %>
+<%@ page import="com.util.hero.HeroInfo" %>
 <html>
 <head>
     <title>Hero 소개</title>
@@ -25,50 +28,245 @@
 
 <main id="main">
     <div class="content">
-<%--        <ul class="icon">--%>
-<%--            <li><a href="#"><img src="../img/icon.png" alt="찜한 영웅"></a></li>--%>
-<%--            <li>전체순</li>--%>
-<%--        </ul>--%>
 
-        <form method="get" action="Checkbox">
         <ul class="Hero">
-            <li><a href=""><img src="../img/hero/dr.jpg" alt="닥터스트레인지">닥터스트레인지</a></li>
-            <li><a href=""><img src="../img/hero/winter%20soldier.jpg" alt="윈터솔져">윈터솔져</a></li>
-            <li><a href=""><img src="../img/hero/black.jpg" alt="블랙 위도우">블랙 위도우</a></li>
-            <li><a href=""><img src="../img/hero/black02.jpg" alt="블랙팬서">블랙팬서</a></li>
-            <li><a href=""><img src="../img/hero/Vision.jpg" alt="비즈">비즈</a></li>
-            <li><a href=""><img src="../img/hero/scarlet.jpg" alt="스칼렛 위치">스칼렛 위치</a></li>
-            <li><a href=""><img src="../img/hero/star.jpg" alt="스타로드">스타로드</a></li>
-            <li><a href=""><img src="../img/hero/spider.jpg" alt="스파이더맨">스파이더맨</a></li>
-            <li><a href=""><img src="../img/hero/iron.jpg" alt="아이언맨">아이언맨</a></li>
-            <li><a href=""><img src="../img/hero/ant.jpg" alt="앤트맨">앤트맨</a></li>
-            <li><a href=""><img src="../img/hero/war.jpg" alt="워머신">워머신</a></li>
-            <li><a href=""><img src="../img/hero/captain.jpg" alt="캡틴 아메리카">캡틴 아메리카</a></li>
-            <li><a href=""><img src="../img/hero/thor.jpg" alt="토르">토르</a></li>
-            <li><a href=""><img src="../img/hero/falcon.jpg" alt="팔콘">팔콘</a></li>
-            <li><a href=""><img src="../img/hero/hulk.jpg" alt="헐크">헐크</a></li>
-            <li><a href=""><img src="../img/hero/hawk.jpg" alt="호크아이">호크아이</a></li>
+            <li>
+                <img src="../img/hero/dr.jpg" alt="닥터스트레인지">
+                    <span class="popupBtn">닥터스트레인지</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <img src="../img/hero/winter%20soldier.jpg" alt="윈터솔져">
+                <span class="popupBtn">윈터솔져</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li><img src="../img/hero/black.jpg" alt="블랙 위도우">
+                <span class="popupBtn">블랙 위도우</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+
+            <li><img src="../img/hero/black02.jpg" alt="블랙팬서">
+                <span class="popupBtn">블랙팬서</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/Vision.jpg" alt="비즈">
+                <span class="popupBtn">비즈</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/scarlet.jpg" alt="스칼렛 위치">
+                <span class="popupBtn">스칼렛 위치</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/star.jpg" alt="스타로드">
+                <span class="popupBtn">스타로드</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/spider.jpg" alt="스파이더맨">
+                <span class="popupBtn">스파이더맨</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/iron.jpg" alt="아이언맨">
+                <span class="popupBtn">아이언맨</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/ant.jpg" alt="앤트맨">
+                <span class="popupBtn">앤트맨</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/war.jpg" alt="워머신">
+                <span class="popupBtn">워머신</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/captain.jpg" alt="캡틴 아메리카">
+                <span class="popupBtn">캡틴 아메리카</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/thor.jpg" alt="토르">
+                <span class="popupBtn">토르</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/falcon.jpg" alt="팔콘">
+                <span class="popupBtn">팔콘</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/hulk.jpg" alt="헐크">
+                <span class="popupBtn">헐크</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li><img src="../img/hero/hawk.jpg" alt="호크아이">
+                <span class="popupBtn">호크아이</span>
+                <div class="modalWrap">
+                    <div class="modalContent">
+                        <div class="modalBody">
+                            <span class="closeBtn">&times;</span>
+                            <p>modal-popup 입니다.</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
         </ul>
-        </form>
+
     </div>
 </main>
 
+
 <footer id="footer">
     <p>Copyright (c) 2023 Re-Coder</p>
-    <out_logo><a href="../index.jsp"><img src="../img/profooterlogo.png"></a></out_logo>
+    <out_logo><a href=" ../index.jsp"><img src="../img/profooterlogo.png"></a></out_logo>
 </footer>
 
 <script>
-    $("input:checkbox[id='1']").prop("checked", true);
-    $("input:checkbox[id='1']").prop("checked", false);
+
+    // Modal을 가져옵니다.
+    var modals = document.getElementsByClassName("modalWrap");
+    // Modal을 띄우는 클래스 이름을 가져옵니다.
+    var btns = document.getElementsByClassName("popupBtn");
+    // Modal을 닫는 close 클래스를 가져옵니다.
+    var spanes = document.getElementsByClassName("closeBtn");
+    var funcs = [];
+
+    // Modal을 띄우고 닫는 클릭 이벤트를 정의한 함수
+    function Modal(num) {
+        return function() {
+            // 해당 클래스의 내용을 클릭하면 Modal을 띄웁니다.
+            btns[num].onclick =  function() {
+                modals[num].style.display = "block";
+                console.log(num);
+            };
+
+            // <span> 태그(X 버튼)를 클릭하면 Modal이 닫습니다.
+            spanes[num].onclick = function() {
+                modals[num].style.display = "none";
+            };
+        };
+    }
+
+    // 원하는 Modal 수만큼 Modal 함수를 호출해서 funcs 함수에 정의합니다.
+    for(var i = 0; i < btns.length; i++) {
+        funcs[i] = Modal(i);
+    }
+
+    // 원하는 Modal 수만큼 funcs 함수를 호출합니다.
+    for(var j = 0; j < btns.length; j++) {
+        funcs[j]();
+    }
+
+    // Modal 영역 밖을 클릭하면 Modal을 닫습니다.
+    window.onclick = function(event) {
+        if (event.target.className == "modal") {
+            event.target.style.display = "none";
+        }
+    };
+
 </script>
 
-<script>
-    $("input:checkbox[name=item]:checked").each(function(){
-        var checkVal = $(this).val();
-        console.log(checkVal);
-    })
-</script>
 
 </body>
 </html>

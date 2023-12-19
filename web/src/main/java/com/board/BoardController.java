@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 
-@WebServlet("heroboard/list.do")
+//@WebServlet("heroboard/list.do")
 public class BoardController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //DAO 생성
