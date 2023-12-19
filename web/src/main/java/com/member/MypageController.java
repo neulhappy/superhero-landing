@@ -23,8 +23,6 @@ public class MypageController extends HttpServlet {
             request.getRequestDispatcher("/mypage/MyReview.jsp").forward(request, response);
         } else if ("Shopping".equals(action)) {
             request.getRequestDispatcher("/mypage/MyShoppingCart.jsp").forward(request, response);
-        } else if ("Information".equals(action)) {
-            request.getRequestDispatcher("/mypage/MyInformation.jsp").forward(request, response);
         } else {
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
