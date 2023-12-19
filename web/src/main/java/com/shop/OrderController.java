@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/shop/order.do")
+@WebServlet("/order/orderSuccess.do")
 public class OrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -27,6 +27,7 @@ public class OrderController extends HttpServlet {
         OrderDAO dao = new OrderDAO();
         int orderId = dao.insertOrder(dto);
         dao.close();
+
 
         HttpSession session = req.getSession();
         session.setAttribute("order_id", orderId);

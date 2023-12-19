@@ -2,7 +2,6 @@ const IMP = window.IMP;
 IMP.init("imp85622471");
 
 const kakaoButton = document.querySelector(".kakao");
-const tossButton = document.querySelector(".toss");
 
 const onKakaoPay = async () => {
     IMP.request_pay({
@@ -21,29 +20,13 @@ const onKakaoPay = async () => {
         }
     });
 }
-const onTossPay = async () => {
-    IMP.request_pay({
-        pg: "tosspay.tosstest",
-        pay_method: "card",
-        amount: "9999",
-        name: "hero goods",
-        buyer_email: "구매자 이메일",
-        merchant_uid: "merchant_" + new Date().getTime()
-    }, function (rsp) {
-        if (rsp.success) {
-            pay_info(rsp);
-        } else {
-            location.href = "payFailed.jsp";
-        }
-    });
-}
 kakaoButton.addEventListener("click", onKakaoPay);
-tossButton.addEventListener("click", onTossPay);
+
 
 function pay_info(rsp) {
     var form = document.createElement('form');
     var objs;
-    console.log(rsp.name)
+
     objs = document.createElement('input');
     objs.setAttribute('type', 'hidden');
     objs.setAttribute('name', 'productName');
@@ -127,34 +110,56 @@ function pay_info(rsp) {
         productList.appendChild(product);
     }
 
-function sendData() {
-    var validPhonenumber = validatePhoneNumber();
-    if(!validPhonenumber){
-        return;
-    }
-    // 폼 데이터 가져오기
-    var formData = {
-        customer_id: document.getElementById('customer_id').value,
-        purchaser_name: document.getElementById('purchaser_name').value,
-        recipient_name: document.getElementById('recipient_name').value,
-        address: document.getElementById('address').value,
-        contact: document.getElementById('contact').value
-        // 다른 필드들도 추가할 수 있습니다.
-    };
+function submit() {
+    sendOrderData();
+}
 
-    // AJAX를 이용한 데이터 전송
+function phoneNumberRule(str){//휴대폰 번호 유효성 검사
+    return /^01(?:0|1|[6-9])-\d{3,4}-\d{4}$/.test(str);
+}
+function nameRule(str){//이름 유효성 검사
+    return /^[A-Za-z가-힣]+$/.test(str);
+}
+
+function addressRule(str){//주소 유효성 검사
+    return /^[A-Za-z가-힣0-9\s\-\.,#]+$/.test(str);
+}
+
+const InputPurchaserName = document.querySelector('#purchaser_name');
+const InputRecipientName = document.querySelector('#recipient_name');
+const InputAddress = document.querySelector('#address');
+const InputPhoneNumber = document.querySelector('#contact');
+function validateForm() {
+    console.log("되고있는중");
+
+    var resultDiv = document.getElementById("phoneNumberCheckResult");
+    if (phoneNumberRule(InputPhoneNumber.value) === true
+        && nameRule(InputPurchaserName.value) === true
+        && nameRule(InputRecipientName.value) === true
+        && addressRule(InputAddress.value) === true) {
+        submitButton.disabled = false; // 유효성 검사 성공 시 버튼 활성화
+    } else {
+        submitButton.disabled = true; // 유효성 검사 실패 시 버튼 비활성화
+    }
+}
+
+function submitForm() {
+    //const form = document.getElementById('orderForm');
+    let formData = $("#orderForm").serialize();
+    console.log(formData);
+
     $.ajax({
-        type: 'POST',
-        url: '/shop/order.jsp', // 데이터를 처리할 서버의 엔드포인트 URL을 입력하세요.
+        type: "post",
+        url: "orderSuccess.do",
         data: formData,
-        success: function(response) {
-            // 성공 시 실행되는 코드
-            alert('주문지 작성이 성공적으로 완료되었습니다.');
-            // 추가 작업을 할 수 있습니다.
+        dataType: 'json',
+        success: function (data) {
+            alert("success");
+            console.log(data);
         },
-        error: function(error) {
-            // 실패 시 실행되는 코드
-            alert('주문지 작성에 실패했습니다.');
+        error: function (request, status, error) {
+            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+
         }
     });
 }
