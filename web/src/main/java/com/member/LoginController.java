@@ -18,15 +18,23 @@ public class LoginController extends HttpServlet {
 
         String id = req.getParameter("id");
         String pw = req.getParameter("pw");
+        String mode = req.getParameter("mode");
 
-        MemberDao mDao = MemberDao.getInstance();
+        MemberDao dao = new MemberDao();
 
-        if (mDao.login(id, pw)) {
+        if (dao.login(id, pw)) {
             // 로그인 성공
             HttpSession session = req.getSession();
-            session.setAttribute("userId", id);
-            // 로그인 후 이동할 페이지로 리다이렉트 또는 포워딩
-            resp.sendRedirect("/index.jsp");
+            switch (mode) {
+                case "login" -> {
+                    session.setAttribute("userId", id);
+                    // 로그인 후 이동할 페이지로 리다이렉트 또는 포워딩
+                    resp.sendRedirect("/index.jsp");
+                }
+                case "inform" -> {
+                    req.getRequestDispatcher("/mypage/MyInformation.jsp").forward(req, resp);
+                }
+            }
         } else {
             // 로그인 실패
             req.setAttribute("loginResult", "fail");

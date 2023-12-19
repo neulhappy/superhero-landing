@@ -28,14 +28,14 @@ public class JoinController extends HttpServlet {
         String pw = req.getParameter("pw");
         String email = req.getParameter("email");
 
-        MemberDao mDao = MemberDao.getInstance();
+        MemberDao dao = new MemberDao();
         MemberDTO mDto = new MemberDTO();
 
         mDto.setUser_id(id);
         mDto.setPassword(pw);
         mDto.setEmail(email);
         System.out.println(pw);
-        int joinResult = mDao.join(mDto);
+        int joinResult = dao.join(mDto);
 
         if (joinResult == 1) {
             req.setAttribute("joinResult", joinResult);

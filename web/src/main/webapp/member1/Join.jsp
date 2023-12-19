@@ -47,10 +47,21 @@
         #emCheckResult{
             top: 28%;
         }
+        h1 {
+           text-align: center;
+            padding-top: 30px;
+        }
+        a {
+            text-decoration: none;
+            color: #86acd9;
+        }
 
     </style>
 </head>
 <body>
+<h1>
+    <a href="/index.jsp">Super Hero Story</a>
+</h1>
 <form id="joinform" class="box" action="join.do" method="post" onsubmit="return validateForm(this);">
     <div id="idCheckResult"></div>
     <input type="text" onkeyup="checkId()" placeholder="ID" name="id" id="id" minlength="4" maxlength="10" required>
@@ -65,101 +76,100 @@
     const elInputId = document.querySelector('#id');
     const elInputPw = document.querySelector('#pw');
     const elInputEm = document.querySelector('#email');
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // 이벤트 리스너 추가
+        elInputId.addEventListener('input', checkId);
+        elInputPw.addEventListener('input', checkPw);
+        elInputEm.addEventListener('input', checkEm);
+
+        // 폼 제출 이벤트 핸들러
+        const myForm = document.getElementById('joinform');
+        myForm.addEventListener('submit', async function(event) {
+            event.preventDefault(); // 기본 제출 동작을 막음
+            if (await validateForm()) {
+                HTMLFormElement.prototype.submit.call(myForm);
+            }
+        });
+    });
+
     // 아이디 유효성 검사
     function joinId(str) {
-        return /^[A-Za-z0-9][A-Za-z0-9]*$/.test(str);
+        return /^[A-Za-z0-9]{4,10}$/.test(str);
     }
 
+    // 이메일 유효성 검사
     function joinEmail(asValue) {
         return /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(asValue);
     }
 
-    function checkEm() {
-        const emCk = document.getElementById("emCheckResult");
-        if(joinEmail(elInputEm.value) === true) {
-            emCk.innerText = "사용 가능한 이메일입니다.";
-            emCk.style.color = "green";
-        } else if(joinEmail(elInputEm.value) === false) {
-        emCk.innerText = "이메일 형식을 확인해주세요.";
-        emCk.style.color = "red";
-        }
-    }
-
-    // 비밀번호 조건
+    // 비밀번호 유효성 검사
     function checkPw() {
         const pwCk = document.getElementById("pwCheckResult");
         if(elInputPw.value.length >= 4) {
             pwCk.innerText = "사용 가능한 비밀번호입니다.";
             pwCk.style.color = "green";
-        } else if(elInputPw.value.length < 4) {
+        } else {
             pwCk.innerText = "4~10글자, 영어와 숫자로 입력해주세요.";
             pwCk.style.color = "red";
         }
     }
-    // 아이디 중복 확인
-    function checkId() {
-        var id = document.getElementById("id").value; // 입력된 아이디 가져오기
 
-        // 서버로 중복 확인 요청을 보냅니다.
-        var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/member1/checkId.do", true);
-        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                var result = xhr.responseText; // 서버에서 받은 결과 (true 또는 false)
-                var resultDiv = document.getElementById("idCheckResult");
-
-                if(elInputId.value.length >= 4){
-                    if(joinId(elInputId.value) === true ) {
-                        if (result === "true") {
-                            resultDiv.innerHTML = "사용 가능한 아이디입니다.";
-                            resultDiv.style.color = "green";
-                        } else if ( result === "false") {
-                            resultDiv.innerHTML = "이미 사용 중인 아이디입니다.";
-                            resultDiv.style.color = "red";
-                        }
-                    } else  {
-                        resultDiv.innerHTML = "영어와 숫자로 입력해주세요.";
-                        resultDiv.style.color = "red";
-                    }
-                } else {
-                    resultDiv.innerHTML = "4~10글자, 영어와 숫자로 입력하세요."
-                    resultDiv.style.color = "red";
-                }
-            }
+    // 이메일 유효성 검사
+    function checkEm() {
+        const emCk = document.getElementById("emCheckResult");
+        if(joinEmail(elInputEm.value)) {
+            emCk.innerText = "사용 가능한 이메일입니다.";
+            emCk.style.color = "green";
+        } else {
+            emCk.innerText = "이메일 형식을 확인해주세요.";
+            emCk.style.color = "red";
         }
-        // 서버로 아이디를 전송합니다.
-        var data = "id=" + encodeURIComponent(id);
-        xhr.send(data);
+    }
+
+    // 아이디 중복 확인
+    async function checkId() {
+        var id = document.getElementById("id").value;
+
+        // 서버에 중복 확인 요청 전송
+        var result = await fetch('/member1/checkId.do', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            body: 'id=' + encodeURIComponent(id)
+        }).then(response => response.text());
+
+        var resultDiv = document.getElementById("idCheckResult");
+        if(joinId(elInputId.value)) {
+            resultDiv.innerHTML = result === "true" ? "사용 가능한 아이디입니다." : "이미 사용 중인 아이디입니다.";
+            resultDiv.style.color = result === "true" ? "green" : "red";
+        } else {
+            resultDiv.innerHTML = "4~10글자, 영어와 숫자로 입력하세요."
+            resultDiv.style.color = "red";
+        }
+    }
+
+    // 폼 유효성 검사
+    async function validateForm() {
+        if (!joinId(elInputId.value)) {
+            alert("아이디를 다시 입력해주세요");
+            elInputId.focus();
+            return false;
+        }
+        if (!joinEmail(elInputEm.value)) {
+            alert("이메일을 다시 입력해주세요.");
+            elInputEm.focus();
+            return false;
+        }
+        elInputPw.value = await sha256(elInputPw.value);
+        return true;
     }
 
     // 비밀번호 해시화
-    const myForm = document.getElementById('joinform');
-    myForm.addEventListener('submit', async function (event) {
-        console.log("1");
-        event.preventDefault(); // 기본 제출 동작을 막음
-        await validateForm(this); // this는 현재 폼을 가리킴
-        HTMLFormElement.prototype.submit.call(myForm)
-    })
-    async function validateForm(form) {
-        if(!joinId(elInputId.value)) {
-            alert("아이디를 다시 입력해주세요");
-            elInputId.focus();
-            return joinId(str); // 아이디가 유효하지 않으면 submit 방지
-        }
-        if(!joinEmail(elInputEm.value)){
-            alert("이메일을 다시 입력해주세요.");
-            elInputEm.focus();
-            return joinEmail(asValue);
-        }
-        // 비밀번호 해시화
-        const hashedPw = await sha256(form.pw.value);
-        form.pw.value = hashedPw;
-    }
     async function sha256(str) {
         return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
             .then(buffer => Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join(''));
     }
+
 </script>
 </body>
 </html>

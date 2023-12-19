@@ -32,19 +32,34 @@
 </head>
 
 <body>
-<form id="orderForm" action="orderSuccess.do" method="post">
-    주문자: <input type="text" onkeyup="validateForm()" placeholder="구매자" id="purchaser_name" name="purchaser_name" required> <br/>
-    수령인: <input type="text" onkeyup="validateForm()" placeholder="수취인" id="recipient_name" name="recipient_name" required> <br/>
-    주소: <input type="text" onkeyup="validateForm()" placeholder="주소" id="address" name="address" required> <br/>
-    연락처: <input type="tel" onkeyup="validateForm()" placeholder="연락처('-'넣어서 작성)" id="contact" name="contact" required> <br/>
-
-    상품 목록:
+<form id="orderForm" class="row g-3 mx-auto p-2" style="width: 1000px;" action="orderSuccess.do" method="post">
+    <div class="col-md-6">
+        <label class="form-label">주문자</label>
+        <input type="text" onkeyup="validateForm()" placeholder="구매자" id="purchaser_name" class="form-control" name="purchaser_name" required> <br/>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">수령인</label>
+        <input type="text" onkeyup="validateForm()" placeholder="수령인" id="recipient_name" class="form-control" name="recipient_name" required> <br/>
+    </div>
+    <div class="col-12">
+        <label class="form-label">주소</label>
+        <input type="text" onkeyup="validateForm()" placeholder="주소" id="address" class="form-control" name="address" required> <br/>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">연락처</label>
+        <input type="tel" onkeyup="validateForm()" placeholder="연락처('-'넣어서 작성)" id="contact" class="form-control" name="contact" required> <br/>
+    </div>
+    <div class="col-md-12">
+        <label class="form-label">상품 목록</label>
     <ul id="productList">
         <!-- 동적으로 추가되는 상품 목록 -->
     </ul>
     <button type="button" onclick="addProduct()">상품 추가</button>
+    </div>
 </form>
-    <button id="submitButton" disabled class="kakao btn btn-primary btn-lg" onclick="submitForm()">카카오페이 간편 결제하기</button>
+<div class="row g-3 mx-auto p-2" style="width: 800px">
+    <button id="submitButton" disabled class="kakao btn btn-primary btn-lg align-middle" onclick="submitForm()">카카오페이 간편 결제하기</button>
+</div>
 
 
 

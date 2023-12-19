@@ -12,14 +12,12 @@ import java.util.Map;
 
 public class BoardDAO extends DBConnPool {
 
-    public List<BoardDTO> selectListPage(Map<String, Object> map, String boardId) {
+    public List<BoardDTO> selectList(Map<String, Object> map, String boardId) {
         List<BoardDTO> bbs = new ArrayList<>();
         String table = "board-" + boardId;
 
         StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT * FROM (")
-                .append(" SELECT Tb.*, ROWNUM rNUM FROM (")
-                .append(" SELECT * FROM ")
+        queryBuilder.append("SELECT * FROM ")
                 .append(table);
 
         if (map.get("searchWord") != null) {
@@ -27,10 +25,8 @@ public class BoardDAO extends DBConnPool {
                     .append(map.get("searchField"))
                     .append(" LIKE ?");
         }
-        queryBuilder.append(" ORDER BY num DESC")
-                .append(" ) Tb")
-                .append(" )")
-                .append(" WHERE rNUM BETWEEN ? AND ? ");
+
+        queryBuilder.append(" ORDER BY num DESC");
 
         String query = queryBuilder.toString();
 
@@ -40,9 +36,6 @@ public class BoardDAO extends DBConnPool {
             if (map.get("searchWord") != null) {
                 psmt.setString(i++, "%" + map.get("searchWord") + "%");
             }
-
-            psmt.setInt(i++, Integer.parseInt(map.get("start").toString()));
-            psmt.setInt(i, Integer.parseInt(map.get("end").toString()));
 
             rs = psmt.executeQuery();
 
@@ -59,21 +52,21 @@ public class BoardDAO extends DBConnPool {
                 dto.setIs_published(getBoolean(rs.getString(8)));
                 dto.setIs_notice(getBoolean(rs.getString(9)));
 
-
                 bbs.add(dto);
             }
         } catch (SQLException e) {
-            Logger.error("selectListPage 중 예외 발생", e);
+            Logger.error("selectList 중 예외 발생", e);
         }
 
         return bbs;
     }
 
+
     public BoardDTO selectView(String id, String boardId) {
         String table = "board-" + boardId;
         BoardDTO dto = new BoardDTO();
 
-        String query = "SELECT * FROM " + table + "WHERE id=?";
+        String query = " SELECT * FROM " + table + "WHERE id=?";
 
         try {
             psmt = con.prepareStatement(query);

@@ -55,13 +55,35 @@
             font-size: 1em;
             color: #fff;
         }
+        .sign-up-box > i > a {
+            text-decoration: none;
+            color: #fdf5ef;
+        }
+        h1 {
+            text-align: center;
+            padding-top: 30px;
+        }
+        h1 > a {
+            text-decoration: none;
+            color: #86acd9;
+        }
+
 
     </style>
 </head>
 <body>
-<%
-    if(session.getAttribute("userId") == null) {
-%>
+<h1>
+    <a href="/index.jsp">Super Hero Story</a>
+</h1>
+<form class="box" action="login.do" method="post" onsubmit="return validateForm(this)">
+    <input type="hidden" name="mode" value="login">
+    <input type="text" placeholder="ID" name="id">
+    <input type="password" placeholder="Password" name="pw" />
+    <button name="submit">Login</button>
+    <div class="sign-up-box" id="signup">
+        <i class="material-icons"><a href="Join.jsp">Sign Up</a></i>
+    </div>
+</form>
 <script>
     function validateForm(form) {
         if(form.id.value == "") {
@@ -74,21 +96,5 @@
         }
     }
 </script>
-<form class="box" action="login.do" method="post">
-    <input type="text" placeholder="ID" name="id">
-    <input type="password" placeholder="Password" name="pw" />
-    <button name="submit">Login</button>
-    <div class="sign-up-box" id="signup">
-        <i class="material-icons"><a href="Join.jsp">Sign Up</a></i>
-    </div>
-</form>
-<%
-    } else {
-%>
-    회원님, 로그인하셨습니다. <br/>
-    <a href="Logout.jsp">[로그아웃]</a>
-<%
-    }
-%>
 </body>
 </html>

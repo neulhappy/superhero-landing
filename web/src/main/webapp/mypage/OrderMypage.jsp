@@ -26,7 +26,7 @@
         }
 
         h1 > a {
-            color: #2d2d2d;
+            color: black;
         }
 
         .nav > ul {
@@ -40,7 +40,7 @@
         }
 
         .nav > ul > li > a {
-            color: #2d2d2d;
+            color: #575757;
         }
 
         .order {
@@ -54,9 +54,20 @@
             display: flex;
             justify-content: left;
             gap: 20px;
-            padding-bottom: 30px;
+            height: 30px;
+            width: 700px;
+            background: black;
+            border-radius: 4px;
+            color: #e7e7e7;
+            padding: 15px 0 15px 30px;
+            font-weight: 600;
         }
 
+        table {
+            width: 700px;
+            height: 400px;
+            text-align: center;
+        }
 
 
         span {
@@ -72,10 +83,9 @@
     <div class="nav">
         <ul>
             <li><a href="OrderMypage.jsp"><span>주문내역</span></a></li>
-            <li><a href="MyQnA.jsp">나의 문의내역</a></li>
+            <li><a href="${pageContext.request.contextPath}mypage.do?action=QnA">나의 문의내역</a></li>
             <li><a href="MyReview.jsp">나의 후기</a></li>
             <li><a href="MyShoppingCart.jsp">장바구니</a></li>
-            <li><a href="MyInformation.jsp">회원정보</a></li>
         </ul>
     </div>
     <div class="order">
@@ -83,13 +93,34 @@
             <li>주문내역조회</li>
             <li>반품/환불조회</li>
         </ul>
-        <table border="1">
+        <table>
             <tr>
                 <th>주문번호[상품번호]</th>
                 <th>상품명</th>
                 <th>수량</th>
                 <th>주문일자</th>
                 <th>처리상태</th>
+            </tr>
+            <tr>
+                <td>123456</td>
+                <td>아이언맨 카드</td>
+                <td>5</td>
+                <td>2023-12-19</td>
+                <td>상품 준비중</td>
+            </tr>
+            <tr>
+                <td>123156</td>
+                <td>스파이더맨 카드</td>
+                <td>2</td>
+                <td>2023-12-19</td>
+                <td>상품 준비중</td>
+            </tr>
+            <tr>
+                <td>122156</td>
+                <td>닥터스트레인지 카드</td>
+                <td>3</td>
+                <td>2023-12-19</td>
+                <td>상품 준비중</td>
             </tr>
         </table>
     </div>

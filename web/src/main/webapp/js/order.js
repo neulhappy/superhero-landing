@@ -78,41 +78,70 @@ function pay_info(rsp) {
     form.submit();
 }
 
-    function addProduct() {
-        var productList = document.getElementById("productList");
 
-        // 상품 목록 요소 생성
-        var product = document.createElement("li");
+var predefinedProducts = ["상품1", "상품2", "상품3", "상품4", "상품5"];
 
-        var quantityWrapper = document.createElement("div");
-        quantityWrapper.className = "quantity-wrapper";
+function addProduct() {
+    var productList = document.getElementById("productList");
+    // 상품 목록 요소 생성
+    var product = document.createElement("li");
+    product.style.listStyle = "none";
 
-        var quantityInput = document.createElement("input");
-        quantityInput.type = "number";
-        quantityInput.min = "1"; // 최소값
-        quantityInput.value = "1"; // 초기값
-        quantityInput.className = "quantity-input";
+    var productName = document.createElement("span");
+    productName.textContent = "상품명";
+    productName.style.marginLeft = "0px";
 
-        // X 버튼
-        var deleteBtn = document.createElement("button");
-        deleteBtn.type = "button";
-        deleteBtn.textContent = "X";
-        deleteBtn.onclick = function () {
-            product.remove(); // X 버튼을 누르면 해당 상품 목록 삭제
-        };
+    var select = document.createElement("select");
+    select.style.width = "400px";
+    select.style.marginLeft = "10px";
+    predefinedProducts.forEach(function (productName) {
+        var option = document.createElement("option");
+        option.value = productName;
+        option.textContent = productName;
+        select.appendChild(option);
+    });
 
-        // 상품 목록 요소에 상품 개수 입력 필드와 X 버튼 추가
-        quantityWrapper.appendChild(quantityInput);
-        quantityWrapper.appendChild(deleteBtn);
+    var quantityWrapper = document.createElement("div");
+    quantityWrapper.className = "quantity-wrapper";
+    quantityWrapper.style.display = "flex";
 
-        // 상품 목록에 상품 추가
-        product.appendChild(quantityWrapper);
-        productList.appendChild(product);
-    }
+    var quantityInput = document.createElement("input");
+    quantityInput.type = "number";
+    quantityInput.min = "1"; // 최소값
+    quantityInput.max = "10"; // 최대값
+    quantityInput.value = "1"; // 초기값
+    quantityInput.className = "quantity-input";
+    quantityInput.style.width = "50px";
+    quantityInput.style.height = "25px";
+    quantityInput.style.marginLeft = "100px";
 
-function submit() {
-    sendOrderData();
+    var quantityUnit = document.createElement("span");
+    quantityUnit.textContent = "개";
+
+    // X 버튼
+    var deleteBtn = document.createElement("button");
+    deleteBtn.type = "button";
+    deleteBtn.textContent = "X";
+    deleteBtn.style.height = "25px";
+    deleteBtn.style.marginLeft = "200px";
+    deleteBtn.onclick = function () {
+        product.remove(); // X 버튼을 누르면 해당 상품 목록 삭제
+    };
+
+    // 상품 목록 요소에 상품 개수 입력 필드와 X 버튼, '개' 텍스트 추가
+    quantityWrapper.appendChild(productName);
+    quantityWrapper.appendChild(select);
+    quantityWrapper.appendChild(quantityInput);
+    quantityWrapper.appendChild(quantityUnit);
+    quantityWrapper.appendChild(deleteBtn);
+
+    product.appendChild(quantityWrapper);
+    productList.appendChild(product);
 }
+
+// function submit() {
+//     sendOrderData();
+// }
 
 function phoneNumberRule(str){//휴대폰 번호 유효성 검사
     return /^01(?:0|1|[6-9])-\d{3,4}-\d{4}$/.test(str);
