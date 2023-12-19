@@ -2,9 +2,6 @@
 <html>
 <head>
     <title>로그인페이지</title>
-    <span style="color:red; font-size: 1.2em;">
-        <%= request.getAttribute("LoginErrMsg") %>
-    </span>
     <style>
         * {
             box-sizing: border-box;
@@ -62,11 +59,12 @@
     </style>
 </head>
 <body>
-<% if(session.getAttribute("userId") == null) {
+<%
+    if(session.getAttribute("userId") == null) {
 %>
 <script>
     function validateForm(form) {
-        if(!form.id.value) {
+        if(form.id.value == "") {
             alert("아이디를 입력하세요.");
             return false;
         }

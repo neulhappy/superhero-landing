@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>회원가입</title>
     <style>
         * {
             box-sizing: border-box;
