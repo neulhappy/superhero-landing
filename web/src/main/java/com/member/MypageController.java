@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 public class MypageController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action"); // 액션을 결정하기 위해 쿼리 파라미터를 사용할 수 있습니다.
+        String action = request.getParameter("action");
 
         if ("Order".equals(action)) {
             request.getRequestDispatcher("/mypage/OrderMypage.jsp").forward(request, response);
