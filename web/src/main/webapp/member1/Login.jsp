@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>로그인페이지</title>
     <style>
         * {
             box-sizing: border-box;
@@ -59,6 +59,21 @@
     </style>
 </head>
 <body>
+<%
+    if(session.getAttribute("userId") == null) {
+%>
+<script>
+    function validateForm(form) {
+        if(form.id.value == "") {
+            alert("아이디를 입력하세요.");
+            return false;
+        }
+        if(form.pw.value == "") {
+            alert("패스워드를 입력하세요.");
+            return false;
+        }
+    }
+</script>
 <form class="box" action="login.do" method="post">
     <input type="text" placeholder="ID" name="id">
     <input type="password" placeholder="Password" name="pw" />
@@ -67,5 +82,13 @@
         <i class="material-icons"><a href="Join.jsp">Sign Up</a></i>
     </div>
 </form>
+<%
+    } else {
+%>
+    회원님, 로그인하셨습니다. <br/>
+    <a href="Logout.jsp">[로그아웃]</a>
+<%
+    }
+%>
 </body>
 </html>
