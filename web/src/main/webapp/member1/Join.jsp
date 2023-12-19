@@ -60,7 +60,7 @@
 </head>
 <body>
 <h1>
-    <a href="/index.jsp">Super Hero Story</a>
+    <a href="/index.jsp">Super Hero Story!</a>
 </h1>
 <form id="joinform" class="box" action="join.do" method="post" onsubmit="return validateForm(this);">
     <div id="idCheckResult"></div>
