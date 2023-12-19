@@ -4,9 +4,7 @@
     <title>Title</title>
 </head>
 <body>
-    pay Success
-
-    PaymentDTO p
+결제 성공화면입니다.
 
 
 </body>

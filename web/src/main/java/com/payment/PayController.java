@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpSession;
 
 import static com.util.Logger.logger;
 
-@WebServlet("/payment/paySuccess.do")
+@WebServlet("/order/paySuccess.do")
 public class PayController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -37,15 +37,19 @@ public class PayController extends HttpServlet {
         LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
         java.sql.Date paymentTime = java.sql.Date.valueOf(dateTime.toLocalDate());
 
-
         // 클라이언트에 응답을 보냅니다.
         resp.setContentType("text/html; charset=UTF-8");
         req.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
-        out.println("Payment information received!");
-
-        //TODO 이후 삭제해야할 실험용 코딩
-        System.out.println(productName +":::: "+ buyerId +":::: "+ productId +":::: "+ amount + ":::: "+ status +"::::" + paymentMethod + ":::::" + paymentTime);
+        out.println("<html>");
+        out.println("<head>");
+        out.println("<title>결제 정보</title>");
+        out.println("</head>");
+        out.println("<body>");
+        out.println("<h1>결제가 완료되었습니다.</h1>");
+        out.println("<button onclick=\"window.location.href='order.jsp'\">다음으로</button>");
+        out.println("</body>");
+        out.println("</html>");
 
         //폼값을 DTO에 저장
         PaymentDTO pDto = new PaymentDTO();

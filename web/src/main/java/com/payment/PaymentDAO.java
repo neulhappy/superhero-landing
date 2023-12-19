@@ -20,7 +20,6 @@ public class PaymentDAO extends DBConnPool {
         return pDao;
     }
 
-    //TODO DB커넥풀 오류 수정해야함
     public int updatePayment(PaymentDTO pDto){
         System.out.println("updatePayment 실행됨");
         DBConnPool connectionPool = new DBConnPool();
