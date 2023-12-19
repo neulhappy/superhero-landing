@@ -1,6 +1,7 @@
 package com.util;
-
 //가변 매개변수 메소드는 오버로딩 비권장.
+
+import static com.util.Logger.logger;
 
 public class Builder {
     public static String buildString(String... lines) {
@@ -30,4 +31,72 @@ public class Builder {
         return script.toString();
     }
 
+    public static String insertQuery(String table, String columns) {
+        StringBuilder sql = new StringBuilder();
+        try {
+            sql.append("INSERT INTO ").append(table).append(" VALUES (").append(columns).append(")");
+        } catch (IllegalArgumentException e) {
+            logger.error("insertQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.", e);
+        }
+        return sql.toString();
+    }
+
+    public static String updateQuery(String table, String columns, String newValue, String condition) {
+        StringBuilder sql = new StringBuilder();
+        try {
+            sql.append("UPDATE ").append(table)
+                    .append(" SET ").append(columns).append(" = ").append(newValue)
+                    .append(" WHERE ").append(condition);
+        } catch (IllegalArgumentException e) {
+            logger.error("updateQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.", e);
+        }
+        return sql.toString();
+    }
+
+    public static String updateQuery(String table, String columns, String newValue) {
+        StringBuilder sql = new StringBuilder();
+        try {
+            sql.append("UPDATE ").append(table)
+                    .append(" SET ").append(columns).append(" = ").append(newValue);
+        } catch (IllegalArgumentException e) {
+            logger.error("updateQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.", e);
+        }
+        return sql.toString();
+    }
+
+    public static String selectQuery(String columnName, String table, String condition, String sortColumns) {
+        StringBuilder sql = new StringBuilder();
+        try {
+            sql.append("SELECT ").append(columnName)
+                    .append(" FROM ").append(table)
+                    .append(" WHERE ").append(condition)
+                    .append(" ORDER BY ").append(sortColumns);
+        } catch (IllegalArgumentException e) {
+            logger.error("selectQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.", e);
+        }
+        return sql.toString();
+    }
+
+    public static String selectQuery(String columnName, String table, String condition) {
+        StringBuilder sql = new StringBuilder();
+        try {
+            sql.append("SELECT ").append(columnName)
+                    .append(" FROM ").append(table)
+                    .append(" WHERE ").append(condition);
+        } catch (IllegalArgumentException e) {
+            logger.error("selectQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.", e);
+        }
+        return sql.toString();
+    }
+
+    public static String selectQuery(String columnName, String table) {
+        StringBuilder sql = new StringBuilder();
+        try {
+            sql.append("SELECT ").append(columnName)
+                    .append(" FROM ").append(table);
+        } catch (IllegalArgumentException e) {
+            logger.error("selectQuery 실행 중 올바르지 않은 인자 값을 넣었습니다.", e);
+        }
+        return sql.toString();
+    }
 }
