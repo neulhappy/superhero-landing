@@ -1,86 +1,54 @@
 package com.member;
 
+import com.util.DBConnPool;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
-public class MemberDao {
-    private static MemberDao mDao;
-    private Connection conn;
-    private PreparedStatement ps;
-    private ResultSet rs;
-    private int result;
+public class MemberDao extends DBConnPool{
 
-    public static synchronized MemberDao getInstance() {
-        if (mDao == null) {
-            mDao = new MemberDao();
-        }
-        return mDao;
-    }
-    public Connection getConn() {
-        String url = "jdbc:oracle:thin:@localhost:1521:ORCL";
-        String id = "test";
-        String pw = "bitc5600";
-        try {
-            Class.forName("oracle.jdbc.driver.OracleDriver");
-            conn = DriverManager.getConnection(url, id, pw);
-            System.out.println("db 연결 성공");
-        }catch (ClassNotFoundException e){
-            e.printStackTrace();
-            System.out.println("getConn Exception");
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return conn;
-    }
     public int join(MemberDTO mDto) {
-        System.out.println("join 메소드 실행 됨");
-        conn = this.getConn();
-        StringBuffer query = new StringBuffer();
-        query.append(" INSERT INTO GAME_MEMBER ").append(" values(?,?,?) ");
+        int result = 0;
+
         try {
-            ps = conn.prepareStatement(query.toString());
-            ps.setString(1, mDto.getUser_id());
-            ps.setString(2, mDto.getEmail());
-            ps.setString(3, mDto.getPassword());
+            con = this.getConnection();
+            String query = " INSERT INTO GAME_MEMBER VALUES (?, ?, ?)";
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, mDto.getUser_id());
+            psmt.setString(2, mDto.getEmail());
+            psmt.setString(3, mDto.getPassword());
 
-            result = ps.executeUpdate();
-
-        } catch (Exception e) {
+            result = psmt.executeUpdate();
+        } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("joinMember Exception");
         } finally {
-            this.close(conn, ps, null);
+            close(con, psmt, null);
         }
         return result;
     }
-    // 로그인 확인 메서드
+
     public boolean login(String id, String password) {
-        conn = this.getConn();
-        String query = "SELECT MEMBERPW FROM GAME_MEMBER WHERE MEMBERID = ?";
         try {
-            ps = conn.prepareStatement(query);
-            ps.setString(1, id);
-            rs = ps.executeQuery();
+            con = this.getConnection();
+            String query = " SELECT MEMBERPW FROM GAME_MEMBER WHERE MEMBERID = ?";
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, id);
+            rs = psmt.executeQuery();
 
             if (rs.next()) {
                 String storedHashedPassword = rs.getString("MEMBERPW");
-                System.out.println(storedHashedPassword);
                 String inputHashedPassword = hashPassword(password);
-                System.out.println(inputHashedPassword);
-
-                // 저장된 해시된 비밀번호와 입력된 해시된 비밀번호 비교
                 return storedHashedPassword.equals(inputHashedPassword);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            this.close(conn, ps, rs);
+            close(con, psmt, rs);
         }
         return false;
     }
 
-    // 비밀번호를 해시화하는 메서드
     private String hashPassword(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-256");
@@ -92,53 +60,38 @@ public class MemberDao {
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            throw new RuntimeException("Password hashing failed.", e);
+            return null; // 해시화 실패시 null 반환
         }
     }
 
     public void close(Connection conn, PreparedStatement ps, ResultSet rs) {
-        if (rs != null) {
-            try{
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if(ps != null) {
-            try{
-                ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if(conn != null) {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        try {
+            if (rs != null) rs.close();
+            if (ps != null) ps.close();
+            if (conn != null) conn.close(); // 커넥션 반환
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
-
+    // 아이디 중복 확인 메서드 등 다른 메서드 구현
     public boolean isIdAvailable(String id) {
-        conn = this.getConn();
-        String query = " SELECT COUNT(*) FROM GAME_MEMBER WHERE MEMBERID = ?";
+
         try {
-            ps = conn.prepareStatement(query);
-            ps.setString(1, id);
-            rs = ps.executeQuery();
+            con = this.getConnection();
+            String query = " SELECT COUNT(*) FROM GAME_MEMBER WHERE MEMBERID = ?";
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, id);
+            rs = psmt.executeQuery();
 
             if (rs.next()) {
                 int count = rs.getInt(1);
-                // count가 0이면 해당 아이디는 사용 가능
-                return count == 0;
+                return count == 0; // count가 0이면 아이디 사용 가능
             }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            this.close(conn, ps, rs);
+            close(con, psmt, rs); // 자원 반납
         }
-        // 아이디가 이미 존재하거나 예외가 발생한 경우
-        return false;
+        return false; // 예외 발생하거나 이미 존재하는 경우 false 반환
     }
 }

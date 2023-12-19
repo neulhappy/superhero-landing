@@ -66,7 +66,7 @@ public class BoardDAO extends DBConnPool {
         String table = "board-" + boardId;
         BoardDTO dto = new BoardDTO();
 
-        String query = "SELECT * FROM " + table + "WHERE id=?";
+        String query = " SELECT * FROM " + table + "WHERE id=?";
 
         try {
             psmt = con.prepareStatement(query);

@@ -6,7 +6,7 @@
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
         body {
-            width: 100%;
+            width: 1200px;
             font-family: 'Noto Sans KR', sans-serif;
             font-size: 1.3em;
             line-height: 1.6;
@@ -29,6 +29,10 @@
         ul {
             list-style: none;
             text-align: center;
+        }
+        .nav > ul {
+            text-align: center;
+            width: calc(1200px - 800px);
         }
 
         li {
@@ -82,7 +86,7 @@
         <div class="nav">
             <ul>
                 <li><a href="OrderMypage.jsp">주문내역</a></li>
-                <li><a href="MyQnA.jsp">나의 문의내역</a></li>
+                <li><a href="${pageContext.request.contextPath}mypage.do?action=QnA">나의 문의내역</a></li>
                 <li><a href="MyReview.jsp">나의 후기</a></li>
                 <li><a href="MyShoppingCart.jsp">장바구니</a></li>
             </ul>

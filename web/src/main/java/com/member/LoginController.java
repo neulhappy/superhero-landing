@@ -20,9 +20,9 @@ public class LoginController extends HttpServlet {
         String pw = req.getParameter("pw");
         String mode = req.getParameter("mode");
 
-        MemberDao mDao = MemberDao.getInstance();
+        MemberDao dao = new MemberDao();
 
-        if (mDao.login(id, pw)) {
+        if (dao.login(id, pw)) {
             // 로그인 성공
             HttpSession session = req.getSession();
             switch (mode) {
