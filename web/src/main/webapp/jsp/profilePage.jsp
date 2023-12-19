@@ -24,11 +24,13 @@
 </header>
 
 <main id="main">
-    <Section id="sec1"><p>좋은 물건을 드리겠다는 마음으로 이 사이트를 개발했습니다</p></Section>
+    <Section id="sec1"><p>좋은 제품을 드리겠다는 마음으로 이 사이트를 개발했습니다</p></Section>
     <Section id="sec2">
-        <contents>
-            소개글
-        </contents>
+        <content>
+            <p style="font-size: 1.4rem; font-weight: 400; color: #726f6f; text-align: center; padding-top: 300px">
+            re-coder는 마블 히어로 제품 및 서비스를 제공하는 브랜드입니다
+            </p>
+        </content>
     </Section>
 </main>
 

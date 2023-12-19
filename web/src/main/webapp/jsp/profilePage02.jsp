@@ -25,18 +25,31 @@
 
 <main id="main">
     <div class="content">
-        <ul class="icon">
-            <li>찜한 영웅</li>
-            <li>전체순</li>
-        </ul>
+<%--        <ul class="icon">--%>
+<%--            <li><a href="#"><img src="../img/icon.png" alt="찜한 영웅"></a></li>--%>
+<%--            <li>전체순</li>--%>
+<%--        </ul>--%>
 
+        <form method="get" action="Checkbox">
         <ul class="Hero">
-            <li><a href=""><img src="../img/dr.jpg"></a></li>
-            <li><a href=""><img src="../img/winter%20soldier.jpg"></a></li>
-            <li><a href=""><img src="../img/black.jpg"></a></li>
-            <li><a href=""><img src=""></a></li>
+            <li><a href=""><img src="../img/hero/dr.jpg" alt="닥터스트레인지">닥터스트레인지</a></li>
+            <li><a href=""><img src="../img/hero/winter%20soldier.jpg" alt="윈터솔져">윈터솔져</a></li>
+            <li><a href=""><img src="../img/hero/black.jpg" alt="블랙 위도우">블랙 위도우</a></li>
+            <li><a href=""><img src="../img/hero/black02.jpg" alt="블랙팬서">블랙팬서</a></li>
+            <li><a href=""><img src="../img/hero/Vision.jpg" alt="비즈">비즈</a></li>
+            <li><a href=""><img src="../img/hero/scarlet.jpg" alt="스칼렛 위치">스칼렛 위치</a></li>
+            <li><a href=""><img src="../img/hero/star.jpg" alt="스타로드">스타로드</a></li>
+            <li><a href=""><img src="../img/hero/spider.jpg" alt="스파이더맨">스파이더맨</a></li>
+            <li><a href=""><img src="../img/hero/iron.jpg" alt="아이언맨">아이언맨</a></li>
+            <li><a href=""><img src="../img/hero/ant.jpg" alt="앤트맨">앤트맨</a></li>
+            <li><a href=""><img src="../img/hero/war.jpg" alt="워머신">워머신</a></li>
+            <li><a href=""><img src="../img/hero/captain.jpg" alt="캡틴 아메리카">캡틴 아메리카</a></li>
+            <li><a href=""><img src="../img/hero/thor.jpg" alt="토르">토르</a></li>
+            <li><a href=""><img src="../img/hero/falcon.jpg" alt="팔콘">팔콘</a></li>
+            <li><a href=""><img src="../img/hero/hulk.jpg" alt="헐크">헐크</a></li>
+            <li><a href=""><img src="../img/hero/hawk.jpg" alt="호크아이">호크아이</a></li>
         </ul>
-
+        </form>
     </div>
 </main>
 
@@ -45,6 +58,17 @@
     <out_logo><a href="../index.jsp"><img src="../img/profooterlogo.png"></a></out_logo>
 </footer>
 
+<script>
+    $("input:checkbox[id='1']").prop("checked", true);
+    $("input:checkbox[id='1']").prop("checked", false);
+</script>
+
+<script>
+    $("input:checkbox[name=item]:checked").each(function(){
+        var checkVal = $(this).val();
+        console.log(checkVal);
+    })
+</script>
 
 </body>
 </html>
