@@ -17,7 +17,7 @@
     <h1><img src="../img/profilelogo.png"></h1>
     <nav>
         <ul class="menu">
-            <li><a href="profilePage.jsp">개발자 소개</a></li>
+            <li><a href="profilePage.jsp">브랜드 소개</a></li>
             <li><a href="profilePage02.jsp">Hero 소개</a></li>
         </ul>
     </nav>

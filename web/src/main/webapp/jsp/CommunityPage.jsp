@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %><%--
   Created by IntelliJ IDEA.
   User: admin
   Date: 2023-12-14
@@ -31,8 +32,8 @@
 
         <nav id="menu">
             <ul>
-                <li><a href="#">소개</a></li>
-                <li><a href="#">상점</a></li>
+                <li><a href="profilePage.jsp">소개</a></li>
+                <li><a href="goodsPage.jsp">상점</a></li>
                 <li><a href="CommunityPage.jsp" >상품후기</a></li>
                 <li><a href="faqPage.jsp">FAQ</a></li>
             </ul>
@@ -53,9 +54,14 @@
                 <tbody class="table-group-divider">
                 <tr>
                     <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
+                    <td>${param.title}</td>
+                    <td>${param.name}</td>
+                    <td> <%
+                        Date date = new Date();
+                        SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+                        String strDate = simpleDate.format(date);%>
+                        <%=strDate%>
+                    </td>
                 </tr>
                 <tr>
                     <th scope="row">2</th>
@@ -72,7 +78,7 @@
             </table>
 
             <div class="write_btn">
-                <a href="#"><img src="../img/pen.png" alt="펜"></a>
+                <a href="writePage.jsp"><img src="../img/pen.png" alt="펜"></a>
                 <!--        writePage로 이동-->
             </div>
         </div>

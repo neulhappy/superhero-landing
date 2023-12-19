@@ -93,6 +93,10 @@ public class OrderDTO {
         return productList;
     }
 
+    public void setProductList(ArrayList<ProductSet> productList) {
+        this.productList = productList;
+    }
+
     public int getProductListLength() {
         return productList.size();
     }
@@ -105,7 +109,8 @@ public class OrderDTO {
         return productList.get(num).quantity;
     }
 
-    class ProductSet {
+
+    static class ProductSet {
         private int prod_id;
         private int quantity;
 
@@ -125,4 +130,5 @@ public class OrderDTO {
             this.quantity = quantity;
         }
     }
+
 }

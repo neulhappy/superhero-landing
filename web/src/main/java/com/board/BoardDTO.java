@@ -3,7 +3,7 @@ package com.board;
 import java.sql.Date;
 
 public class BoardDTO {
-
+    private int boardId;
     private int num;
     private String title;
     private String content;
@@ -13,6 +13,14 @@ public class BoardDTO {
     private int visitcount;
     private boolean is_published;
     private boolean is_notice;
+
+    public int getBoardId() {
+        return boardId;
+    }
+
+    public void setBoardId(int boardId) {
+        this.boardId = boardId;
+    }
 
     public int getNum() {
         return num;
@@ -85,4 +93,5 @@ public class BoardDTO {
     public void setIs_notice(boolean is_notice) {
         this.is_notice = is_notice;
     }
+
 }

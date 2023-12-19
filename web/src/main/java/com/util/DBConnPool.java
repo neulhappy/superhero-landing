@@ -49,4 +49,7 @@ public class DBConnPool {
         }
         return psmt;
     }
+    public static boolean getBoolean(String input) {
+        return "Y".equalsIgnoreCase(input);
+    }
 }
