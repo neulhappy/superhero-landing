@@ -39,18 +39,22 @@
         }
         .sign-up-box {
             position: absolute;
-            width: 70px;
-            height: 70px;
-            border-radius: 50%;
-            background-color: #86acd9;
+            right: -10%;
+            top: 10%;
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(to bottom, rgb(255, 255, 255), #86acd9); /* 버블 느낌 */
+            border-radius: 50% 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            top: var(--padding);
-            right: -35px;
             cursor: pointer;
-            transition: all 500ms ease-in-out;
+            transition: transform 0.3s ease-in-out;
         }
+        .sign-up-box:hover {
+            transform: scale(1.1); /* 마우스 호버 시 커짐 */
+        }
+
         .sign-up-box i {
             font-size: 1em;
             color: #fff;
@@ -95,6 +99,7 @@
             return false;
         }
     }
+
 </script>
 </body>
 </html>
