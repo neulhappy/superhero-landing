@@ -265,6 +265,20 @@
         }
     };
 
+
+    <%--document.addEventListener('DOMContentLoaded', function() {--%>
+    <%--    fetch('/getHeroData')--%>
+    <%--        .then(response => response.json())--%>
+    <%--        .then(data => {--%>
+    <%--            Object.entries(data).forEach(([key, heroInfo], index) => {--%>
+    <%--                modals[index].querySelector('.modalBody').innerHTML = `--%>
+    <%--                <h2>${heroInfo.name}</h2>--%>
+    <%--                <p>${heroInfo.description}</p>--%>
+    <%--            `;--%>
+    <%--            });--%>
+    <%--        })--%>
+    <%--        .catch(error => console.error('Error:', error));--%>
+    <%--});--%>
 </script>
 
 

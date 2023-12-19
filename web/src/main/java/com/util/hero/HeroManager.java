@@ -8,6 +8,13 @@ public class HeroManager {
 
     private Map<HeroName, HeroInfo> heros = new HashMap<>();
 
+    // 기존 메서드들 유지...
+
+    // 모든 히어로 정보를 가져오는 메서드
+    public Map<HeroName, HeroInfo> getAllHeroes() {
+        return heros;
+    }
+
 
     //TODO 히어로별 스테이터스 조정하기
     private void init(){
