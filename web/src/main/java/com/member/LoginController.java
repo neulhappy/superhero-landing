@@ -1,5 +1,6 @@
 package com.member;
 
+import com.util.Alert;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,17 +10,20 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 
 @WebServlet("/member1/login.do")
 public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = resp.getWriter();
 
         String id = req.getParameter("id");
         String hashedPw = req.getParameter("pw");
-        System.out.println(id);
-        System.out.println(hashedPw);
+        out.println(id);
+        out.println(hashedPw);
         String mode = req.getParameter("mode");
 
         MemberDao dao = new MemberDao();
@@ -40,9 +44,7 @@ public class LoginController extends HttpServlet {
         } else {
             // 로그인 실패
             req.setAttribute("loginResult", "fail");
-            RequestDispatcher rd = req.getRequestDispatcher("/member1/Login.jsp");
-            System.out.println("로그인실패");
-            rd.forward(req, resp);
+            Alert.alertBack("로그인에 실패하였습니다.",out);
         }
     }
 }

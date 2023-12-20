@@ -92,13 +92,27 @@
             </ul>
         </div>
         <div class="login">
-            <form class="box" action="member1/login.do">
+            <form id="passwordForm" class="box" action="passwordCheck.do" method="post">
                 <input type="hidden" name="mode" value="inform">
-                <input type="hidden" name="id">
-                <input type="password" placeholder="Password" name="pw"/>
-                <button name="submit">인증하기</button>
+                <input type="hidden" name="id" value="<%= session.getAttribute("userId") %>">
+                <input type="password" placeholder="Password" name="pw" id="pw"/>
+                <button type="submit">인증하기</button>
             </form>
         </div>
     </div>
+    <script>
+        async function sha256(str) {
+            const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+            return Array.from(new Uint8Array(buffer)).map(byte => byte.toString(16).padStart(2, '0')).join('');
+        }
+
+        document.getElementById('passwordForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const password = document.getElementById('pw').value;
+            const hashedPassword = await sha256(password);
+            document.getElementById('passwordForm').action = "passwordCheck.do?hashedPw=" + hashedPassword;
+            document.getElementById('passwordForm').submit();
+        });
+    </script>
 </body>
 </html>

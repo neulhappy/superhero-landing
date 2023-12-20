@@ -9,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/member1/join.do")
 public class JoinController extends HttpServlet {
@@ -37,17 +38,15 @@ public class JoinController extends HttpServlet {
         System.out.println(pw);
         int joinResult = dao.join(mDto);
 
+        resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = resp.getWriter();
+
         if (joinResult == 1) {
-            req.setAttribute("joinResult", joinResult);
-            HttpSession session = req.getSession();
-            session.setAttribute("sessionID", id);
-            RequestDispatcher rd = req.getRequestDispatcher("/member1/Login.jsp");
-            rd.forward(req, resp);
+            out.println("<script>alert('회원가입에 성공했습니다.');location.href='/member1/Login.jsp';</script>");
         } else {
-            req.setAttribute("joinResult", 0);
-            RequestDispatcher rd = req.getRequestDispatcher("../member1/Join.jsp");
-            rd.forward(req, resp);
+            out.println("<script>alert('회원가입에 실패했습니다.');location.href='../member1/Join.jsp';</script>");
         }
+        out.flush();
     }
 }
 
