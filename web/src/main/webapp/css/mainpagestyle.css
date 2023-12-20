@@ -8,11 +8,15 @@ body {overflow-x: hidden; font-family: 'Noto Sans KR', sans-serif; font-size: 1.
 *{margin: 0; padding: 0;}
 
 ul{list-style: none;}
-h1{padding: 30px 0 20px 100px; color: rgb(50,30,10);}
-h1 a {text-decoration: none; color: rgb(200, 10, 45);}
+
+#header {max-height: 360px; background: white}
+.inner {transform: translate(0, -200px)}
+
+h1 {text-align: center}
+h1 a img {width: 400px;}
 .login{translate: 1500px; display: flex; font-size: 1rem; font-weight: 600;}
 .login li{transform: translate(0, -3px); }
-.login a {text-decoration: none; color: #fdf7f7; padding: 0 10px;}
+.login a {text-decoration: none; color: black; padding: 0 10px; font-weight: 600}
 
 #menu{
     width: 100%;
@@ -42,11 +46,15 @@ h1 a {text-decoration: none; color: rgb(200, 10, 45);}
 
 #main div{
     width: 1200px;
-    height: 1080px;
+    height: 800px;
     margin: 50px auto;
-    background: url("../img/main.png") no-repeat center;
+    background: url("../img/main.png") no-repeat center ;
 }
 
 
 
-#footer {text-align: center; padding: 100px 0 50px 0; font-size: 1.2rem; color: #8f8a8a;}
+#footer {
+    text-align: right; padding: 100px 50px 50px 0; font-size: 1rem; color: #8f8a8a;
+    background: url("../img/mainfooter.png") no-repeat center white;
+    background-size: 500px;
+}
