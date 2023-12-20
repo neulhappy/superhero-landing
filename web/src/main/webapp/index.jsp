@@ -33,7 +33,7 @@
         <nav id="menu">
             <ul>
                 <li><a href="jsp/profilePage.jsp">소개</a></li>
-                <li><a href="jsp/goodsPage.jsp">상점</a></li>
+                <li><a href="jsp/goods.jsp">상점</a></li>
                 <li><a href="jsp/CommunityPage.jsp">상품후기</a></li>
                 <li><a href="jsp/faqPage.jsp">FAQ</a></li>
             </ul>
