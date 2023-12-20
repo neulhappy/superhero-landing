@@ -32,10 +32,8 @@ public class HeroDAO extends DBConnPool {
     }
 
     public List<HeroDTO> selectList() {
-        //쿼리 결과를 담을 변수
         List<HeroDTO> heroList = new ArrayList<HeroDTO>();
 
-        //쿼리문 작성
         String query = "SELECT * FROM hero ORDER BY id DESC";
 
         try {
@@ -52,8 +50,6 @@ public class HeroDAO extends DBConnPool {
                 dto.setDetail(rs.getString("detail"));
                 heroList.add(dto);
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
             System.out.println("selectList 오류 발생");
