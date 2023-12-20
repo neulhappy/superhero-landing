@@ -17,7 +17,7 @@
 <div id="wrap">
     <header id="header">
         <h1>
-            <a href="index.jsp">Super Hero Story</a>
+            <a href="${pageContext.request.contextPath}/index.do">Super Hero Story</a>
         </h1>
 
         <ul class="login">
