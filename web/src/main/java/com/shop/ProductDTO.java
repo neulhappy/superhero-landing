@@ -5,7 +5,6 @@ public class ProductDTO {
     private String name;
     private String category;
     private int price;
-    private int hero;
     private boolean able;
 
     public int getId() {
@@ -40,13 +39,7 @@ public class ProductDTO {
         this.price = price;
     }
 
-    public int getHero() {
-        return hero;
-    }
 
-    public void setHero(int hero) {
-        this.hero = hero;
-    }
 
     public boolean isAble() {
         return able;

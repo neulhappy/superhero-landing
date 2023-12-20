@@ -20,8 +20,7 @@ public class ProductDAO extends DBConnPool {
                 dto.setName(rs.getString(2));
                 dto.setCategory(rs.getString(3));
                 dto.setPrice(rs.getInt(4));
-                dto.setHero(rs.getInt(5));
-                dto.setAble(rs.getString(6).equalsIgnoreCase("Y"));
+                dto.setAble(rs.getString(5).equalsIgnoreCase("Y"));
             }
         } catch (SQLException e) {
             Logger.error("selectProduct 중 예외 발생");
@@ -42,8 +41,7 @@ public class ProductDAO extends DBConnPool {
                 dto.setName(rs.getString(2));
                 dto.setCategory(rs.getString(3));
                 dto.setPrice(rs.getInt(4));
-                dto.setHero(rs.getInt(5));
-                dto.setAble(rs.getString(6).equalsIgnoreCase("Y"));
+                dto.setAble(rs.getString(5).equalsIgnoreCase("Y"));
                 prodList.add(dto);
             }
         } catch (Exception e) {
@@ -66,8 +64,7 @@ public class ProductDAO extends DBConnPool {
                 dto.setName(rs.getString(2));
                 dto.setCategory(rs.getString(3));
                 dto.setPrice(rs.getInt(4));
-                dto.setHero(rs.getInt(5));
-                dto.setAble(rs.getString(6).equalsIgnoreCase("Y"));
+                dto.setAble(rs.getString(5).equalsIgnoreCase("Y"));
                 prodList.add(dto);
             }
         } catch (Exception e) {
