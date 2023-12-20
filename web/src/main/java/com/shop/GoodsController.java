@@ -1,4 +1,4 @@
-package com.board;
+package com.shop;
 
 import com.util.Alert;
 import jakarta.servlet.ServletException;
@@ -11,23 +11,22 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet("/profile.do")
-public class ProfileController extends HttpServlet {
+@WebServlet("/goods.do")
+public class GoodsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String action = req.getParameter("action");
-
-        switch (action) {
-            case "intro" -> req.getRequestDispatcher("/jsp/profilePage.jsp").forward(req, resp);
-            case "hero" -> {
-                req.getRequestDispatcher("/jsp/profilePage02.jsp").forward(req, resp);
-            }
+        String category = req.getParameter("category");
+        ProductDAO dao = new ProductDAO();
+        List<ProductDTO> prodList = dao.selectListByCat(category);
+        req.setAttribute("prodList", prodList);
+        switch (category) {
+            case "goods" -> req.getRequestDispatcher("/jsp/goods.jsp").forward(req, resp);
+            case "photoCard" -> req.getRequestDispatcher("/jsp/Photocard.jsp").forward(req, resp);
             default -> {
                 resp.setContentType("text/html;charset=UTF-8");
                 PrintWriter out = resp.getWriter();
                 Alert.alertBack("잘못된 접근입니다.", out);
             }
         }
-
     }
 }

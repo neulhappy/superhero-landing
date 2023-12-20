@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class BoardDTO {
     private int boardId;
-    private int num;
+    private int id;
     private String title;
     private String content;
     private int author_id;
@@ -13,6 +13,7 @@ public class BoardDTO {
     private int visitcount;
     private boolean is_published;
     private boolean is_notice;
+    private String author_uid;
 
     public int getBoardId() {
         return boardId;
@@ -22,12 +23,12 @@ public class BoardDTO {
         this.boardId = boardId;
     }
 
-    public int getNum() {
-        return num;
+    public int getId() {
+        return id;
     }
 
-    public void setNum(int num) {
-        this.num = num;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -94,4 +95,11 @@ public class BoardDTO {
         this.is_notice = is_notice;
     }
 
+    public String getAuthor_uid() {
+        return author_uid;
+    }
+
+    public void setAuthor_uid(String author_uid) {
+        this.author_uid = author_uid;
+    }
 }

@@ -22,3 +22,4 @@ public class LogoutController extends HttpServlet {
         response.sendRedirect("index.jsp"); // 메인 페이지로 리디렉션
     }
 }
+

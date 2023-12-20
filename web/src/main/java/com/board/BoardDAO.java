@@ -3,54 +3,38 @@ package com.board;
 import com.util.DBConnPool;
 import com.util.Logger;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class BoardDAO extends DBConnPool {
 
-    public List<BoardDTO> selectList(Map<String, Object> map, String boardId) {
+    public List<BoardDTO> selectList(String boardId) {
         List<BoardDTO> bbs = new ArrayList<>();
-        String table = "board-" + boardId;
-
-        StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT * FROM ")
-                .append(table);
-
-        if (map.get("searchWord") != null) {
-            queryBuilder.append(" WHERE ")
-                    .append(map.get("searchField"))
-                    .append(" LIKE ?");
-        }
-
-        queryBuilder.append(" ORDER BY num DESC");
-
-        String query = queryBuilder.toString();
+        String table = "board" + boardId;
+        String query = "SELECT b.*, m.user_id FROM " +
+                table + " b " +
+                "INNER JOIN member m ON b.author_id = m.id " +
+                "WHERE b.is_published = 'Y' " +
+                "ORDER BY b.num DESC";
 
         try {
             psmt = con.prepareStatement(query);
-            int i = 1;
-            if (map.get("searchWord") != null) {
-                psmt.setString(i++, "%" + map.get("searchWord") + "%");
-            }
-
             rs = psmt.executeQuery();
 
             while (rs.next()) {
                 BoardDTO dto = new BoardDTO();
                 dto.setBoardId(Integer.parseInt(boardId));
-                dto.setNum(rs.getInt(1));
-                dto.setTitle(rs.getString(2));
-                dto.setContent(rs.getString(3));
-                dto.setAuthor_id(rs.getInt(4));
-                dto.setPostdate(rs.getDate(5));
-                dto.setLastchanged(rs.getDate(6));
-                dto.setVisitcount(rs.getInt(7));
-                dto.setIs_published(getBoolean(rs.getString(8)));
-                dto.setIs_notice(getBoolean(rs.getString(9)));
+                dto.setId(rs.getInt("id"));
+                dto.setTitle(rs.getString("title"));
+                dto.setContent(rs.getString("content"));
+                dto.setAuthor_id(rs.getInt("author_id"));
+                dto.setAuthor_uid(rs.getString("user_id"));
+                dto.setPostdate(rs.getDate("postdate"));
+                dto.setLastchanged(rs.getDate("lastchanged"));
+                dto.setVisitcount(rs.getInt("visitcount"));
+                dto.setIs_published(getBoolean(rs.getString("is_published")));
+                dto.setIs_notice(getBoolean(rs.getString("is_notice")));
 
                 bbs.add(dto);
             }
@@ -63,10 +47,13 @@ public class BoardDAO extends DBConnPool {
 
 
     public BoardDTO selectView(String id, String boardId) {
-        String table = "board-" + boardId;
+        String table = "board" + boardId;
         BoardDTO dto = new BoardDTO();
 
-        String query = " SELECT * FROM " + table + "WHERE id=?";
+        String query = "SELECT b.*, m.user_id " +
+                "FROM " + table + " b " +
+                "JOIN member m ON b.author_id = m.id " +
+                "WHERE b.id=?";
 
         try {
             psmt = con.prepareStatement(query);
@@ -75,15 +62,16 @@ public class BoardDAO extends DBConnPool {
 
             if (rs.next()) {
                 dto.setBoardId(Integer.parseInt(boardId));
-                dto.setNum(rs.getInt(1));
-                dto.setTitle(rs.getString(2));
-                dto.setContent(rs.getString(3));
-                dto.setAuthor_id(rs.getInt(4));
-                dto.setPostdate(rs.getDate(5));
-                dto.setLastchanged(rs.getDate(6));
-                dto.setVisitcount(rs.getInt(7));
-                dto.setIs_published(getBoolean(rs.getString(8)));
-                dto.setIs_notice(getBoolean(rs.getString(9)));
+                dto.setId(rs.getInt("id"));
+                dto.setTitle(rs.getString("title"));
+                dto.setContent(rs.getString("content"));
+                dto.setAuthor_id(rs.getInt("author_id"));
+                dto.setAuthor_uid(rs.getString("user_id"));
+                dto.setPostdate(rs.getDate("postdate"));
+                dto.setLastchanged(rs.getDate("lastchanged"));
+                dto.setVisitcount(rs.getInt("visitcount"));
+                dto.setIs_published(getBoolean(rs.getString("is_published")));
+                dto.setIs_notice(getBoolean(rs.getString("is_notice")));
             }
         } catch (SQLException e) {
             Logger.error("selectView 중 예외 발생", e);
@@ -91,10 +79,10 @@ public class BoardDAO extends DBConnPool {
         return dto;
     }
 
+
     public int insertWrite(BoardDTO dto) {
         int result = 0;
-        String table = "board-" + dto.getBoardId();
-
+        String table = "board" + dto.getBoardId();
         try {
             // Prepare the query with placeholders
             String query = "INSERT INTO " + table + " (title, content, author_id) VALUES (?, ?, ?)";
@@ -107,8 +95,9 @@ public class BoardDAO extends DBConnPool {
             psmt.executeUpdate();
 
             ResultSet generatedKeys = psmt.getGeneratedKeys();
-            result = generatedKeys.getInt(1);
-
+            if (generatedKeys.next()) {
+                result = generatedKeys.getInt(1);
+            }
         } catch (SQLException e) {
             Logger.error("insertWrite 중 에러 발생", e);
         }
@@ -118,18 +107,15 @@ public class BoardDAO extends DBConnPool {
 
     public int updateWrite(BoardDTO dto) {
         int result = 0;
-        String table = "board-" + dto.getBoardId();
-
+        String table = "board" + dto.getBoardId();
         try {
             // Prepare the query with placeholders
-            String query = "UPDATE " + table + " SET title = ?, content = ? WHERE id = ?";
+            String query = "UPDATE " + table + " SET title = ?, content = ?, lastchanged = ? WHERE id = ?";
             psmt = con.prepareStatement(query);
-
-            // Set parameter values using PreparedStatement
             psmt.setString(1, dto.getTitle());
             psmt.setString(2, dto.getContent());
-            psmt.setInt(3, dto.getBoardId());
-
+            psmt.setDate(3, new java.sql.Date(System.currentTimeMillis()));
+            psmt.setInt(4, dto.getId());
             result = psmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -140,7 +126,7 @@ public class BoardDAO extends DBConnPool {
 
 
     public void updateVisitCount(String id, String boardId) {
-        String table = "board-" + boardId;
+        String table = "board" + boardId;
         String query = "UPDATE " + table + " SET visitcount = visitcount + 1 WHERE id = ?";
 
         try {
@@ -153,11 +139,10 @@ public class BoardDAO extends DBConnPool {
     }
 
     public int deletePost(String id, String boardId) {
-        String table = "board-" + boardId;
+        String table = "board" + boardId;
         int result = 0;
-
         try {
-            String query = "DELETE FROM " + table + " WHERE id = ?";
+            String query = "UPDATE " + table + " SET is_published = 'N' WHERE id = ?";
             psmt = con.prepareStatement(query);
             psmt.setString(1, id);
             result = psmt.executeUpdate();
@@ -168,25 +153,5 @@ public class BoardDAO extends DBConnPool {
         return result;
     }
 
-    public int selectCount(Map<String, Object> map, String boardId) {
-        String table = "board-" + boardId;
-        int totalCount = 0;
-        String query = "SELECT COUNT(*) FROM " + table;
-        if (map.get("searchWord") != null) {
-            query += " WHERE " + map.get("searchFiled") + " "
-                    + " LIKE '%" + map.get("searchWord") + "%'";
-        }
-        try {
-            stmt = con.createStatement();
-            rs = stmt.executeQuery(query);
-            rs.next();
-            totalCount = rs.getInt(1);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println("selectCount 오류 발생");
-        }
-
-        return totalCount;
-    }
 }
 

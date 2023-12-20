@@ -10,7 +10,6 @@ public class MemberDTO {
     private Date regdate;
     private Date lastchanged;
     private boolean quit;
-    private int herorecommanded;
 
     public int getId() {
         return id;
@@ -65,13 +64,5 @@ public class MemberDTO {
 
     public void setQuit(boolean quit) {
         this.quit = quit;
-    }
-
-    public int getHerorecommanded() {
-        return herorecommanded;
-    }
-
-    public void setHerorecommanded(int herorecommanded) {
-        this.herorecommanded = herorecommanded;
     }
 }

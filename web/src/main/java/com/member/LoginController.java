@@ -1,5 +1,6 @@
 package com.member;
 
+import com.util.Alert;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,20 +10,25 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 
 @WebServlet("/member1/login.do")
 public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = resp.getWriter();
 
         String id = req.getParameter("id");
-        String pw = req.getParameter("pw");
+        String hashedPw = req.getParameter("pw");
+        out.println(id);
+        out.println(hashedPw);
         String mode = req.getParameter("mode");
 
         MemberDao dao = new MemberDao();
 
-        if (dao.login(id, pw)) {
+        if (dao.login(id, hashedPw)) {
             // 로그인 성공
             HttpSession session = req.getSession();
             switch (mode) {
@@ -38,8 +44,7 @@ public class LoginController extends HttpServlet {
         } else {
             // 로그인 실패
             req.setAttribute("loginResult", "fail");
-            RequestDispatcher rd = req.getRequestDispatcher("/member1/Login.jsp");
-            rd.forward(req, resp);
+            Alert.alertBack("로그인에 실패하였습니다.",out);
         }
     }
 }
