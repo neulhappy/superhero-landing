@@ -28,18 +28,18 @@ public class MemberDao extends DBConnPool{
         return result;
     }
 
-    public boolean login(String id, String password) {
+    public boolean login(String id, String hashedPw) {
         try {
             con = this.getConnection();
-            String query = " SELECT MEMBERPW FROM GAME_MEMBER WHERE MEMBERID = ?";
+            String query = "SELECT MEMBERPW FROM GAME_MEMBER WHERE MEMBERID = ?";
             psmt = con.prepareStatement(query);
             psmt.setString(1, id);
             rs = psmt.executeQuery();
 
             if (rs.next()) {
                 String storedHashedPassword = rs.getString("MEMBERPW");
-                String inputHashedPassword = hashPassword(password);
-                return storedHashedPassword.equals(inputHashedPassword);
+                System.out.println(hashedPw);
+                return storedHashedPassword.equals(hashedPw); // 데이터베이스의 해시와 비교
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -49,20 +49,6 @@ public class MemberDao extends DBConnPool{
         return false;
     }
 
-    private String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] bytes = md.digest(password.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : bytes) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null; // 해시화 실패시 null 반환
-        }
-    }
 
     public void close(Connection conn, PreparedStatement ps, ResultSet rs) {
         try {
