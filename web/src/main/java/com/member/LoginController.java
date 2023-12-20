@@ -17,12 +17,14 @@ public class LoginController extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         String id = req.getParameter("id");
-        String pw = req.getParameter("pw");
+        String hashedPw = req.getParameter("pw");
+        System.out.println(id);
+        System.out.println(hashedPw);
         String mode = req.getParameter("mode");
 
         MemberDao dao = new MemberDao();
 
-        if (dao.login(id, pw)) {
+        if (dao.login(id, hashedPw)) {
             // 로그인 성공
             HttpSession session = req.getSession();
             switch (mode) {
@@ -39,6 +41,7 @@ public class LoginController extends HttpServlet {
             // 로그인 실패
             req.setAttribute("loginResult", "fail");
             RequestDispatcher rd = req.getRequestDispatcher("/member1/Login.jsp");
+            System.out.println("로그인실패");
             rd.forward(req, resp);
         }
     }

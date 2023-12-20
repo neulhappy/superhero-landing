@@ -26,8 +26,13 @@
         </h1>
 
         <ul class="login">
-            <li><a href="../member1/Login.jsp">로그인</a></li>
-            <li><a href="../member1/Join.jsp">회원가입</a></li>
+            <% if(session.getAttribute("userId") == null) { %>
+            <li><a href="../member1/Login.jsp">로그인</a></li> <!-- Login -->
+            <li><a href="../member1/Join.jsp">회원가입</a></li> <!-- Sign Up -->
+            <% } else { %>
+            <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li> <!-- Logout -->
+            <li><a href="../mypage/MyPage.jsp">마이페이지</a></li>
+            <% } %>
         </ul>
 
         <nav id="menu">

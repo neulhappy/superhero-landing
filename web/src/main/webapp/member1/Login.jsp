@@ -79,27 +79,42 @@
 <h1>
     <a href="/index.jsp">Super Hero Story</a>
 </h1>
-<form class="box" action="login.do" method="post" onsubmit="return validateForm(this)">
-    <input type="hidden" name="mode" value="login">
-    <input type="text" placeholder="ID" name="id">
-    <input type="password" placeholder="Password" name="pw" />
+<form id="loginform" class="box" action="login.do" method="post" onsubmit="return validateForm(this)">
+    <input type="hidden" name="mode" value="login"/>
+    <input type="text" placeholder="ID" name="id" id="id"/>
+    <input type="password" placeholder="Password" name="pw" id="pw"/>
     <button name="submit">Login</button>
     <div class="sign-up-box" id="signup">
         <i class="material-icons"><a href="Join.jsp">Sign Up</a></i>
     </div>
 </form>
 <script>
-    function validateForm(form) {
-        if(form.id.value == "") {
-            alert("아이디를 입력하세요.");
-            return false;
-        }
-        if(form.pw.value == "") {
-            alert("패스워드를 입력하세요.");
-            return false;
-        }
-    }
+    const inpId = document.querySelector('#id');
+    const inpPw = document.querySelector('#pw');
 
+
+    const myForm = document.getElementById('loginform');
+    myForm.addEventListener('submit', async function(event) {
+        event.preventDefault(); // 기본 제출 동작을 막음
+        if (await validateForm()) {
+            HTMLFormElement.prototype.submit.call(myForm);
+        }
+    });
+
+    async function validateForm() {
+        if (inpId.value === "" || inpPw.value === "") {
+            alert("아이디와 패스워드를 모두 입력하세요.");
+            return false;
+        }
+        // 해시화 진행
+        inpPw.value = await sha256(inpPw.value);
+        console.log(inpPw.value);
+        return true;
+    }
+    async function sha256(str) {
+        return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
+            .then(buffer => Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join(''));
+    }
 </script>
 </body>
 </html>
