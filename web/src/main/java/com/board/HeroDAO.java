@@ -1,10 +1,11 @@
 package com.board;
 
-import com.shop.ProductDTO;
 import com.util.DBConnPool;
 import com.util.Logger;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class HeroDAO extends DBConnPool {
     public HeroDTO selectHero(String id) {
@@ -20,7 +21,7 @@ public class HeroDAO extends DBConnPool {
                 dto.setHeroname(rs.getString(2));
                 dto.setRealname(rs.getString(3));
                 dto.setActor(rs.getString(4));
-                dto.setAge(rs.getInt(5));
+                dto.setDetail(rs.getString(5));
 
             }
 
@@ -28,5 +29,36 @@ public class HeroDAO extends DBConnPool {
             Logger.error("selectHero 중 예외 발생");
         }
         return dto;
+    }
+
+    public List<HeroDTO> selectList() {
+        //쿼리 결과를 담을 변수
+        List<HeroDTO> heroList = new ArrayList<HeroDTO>();
+
+        //쿼리문 작성
+        String query = "SELECT * FROM hero ORDER BY id DESC";
+
+        try {
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                //게시물 하나의 내용을 저장
+                HeroDTO dto = new HeroDTO();
+                dto.setId(rs.getInt("id"));
+                dto.setHeroname(rs.getString("heroname"));
+                dto.setRealname(rs.getString("realname"));
+                dto.setActor(rs.getString("actor"));
+                dto.setDetail(rs.getString("detail"));
+                heroList.add(dto);
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("selectList 오류 발생");
+        }
+
+        return heroList;
     }
 }
