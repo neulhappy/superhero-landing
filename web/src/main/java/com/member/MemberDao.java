@@ -1,8 +1,6 @@
 package com.member;
 
 import com.util.DBConnPool;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 public class MemberDao extends DBConnPool{
@@ -12,7 +10,7 @@ public class MemberDao extends DBConnPool{
 
         try {
             con = this.getConnection();
-            String query = " INSERT INTO GAME_MEMBER VALUES (?, ?, ?)";
+            String query = " INSERT INTO member VALUES (?, ?, ?)";
             psmt = con.prepareStatement(query);
             psmt.setString(1, mDto.getUser_id());
             psmt.setString(2, mDto.getEmail());
@@ -31,7 +29,7 @@ public class MemberDao extends DBConnPool{
     public boolean login(String id, String hashedPw) {
         try {
             con = this.getConnection();
-            String query = "SELECT MEMBERPW FROM GAME_MEMBER WHERE MEMBERID = ?";
+            String query = "SELECT MEMBERPW FROM member WHERE MEMBERID = ?";
             psmt = con.prepareStatement(query);
             psmt.setString(1, id);
             rs = psmt.executeQuery();
@@ -64,7 +62,7 @@ public class MemberDao extends DBConnPool{
 
         try {
             con = this.getConnection();
-            String query = " SELECT COUNT(*) FROM GAME_MEMBER WHERE MEMBERID = ?";
+            String query = " SELECT COUNT(*) FROM member WHERE MEMBERID = ?";
             psmt = con.prepareStatement(query);
             psmt.setString(1, id);
             rs = psmt.executeQuery();
