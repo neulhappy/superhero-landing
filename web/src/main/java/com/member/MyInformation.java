@@ -22,10 +22,8 @@ public class MyInformation extends HttpServlet {
 
         MemberDAO dao = new MemberDAO();
         boolean updateResult = dao.updateUserInformation(userId, newPassword, newEmail);
-
-
         if (updateResult) {
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
         } else {
             resp.sendRedirect("/mypage/MyInformation.jsp");
         }
