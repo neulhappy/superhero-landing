@@ -8,8 +8,10 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css"/>
 </head>
 <body>
-<button type="button" class="btn btn-info" style="transform: translate(1200px, 40px); color: white">Write</button>
-
+    <a href="<c:url value='/board/write.do'><c:param name='board' value='2' /><c:param name='action' value='write' /></c:url>">
+        <button type="button" class="btn btn-info" style="transform: translate(1200px, 40px); color: white">Write
+        </button>
+    </a>
     <table class="table table-hover">
         <thead>
             <tr>
