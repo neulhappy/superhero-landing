@@ -1,13 +1,16 @@
 const IMP = window.IMP;
 IMP.init("imp85622471");
 
+let total = 0;
+
 const kakaoButton = document.querySelector(".kakao");
 
 const onKakaoPay = async () => {
+
     IMP.request_pay({
         pg: "kakaopay.TC0ONETIME",
         pay_method: "card",
-        amount: "9999",  //-->${productDTO.price} * n +
+        amount: total,  //-->${productDTO.price} * n +
         name: "히어로 굿즈", // -->${productDTO.name}
         buyer_email: "구매자 이메일", // -->${memberDTO.email} 필요 없을시 제거 필요
         merchant_uid: "merchant_" + new Date().getTime()
@@ -143,14 +146,15 @@ function addProduct() {
 //     sendOrderData();
 // }
 
-function phoneNumberRule(str){//휴대폰 번호 유효성 검사
+function phoneNumberRule(str) {//휴대폰 번호 유효성 검사
     return /^01(?:0|1|[6-9])-\d{3,4}-\d{4}$/.test(str);
 }
-function nameRule(str){//이름 유효성 검사
+
+function nameRule(str) {//이름 유효성 검사
     return /^[A-Za-z가-힣]+$/.test(str);
 }
 
-function addressRule(str){//주소 유효성 검사
+function addressRule(str) {//주소 유효성 검사
     return /^[A-Za-z가-힣0-9\s\-\.,#]+$/.test(str);
 }
 
@@ -158,6 +162,7 @@ const InputPurchaserName = document.querySelector('#purchaser_name');
 const InputRecipientName = document.querySelector('#recipient_name');
 const InputAddress = document.querySelector('#address');
 const InputPhoneNumber = document.querySelector('#contact');
+
 function validateForm() {
     console.log("되고있는중");
 
@@ -187,8 +192,45 @@ function submitForm() {
             console.log(data);
         },
         error: function (request, status, error) {
-            console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 
         }
     });
 }
+
+
+// 장바구니에 담긴 상품들을 표시하는 함수
+function displayCart() {
+    let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+    // HTML로 장바구니에 담긴 상품들을 만듭니다.
+    let cartItemsHTML = '<ul>';
+
+    if (cart.length === 0) {
+        cartItemsHTML += '<li>장바구니에 상품이 없습니다.</li>';
+    } else {
+        // 각 상품마다 3개씩 정보가 들어있으므로, 각각의 정보를 가져와서 표시합니다.
+        for (let i = 0; i < cart.length; i += 3) {
+            const productId = cart[i];
+            const productName = cart[i + 1];
+            const productPrice = cart[i + 2];
+            cartItemsHTML += `<li><img src="../img/goods/${productId}.jpg" style="width: 150px; height: 150px;">     상품명: ${productName}      가격 : ${productPrice}원</li>`;
+
+
+            total += parseInt(productPrice);
+        }
+    }
+    document.getElementById('cartItems').innerHTML = cartItemsHTML;
+    document.getElementById("total").textContent = `${total}원`;
+}
+
+function clearCart() {
+    sessionStorage.removeItem('cart'); // 'cart' 세션 삭제
+    // 여기에 세션 삭제 후의 추가적인 처리를 할 수 있습니다.
+    // 예: 장바구니 화면을 리로드하여 업데이트하는 등의 작업
+    total = 0;
+    displayCart(); // 장바구니 화면 다시 표시
+}
+
+
+// 페이지가 로드될 때 장바구니를 표시합니다.
+window.onload = displayCart;

@@ -15,45 +15,41 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/paymentstyle.css"/>
     <style>
-        .quantity-wrapper {
-            display: flex;
-            align-items: center;
-        }
-
-        .quantity-input {
-            margin-right: 10px;
-        }
-
-        .arrow-buttons {
-            display: flex;
-            flex-direction: column;
-        }
-
         .orderPage {
             display: flex;
+            list-style: none;
         }
+
+        .bag{
+            width: 800px;
+            max-height: 600px; /* 장바구니 목록의 최대 높이를 지정합니다. */
+            overflow-y: auto;
+        }
+
+        .empty{
+            margin-left: 619px;
+        }
+        ul{
+            list-style: none;
+        }
+
 
     </style>
 </head>
 
 <body>
-<div class="orderPage">
-    <div class="shoppingBag col-md-6">
-        <h1>장바구니</h1>
-        <ul>
-            <c:forEach var="productId" items="${sessionScope.cart}">
-                <%
-                    // 여기서는 상품 ID를 사용해서 해당 상품 정보를 가져오는 로직을 작성해야 합니다.
-                    // 이 예시에서는 Product 클래스가 있다고 가정하고 해당 ID로 Product 객체를 가져오는 메서드를 사용합니다.
-                    Product product = Product.getProductById(productId);
-                %>
-                <li>${product.name} - ${product.price}</li>
-            </c:forEach>
-        </ul>
-
-
+<div class="orderPage" >
+    <div class="container bag">
+        <h2 class="text-center">장바구니</h2>
+        <div id="cartItems" class="card">
+            <!-- displayCart 함수에서 장바구니 목록이 표시됩니다. -->
+        </div>
+        <div class = "text-center fs-2">
+            <p><span id="total"></span></p>
+        </div>
     </div>
-    <div>
+
+    <div class="container mt-5">
         <form id="orderForm" class="row g-3 mx-auto p-2 col-md-6" style="width: 800px;" action="orderSuccess.do"
               method="post">
             <div class="col-md-6">
@@ -92,7 +88,14 @@
         </div>
     </div>
 </div>
+<div class="empty">
+    <button class="btn btn-danger btn-lg align-middle" type="button" onclick="clearCart()">장바구니 비우기</button>
+</div>
 
+
+<footer>
+    <jsp:include page="../jsp/Footer.jsp"/>
+</footer>
 
 <script src="../js/order.js"></script>
 </body>
