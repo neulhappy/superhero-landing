@@ -19,7 +19,7 @@
                 <dd>
                     <p>${product.name}</p>
                     <p>${product.price}</p>
-                    <input type="button" value="장바구니" onclick="addCart(${product.id})">
+                    <input type="button" value="장바구니" onclick="addCart(${product.id},'${product.name}', ${product.price})">
                 </dd>
             </dl>
         </c:forEach>
@@ -66,7 +66,7 @@
                 <p>45,000원</p><input type="button" value="장바구니"></dd>
         </dl>
         <div class="basket">
-            <a href="#"><img src="../img/basket.png"></a>
+            <a href="/shop/order.jsp"><img src="../img/basket.png"></a>
         </div>
     </div>
 

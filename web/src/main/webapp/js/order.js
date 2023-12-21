@@ -2,6 +2,7 @@ const IMP = window.IMP;
 IMP.init("imp85622471");
 
 let total = 0;
+let products = [];
 
 const kakaoButton = document.querySelector(".kakao");
 
@@ -10,7 +11,7 @@ const onKakaoPay = async () => {
     IMP.request_pay({
         pg: "kakaopay.TC0ONETIME",
         pay_method: "card",
-        amount: total,  //-->${productDTO.price} * n +
+        amount: 1,  //-->${productDTO.price} * n +
         name: "히어로 굿즈", // -->${productDTO.name}
         buyer_email: "구매자 이메일", // -->${memberDTO.email} 필요 없을시 제거 필요
         merchant_uid: "merchant_" + new Date().getTime()
@@ -83,69 +84,7 @@ function pay_info(rsp) {
 }
 
 
-var predefinedProducts = ["상품1", "상품2", "상품3", "상품4", "상품5"];
 
-function addProduct() {
-    var productList = document.getElementById("productList");
-    // 상품 목록 요소 생성
-    var product = document.createElement("li");
-    product.style.listStyle = "none";
-
-    var productName = document.createElement("span");
-    productName.textContent = "상품명";
-    productName.style.marginLeft = "0px";
-
-    var select = document.createElement("select");
-    select.style.width = "400px";
-    select.style.marginLeft = "10px";
-    predefinedProducts.forEach(function (productName) {
-        var option = document.createElement("option");
-        option.value = productName;
-        option.textContent = productName;
-        select.appendChild(option);
-    });
-
-    var quantityWrapper = document.createElement("div");
-    quantityWrapper.className = "quantity-wrapper";
-    quantityWrapper.style.display = "flex";
-
-    var quantityInput = document.createElement("input");
-    quantityInput.type = "number";
-    quantityInput.min = "1"; // 최소값
-    quantityInput.max = "10"; // 최대값
-    quantityInput.value = "1"; // 초기값
-    quantityInput.className = "quantity-input";
-    quantityInput.style.width = "50px";
-    quantityInput.style.height = "25px";
-    quantityInput.style.marginLeft = "100px";
-
-    var quantityUnit = document.createElement("span");
-    quantityUnit.textContent = "개";
-
-    // X 버튼
-    var deleteBtn = document.createElement("button");
-    deleteBtn.type = "button";
-    deleteBtn.textContent = "X";
-    deleteBtn.style.height = "25px";
-    deleteBtn.style.marginLeft = "200px";
-    deleteBtn.onclick = function () {
-        product.remove(); // X 버튼을 누르면 해당 상품 목록 삭제
-    };
-
-    // 상품 목록 요소에 상품 개수 입력 필드와 X 버튼, '개' 텍스트 추가
-    quantityWrapper.appendChild(productName);
-    quantityWrapper.appendChild(select);
-    quantityWrapper.appendChild(quantityInput);
-    quantityWrapper.appendChild(quantityUnit);
-    quantityWrapper.appendChild(deleteBtn);
-
-    product.appendChild(quantityWrapper);
-    productList.appendChild(product);
-}
-
-// function submit() {
-//     sendOrderData();
-// }
 
 function phoneNumberRule(str) {//휴대폰 번호 유효성 검사
     return /^01(?:0|1|[6-9])-\d{3,4}-\d{4}$/.test(str);
@@ -180,8 +119,14 @@ function validateForm() {
 
 function submitForm() {
     //const form = document.getElementById('orderForm');
-    let formData = $("#orderForm").serialize();
-    console.log(formData);
+    let formData = $("#orderForm").serializeArray();
+
+    let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+
+    cart.forEach(function (product, index){
+        formData.push({ name: 'prod_id' + index+1, value: product.productId });
+        formData.push({ name: 'quantity_' + index+1, value: product.quantity });
+    });
 
     $.ajax({
         type: "post",
@@ -201,37 +146,44 @@ function submitForm() {
 
 
 // 장바구니에 담긴 상품들을 표시하는 함수
-function displayCart() {
-    let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
-    // HTML로 장바구니에 담긴 상품들을 만듭니다.
-    let cartItemsHTML = '<ul>';
+// function displayCart() {
+//     let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+//
+//     // HTML로 장바구니에 담긴 상품들을 만듭니다.
+//     let cartItemsHTML = '<ul>';
+//     let orderList = '';
+//     if (cart.length === 0) {
+//         cartItemsHTML += '<li>장바구니에 상품이 없습니다.</li>';
+//     } else {
+//         // 각 상품마다 3개씩 정보가 들어있으므로, 각각의 정보를 가져와서 표시합니다.
+//         for (let i = 0; i < cart.length; i += 3) {
+//             const productId = cart[i].productId;
+//             const productName = cart[i + 1].productName;
+//             const productPrice = cart[i + 2].productPrice;
+//             cartItemsHTML += `<li><img src="../img/goods/${productId}.jpg" style="width: 150px; height: 150px;">     상품명: ${productName}      가격 : ${productPrice}원</li>`;
+//
+//             products.push(productId);
+//             total += parseInt(productPrice);
+//
+//             orderList += `<input type="number" name="${productId}">`
+//
+//         }
+//     }
+//     document.getElementById('orderList').innerHTML = orderList;
+//     document.getElementById('cartItems').innerHTML = cartItemsHTML;
+//     document.getElementById("total").textContent = `${total}원`;
+// }
+//
+// function clearCart() {
+//     sessionStorage.removeItem('cart'); // 'cart' 세션 삭제
+//     // 여기에 세션 삭제 후의 추가적인 처리를 할 수 있습니다.
+//     // 예: 장바구니 화면을 리로드하여 업데이트하는 등의 작업
+//     total = 0;
+//     displayCart(); // 장바구니 화면 다시 표시
+// }
 
-    if (cart.length === 0) {
-        cartItemsHTML += '<li>장바구니에 상품이 없습니다.</li>';
-    } else {
-        // 각 상품마다 3개씩 정보가 들어있으므로, 각각의 정보를 가져와서 표시합니다.
-        for (let i = 0; i < cart.length; i += 3) {
-            const productId = cart[i];
-            const productName = cart[i + 1];
-            const productPrice = cart[i + 2];
-            cartItemsHTML += `<li><img src="../img/goods/${productId}.jpg" style="width: 150px; height: 150px;">     상품명: ${productName}      가격 : ${productPrice}원</li>`;
 
-
-            total += parseInt(productPrice);
-        }
-    }
-    document.getElementById('cartItems').innerHTML = cartItemsHTML;
-    document.getElementById("total").textContent = `${total}원`;
-}
-
-function clearCart() {
-    sessionStorage.removeItem('cart'); // 'cart' 세션 삭제
-    // 여기에 세션 삭제 후의 추가적인 처리를 할 수 있습니다.
-    // 예: 장바구니 화면을 리로드하여 업데이트하는 등의 작업
-    total = 0;
-    displayCart(); // 장바구니 화면 다시 표시
-}
 
 
 // 페이지가 로드될 때 장바구니를 표시합니다.
-window.onload = displayCart;
+// window.onload = displayCart;

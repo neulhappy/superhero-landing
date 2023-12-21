@@ -34,7 +34,6 @@ public class OrderDAO extends DBConnPool {
                     }
                 }
             }
-
             // Insert order products
             if (orderId > 0) {
                 insertOrderProducts(orderId, dto.getProductList());
