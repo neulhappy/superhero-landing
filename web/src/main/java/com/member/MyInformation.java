@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 @WebServlet("/member/inform.do")
 public class MyInformation extends HttpServlet {
@@ -19,10 +20,12 @@ public class MyInformation extends HttpServlet {
         MemberDAO dao = new MemberDAO();
         boolean updateResult = dao.updateUserInformation(userId, newPassword, newEmail);
 
+        response.setContentType("text/plain;charset=UTF-8");
+        PrintWriter out = response.getWriter();
         if (updateResult) {
-            response.getWriter().write("정보가 성공적으로 변경되었습니다.");
+            out.write("정보가 성공적으로 변경되었습니다.");
         } else {
-            response.getWriter().write("정보 변경에 실패했습니다.");
+            out.write("정보 변경에 실패했습니다.");
         }
     }
 }
