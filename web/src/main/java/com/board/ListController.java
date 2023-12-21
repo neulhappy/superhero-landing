@@ -15,8 +15,7 @@ import java.util.List;
 public class ListController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BoardDAO dao = new BoardDAO();
-        String boardId = req.getParameter("boardId");
-        List<BoardDTO> bbs = dao.selectList(boardId);
+        List<BoardDTO> bbs = dao.selectList("1");
         dao.close();
 
         req.setAttribute("bbs", bbs);

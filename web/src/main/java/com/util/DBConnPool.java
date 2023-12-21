@@ -13,20 +13,34 @@ public class DBConnPool {
     public ResultSet rs;
     private DataSource dataSource;
 
+
     public DBConnPool() {
         try {
-            Context initCtx = new InitialContext();
-            Context ctx = (Context) initCtx.lookup("java:comp/env");
-            dataSource = (DataSource)ctx.lookup("jdbc/orcl");
-
+            initializeDataSource();
+            con = getConnection();
             Logger.logger.info("DB 커넥션 풀 연결 성공");
         } catch (Exception e) {
-            Logger.logger.error("DBConnPool 시도 중 예외 발생");
+            Logger.logger.error("DBConnPool 초기화 중 예외 발생");
         }
     }
 
-    public Connection getConnection() throws SQLException{
-        return dataSource.getConnection();
+    private void initializeDataSource() {
+        try {
+            Context initCtx = new InitialContext();
+            Context ctx = (Context) initCtx.lookup("java:comp/env");
+            dataSource = (DataSource) ctx.lookup("jdbc/orcl");
+        } catch (Exception e) {
+            Logger.logger.error("DataSource 초기화 중 예외 발생");
+        }
+    }
+
+    public Connection getConnection() throws SQLException {
+        try {
+            return dataSource.getConnection();
+        } catch (Exception e) {
+            Logger.logger.error("getConnection 중 예외 발생");
+        }
+        return null;
     }
 
     public void close() {
@@ -49,6 +63,7 @@ public class DBConnPool {
         }
         return psmt;
     }
+
     public static boolean getBoolean(String input) {
         return "Y".equalsIgnoreCase(input);
     }

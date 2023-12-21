@@ -14,10 +14,10 @@ public class BoardDAO extends DBConnPool {
         String table = "board" + boardId;
         String query = "SELECT b.*, m.user_id FROM " +
                 table + " b " +
-                "INNER JOIN member m ON b.author_id = m.id " +
+                "INNER JOIN custom m ON b.author_id = m.id " +
                 "WHERE b.is_published = 'Y' " +
-                "ORDER BY b.num DESC";
-
+                "ORDER BY b.id DESC";
+        System.out.println(query);
         try {
             psmt = con.prepareStatement(query);
             rs = psmt.executeQuery();
@@ -52,7 +52,7 @@ public class BoardDAO extends DBConnPool {
 
         String query = "SELECT b.*, m.user_id " +
                 "FROM " + table + " b " +
-                "JOIN member m ON b.author_id = m.id " +
+                "JOIN custom m ON b.author_id = m.id " +
                 "WHERE b.id=?";
 
         try {
