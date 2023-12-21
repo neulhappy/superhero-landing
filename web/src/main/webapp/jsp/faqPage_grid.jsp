@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://uicdn.toast.com/grid/latest/tui-grid.css"/>
 </head>
 <body>
-<button type="button" class="btn btn-info" style="transform: translate(1700px, 80px); color: white">Write</button>
+<button type="button" class="btn btn-info" style="transform: translate(1200px, 40px); color: white">Write</button>
 
     <table class="table table-hover">
         <thead>
