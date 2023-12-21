@@ -20,6 +20,7 @@ const onKakaoPay = async () => {
 
         } else {
             //todo;failled 처리
+            alert("결제에 실패하셨습니다.");
         }
     });
 }
