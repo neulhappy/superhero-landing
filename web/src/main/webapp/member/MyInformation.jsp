@@ -125,7 +125,7 @@
             <li><a href="MyInformation.jsp"><span>회원정보</span></a></li>
         </ul>
     </div>
-    <form class="info" action="myinform.do" method="post">
+    <form class="info">
         <table>
             <tr>
                 <th>내 아이디</th>
@@ -192,7 +192,7 @@
 
         // AJAX 요청으로 서버에 데이터 전송
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "/mypage/myinform.do", true);
+        xhr.open("POST", "member/inform.do", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(formData);
 

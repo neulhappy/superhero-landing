@@ -11,10 +11,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/mypage/myinform.do")
+@WebServlet("/member/inform.do")
 public class MyInformation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html; charset=UTF-8");
+        PrintWriter out = resp.getWriter();
 
         String newPassword = req.getParameter("newPassword");
         String newEmail = req.getParameter("newEmail");
@@ -22,10 +24,11 @@ public class MyInformation extends HttpServlet {
 
         MemberDAO dao = new MemberDAO();
         boolean updateResult = dao.updateUserInformation(userId, newPassword, newEmail);
+        dao.close();
         if (updateResult) {
-            resp.sendRedirect(req.getContextPath() + "/index.jsp");
+            resp.sendRedirect("index.jsp");
         } else {
-            resp.sendRedirect("/mypage/MyInformation.jsp");
+            resp.sendRedirect("/member/MyInformation.jsp");
         }
     }
 }
