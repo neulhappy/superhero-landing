@@ -7,9 +7,9 @@ const onKakaoPay = async () => {
     IMP.request_pay({
         pg: "kakaopay.TC0ONETIME",
         pay_method: "card",
-        amount: "9999",
-        name: "히어로 굿즈",
-        buyer_email: "구매자 이메일",
+        amount: "9999",  //-->${productDTO.price} * n +
+        name: "히어로 굿즈", // -->${productDTO.name}
+        buyer_email: "구매자 이메일", // -->${memberDTO.email} 필요 없을시 제거 필요
         merchant_uid: "merchant_" + new Date().getTime()
     }, function (rsp) {
         if (rsp.success) {

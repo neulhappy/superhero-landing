@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<div id="gridDiv"></div>
+<div id="gridDiv" style="padding-top: 100px"></div>
 
 <script src="../js/faq.js"></script>
 

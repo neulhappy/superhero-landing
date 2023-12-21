@@ -17,9 +17,10 @@
 <div id="wrap">
     <header id="header">
         <h1>
-            <a href="${pageContext.request.contextPath}/index.do">Super Hero Story</a>
+            <a href="${pageContext.request.contextPath}/index.do"><img src="img/mainlogo.png"></a>
         </h1>
 
+        <div class="inner">
         <ul class="login">
             <% if(session.getAttribute("userId") == null) { %>
             <li><a href="member1/Login.jsp">로그인</a></li> <!-- Login -->
@@ -33,11 +34,12 @@
         <nav id="menu">
             <ul>
                 <li><a href="jsp/profilePage.jsp">소개</a></li>
-                <li><a href="jsp/goodsPage.jsp">상점</a></li>
+                <li><a href="jsp/goods.jsp">상점</a></li>
                 <li><a href="jsp/CommunityPage.jsp">상품후기</a></li>
                 <li><a href="jsp/faqPage.jsp">FAQ</a></li>
             </ul>
         </nav>
+        </div>
     </header>
 
     <main id="main">
