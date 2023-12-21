@@ -5,6 +5,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 import java.sql.*;
+import java.util.Date;
 
 public class DBConnPool {
     public Connection con;
@@ -66,5 +67,21 @@ public class DBConnPool {
 
     public static boolean getBoolean(String input) {
         return "Y".equalsIgnoreCase(input);
+    }
+
+    public static Date getSqlDate(java.util.Date utilDate) {
+        if (utilDate == null) {
+            return null;
+        } else {
+            return new Date(utilDate.getTime());
+        }
+    }
+
+    public static java.util.Date getUtilDate(java.sql.Date sqlDate) {
+        if (sqlDate == null) {
+            return null;
+        } else {
+            return new java.util.Date(sqlDate.getTime());
+        }
     }
 }
