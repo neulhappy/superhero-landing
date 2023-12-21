@@ -6,7 +6,7 @@ public class PaymentDTO {
 
     private String payment;  // 결제 타입
 
-    private Date orderDate; // 주문일자
+    private String payDate; // 결제 일자
 
     private String isPay; //결제 되었는지
 
@@ -18,12 +18,12 @@ public class PaymentDTO {
         this.payment = payment;
     }
 
-    public Date getOrderDate() {
-        return orderDate;
+    public String getPayDate() {
+        return payDate;
     }
 
-    public void setOrderDate(Date orderDate) {
-        this.orderDate = orderDate;
+    public void setPayDate(String payDate) {
+        this.payDate = payDate;
     }
 
     public String getIsPay() {

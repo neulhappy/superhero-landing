@@ -2,9 +2,11 @@ package com.shop;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -27,7 +29,10 @@ public class PayController extends HttpServlet {
         long paymentUnixTime = Long.parseLong(req.getParameter("paymentTime"));
         Instant instant = Instant.ofEpochSecond(paymentUnixTime);
         LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-        java.sql.Date paymentTime = java.sql.Date.valueOf(dateTime.toLocalDate());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        String paymentTime = dateTime.format(formatter);
+
+
 
         // 클라이언트에 응답을 보냅니다.
         resp.setContentType("text/html; charset=UTF-8");
@@ -45,11 +50,10 @@ public class PayController extends HttpServlet {
 
         //폼값을 DTO에 저장
         PaymentDTO pDto = new PaymentDTO();
-        pDto.setPayment(paymentMethod);
-        pDto.setOrderDate(paymentTime);
+        pDto.setPayDate(paymentTime);
 
-        //결제를 무엇으로 하였는지 업데이트
+        //결제 일자를 업데이트
         PaymentDAO pDao = PaymentDAO.getInstance();
-        int joinResult = pDao.updatePayment(pDto);
+        int joinResult = pDao.updatePayDate(pDto);
     }
 }
