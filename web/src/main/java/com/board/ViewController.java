@@ -14,14 +14,14 @@ import java.io.PrintWriter;
 public class ViewController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String boardId = req.getParameter("boardId");
-        String postId = req.getParameter("postId");
+        String board = req.getParameter("board");
+        String postId = req.getParameter("id");
         BoardDAO dao = new BoardDAO();
-        BoardDTO post = dao.selectView(postId, boardId);
+        BoardDTO post = dao.selectView(postId, board);
         req.setAttribute("post", post);
-        switch (boardId) {
-            case "1" -> req.getRequestDispatcher("/view.jsp").forward(req, resp);
-            case "2" -> req.getRequestDispatcher("/view.jsp").forward(req, resp);
+        switch (board) {
+            case "1" -> req.getRequestDispatcher("/jsp/textPage.jsp").forward(req, resp);
+            case "2" -> req.getRequestDispatcher("/jsp/textPage.jsp").forward(req, resp);
             //todo:view 만들어서 링크 연결
             default -> {
                 resp.setContentType("text/html;charset=UTF-8");
