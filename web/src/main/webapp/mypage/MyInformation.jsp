@@ -125,7 +125,7 @@
             <li><a href="MyInformation.jsp"><span>회원정보</span></a></li>
         </ul>
     </div>
-    <div class="info">
+    <form class="info" action="myinform.do" method="post">
         <table>
             <tr>
                 <th>내 아이디</th>
@@ -135,27 +135,29 @@
                 <th>내 이메일</th>
                 <th><%= userEmail %> </th>
             </tr>
-            <tr>
-                <th>새 이메일</th>
-                <td><input type="email" id="newEmail" placeholder="새 이메일"><div id="emailMessage"></div></td>
+                <tr>
+                    <th>새 이메일</th>
+                    <td><input type="email" id="newEmail" placeholder="새 이메일" autocomplete="email"><div id="emailMessage"></div></td>
 
-            </tr>
-            <tr>
-                <th>새 비밀번호</th>
-                <td><input type="password" id="newPassword" placeholder="새 비밀번호"><div id="passwordMessage"></div></td>
-            </tr>
-            <tr>
-                <th></th>
-                <th><input type="password" id="confirmNewPassword" placeholder="새 비밀번호 확인"></th>
-            </tr>
+                </tr>
+                <tr>
+                    <th>새 비밀번호</th>
+                    <td><input type="password" id="newPassword" placeholder="새 비밀번호" autocomplete="new_password"><div id="passwordMessage"></div></td>
+                </tr>
+                <tr>
+                    <th></th>
+                    <th><input type="password" id="confirmNewPassword" placeholder="새 비밀번호 확인" autocomplete="new_password"></th>
+                </tr>
         </table>
         <div class="btn">
             <button onclick="updateInformation()">정보 변경</button>
         </div>
+    </form>
     </div>
 </div>
 
 <script>
+
     async function updateInformation() {
         const newPassword = document.getElementById('newPassword').value;
         const confirmNewPassword = document.getElementById('confirmNewPassword').value;
