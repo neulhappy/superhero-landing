@@ -23,7 +23,7 @@ public class PasswordCheckController extends HttpServlet {
         int PID = dao.login(id, hashedPw);
         dao.close();
         if (PID > 0) {
-            Alert.alertLocation("인증에 성공하였습니다.", "/mypage/MyInformation.jsp", out);
+            Alert.alertLocation("인증에 성공하였습니다.", "/member/MyInformation.jsp", out);
         } else {
             Alert.alertBack("인증에 실패했습니다.", out);
         }

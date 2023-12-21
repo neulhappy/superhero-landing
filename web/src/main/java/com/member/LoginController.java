@@ -38,7 +38,7 @@ public class LoginController extends HttpServlet {
                     resp.sendRedirect("/index.jsp");
                 }
                 case "inform" -> {
-                    req.getRequestDispatcher("/mypage/MyInformation.jsp").forward(req, resp);
+                    req.getRequestDispatcher("/member/MyInformation.jsp").forward(req, resp);
                 }
             }
         } else {
