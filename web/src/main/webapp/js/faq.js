@@ -62,7 +62,7 @@ const initGrid = () => {
         scrollY: false,
         draggable: false,
         header: { height: 50 },
-        bodyHeight: 700,
+        bodyHeight: 500,
         contextMenu: null,
         columns: [
             {

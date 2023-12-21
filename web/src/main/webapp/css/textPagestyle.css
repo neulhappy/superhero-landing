@@ -12,6 +12,7 @@ h1 img{width: 500px;}
 
 .icon {display: flex; justify-content: right; padding-right: 200px; gap: 20px; transform: translate(0,-100px)}
 
-#main {height: 1000px; background: url("../img/textbackground.jpg") no-repeat center; background-size: 2000px; opacity: 0.5; }
+#main {height: 500px; }
 
-footer {transform: translate(0, -200px)}
+
+footer {transform: translate(0, -120px); }
