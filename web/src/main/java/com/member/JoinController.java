@@ -27,7 +27,7 @@ public class JoinController extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
 
-        String id = (req.getParameter("id"));
+        String id = req.getParameter("id");
         String pw = req.getParameter("pw");
         String email = req.getParameter("email");
 
