@@ -76,7 +76,7 @@
             <div class="col-md-12">
                 <label class="form-label">상품 목록</label>
                 <ul id="productList">
-                    <!-- 동적으로 추가되는 상품 목록 -->
+
                 </ul>
                 <button type="button" onclick="addProduct()">상품 추가</button>
             </div>
