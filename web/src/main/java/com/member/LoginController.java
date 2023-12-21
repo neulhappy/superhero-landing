@@ -33,8 +33,6 @@ public class LoginController extends HttpServlet {
                 case "login" -> {
                     session.setAttribute("userId", id);
                     session.setAttribute("userPw", hashedPw);
-                    session.setAttribute("userPID", pid);
-                    // 로그인 후 이동할 페이지로 리다이렉트 또는 포워딩
                     resp.sendRedirect("/index.jsp");
                 }
                 case "inform" -> {
