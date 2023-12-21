@@ -1,4 +1,4 @@
-package com.payment;
+package com.shop;
 
 import java.sql.Date;
 

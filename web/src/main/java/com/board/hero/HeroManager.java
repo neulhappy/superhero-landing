@@ -1,4 +1,4 @@
-package com.util.hero;
+package com.board.hero;
 
 import java.nio.file.Files;
 import java.util.HashMap;

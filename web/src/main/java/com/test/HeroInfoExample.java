@@ -1,6 +1,6 @@
 package com.test;
 
-import com.util.hero.HeroManager;
+import com.board.hero.HeroManager;
 
 public class HeroInfoExample {
     public static void main(String[] args) {

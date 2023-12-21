@@ -11,12 +11,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet("/member1/join.do")
+@WebServlet("/member/join.do")
 public class JoinController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestDispatcher rd = req.getRequestDispatcher("/member1/Join.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/member/Join.jsp");
         rd.forward(req, resp);
     }
 
@@ -42,9 +42,9 @@ public class JoinController extends HttpServlet {
         dao.close();
 
         if (joinResult == 1) {
-            Alert.alertLocation("회원가입에 성공했습니다.", "/member1/Login.jsp", out);
+            Alert.alertLocation("회원가입에 성공했습니다.", "/member/Login.jsp", out);
         } else {
-            Alert.alertLocation("회원가입에 실패했습니다.", "../member1/Join.jsp", out);
+            Alert.alertLocation("회원가입에 실패했습니다.", "../member/Join.jsp", out);
         }
         out.flush();
     }

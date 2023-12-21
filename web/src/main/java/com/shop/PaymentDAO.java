@@ -1,11 +1,10 @@
-package com.payment;
+package com.shop;
 
 import com.util.DBConnPool;
 import com.util.QueryBuilder;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.concurrent.SynchronousQueue;
 
 import static com.util.Logger.logger;
 

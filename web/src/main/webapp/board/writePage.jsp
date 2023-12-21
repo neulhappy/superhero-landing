@@ -24,7 +24,7 @@
 <body>
 
     <h1>게시글 작성</h1>
-    <form name="writeFrm" method="post" action="CommunityPage.jsp" onsubmit="return validateForm(this)">
+    <form name="writeFrm" method="post" action="Review.jsp" onsubmit="return validateForm(this)">
         <input type="hidden" name="board_id" value="">
         <input type="hidden" name="content" value="1">
         <table border="1" style="width: 100%; min-height: 50px;">

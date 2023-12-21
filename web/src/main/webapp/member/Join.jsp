@@ -143,7 +143,7 @@
         var id = document.getElementById("id").value;
 
         // 서버에 중복 확인 요청 전송
-        var result = await fetch('/member1/checkId.do', {
+        var result = await fetch('/member/checkId.do', {
             method: 'POST',
             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
             body: 'id=' + encodeURIComponent(id)

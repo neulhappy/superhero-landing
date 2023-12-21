@@ -13,7 +13,7 @@ import java.io.PrintWriter;
 import java.util.List;
 
 
-@WebServlet("/list.do")
+@WebServlet("/board/list.do")
 public class ListController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BoardDAO dao = new BoardDAO();
@@ -24,7 +24,7 @@ public class ListController extends HttpServlet {
 
         req.setAttribute("bbs", bbs);
         switch (board) {
-            case "1" -> req.getRequestDispatcher("/jsp/CommunityPage.jsp").forward(req, resp);
+            case "1" -> req.getRequestDispatcher("/jsp/Review.jsp").forward(req, resp);
             case "2" -> req.getRequestDispatcher("/jsp/faqPage.jsp").forward(req, resp);
             default -> {
                 resp.setContentType("text/html;charset=UTF-8");

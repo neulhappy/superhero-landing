@@ -33,7 +33,7 @@
 
 
     <footer>
-        <jsp:include page="Footer.jsp"/>
+        <jsp:include page="../include/Footer.jsp"/>
     </footer>
 
     <script src="../js/text.js"></script>

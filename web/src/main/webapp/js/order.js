@@ -19,7 +19,7 @@ const onKakaoPay = async () => {
             pay_info(rsp);
 
         } else {
-            location.href = "payFailed.jsp";
+            //todo;failled 처리
         }
     });
 }

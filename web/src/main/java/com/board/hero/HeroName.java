@@ -1,4 +1,4 @@
-package com.util.hero;
+package com.board.hero;
 
 public enum HeroName {
     DOCTOR_STRANGE("닥터 스트레인지"),

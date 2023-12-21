@@ -62,21 +62,21 @@
         <div class="inner">
             <ul class="login">
                 <c:if test="${empty sessionScope.userId}">
-                    <li><a href="member1/Login.jsp">로그인</a></li> <!-- Login -->
-                    <li><a href="member1/Join.jsp">회원가입</a></li> <!-- Sign Up -->
+                    <li><a href="member/Login.jsp">로그인</a></li> <!-- Login -->
+                    <li><a href="member/Join.jsp">회원가입</a></li> <!-- Sign Up -->
                 </c:if>
                 <c:if test="${not empty sessionScope.userId}">
                     <li><a href="logout">로그아웃</a></li> <!-- Logout -->
-                    <li><a href="mypage/MyPage.jsp">마이페이지</a></li>
+                    <li><a href="member/MyPage.jsp">마이페이지</a></li>
                 </c:if>
             </ul>
 
         <nav id="menu">
             <ul>
-                <li><a href="jsp/profilePage.jsp">소개</a></li>
-                <li><a href="jsp/goods.jsp">상점</a></li>
-                <li><a href="jsp/CommunityPage.jsp">상품후기</a></li>
-                <li><a href="jsp/faqPage.jsp">FAQ</a></li>
+                <li><a href="board/profilePage.jsp">소개</a></li>
+                <li><a href="shop/goods.jsp">상점</a></li>
+                <li><a href="board/Review.jsp">상품후기</a></li>
+                <li><a href="board/faqPage.jsp">FAQ</a></li>
             </ul>
         </nav>
         </div>

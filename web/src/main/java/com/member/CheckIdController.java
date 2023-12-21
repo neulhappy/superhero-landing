@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/member1/checkId.do")
+@WebServlet("/member/checkId.do")
 public class CheckIdController extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

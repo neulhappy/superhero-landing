@@ -6,14 +6,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
-<%@ page import="com.util.hero.HeroManager" %>
-<%@ page import="com.util.hero.HeroName" %>
-<%@ page import="com.util.hero.HeroInfo" %>
-<%@ page import="com.util.hero.Status" %>
-<%@ page import="java.util.Map" %>
-<%@ page import="java.util.HashMap" %>
-<%@ page import="static com.util.hero.HeroName.DOCTOR_STRANGE" %>
-<%@ page import="static java.lang.System.out" %>
+<%@ page import="com.board.hero.HeroManager" %>
+<%@ page import="com.board.hero.HeroName" %>
+<%@ page import="com.board.hero.HeroInfo" %>
 
 <%
     // Instantiate HeroManager
@@ -360,7 +355,7 @@
 
 <footer id="footer">
     <p>Copyright (c) 2023 Re-Coder</p>
-    <out_logo><a href=" ../index.jsp"><img src="../img/profooterlogo.png"></a></out_logo>
+    <out_logo><a href="../index.jsp"><img src="../img/profooterlogo.png"></a></out_logo>
 </footer>
 
 <script>

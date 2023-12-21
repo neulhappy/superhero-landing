@@ -23,19 +23,19 @@
 
             <ul class="login">
                 <% if (session.getAttribute("userId") == null) { %>
-                <li><a href="../member1/Login.jsp">로그인</a></li> <!-- Login -->
-                <li><a href="../member1/Join.jsp">회원가입</a></li> <!-- Sign Up -->
+                <li><a href="../member/Login.jsp">로그인</a></li> <!-- Login -->
+                <li><a href="../member/Join.jsp">회원가입</a></li> <!-- Sign Up -->
                 <% } else { %>
                 <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li> <!-- Logout -->
-                <li><a href="../mypage/MyPage.jsp">마이페이지</a></li>
+                <li><a href="../member/MyPage.jsp">마이페이지</a></li>
                 <% } %>
             </ul>
 
             <nav id="menu">
                 <ul>
                     <li><a href="profilePage.jsp">소개</a></li>
-                    <li><a href="goodsPage.jsp">상점</a></li>
-                    <li><a href="CommunityPage.jsp">상품후기</a></li>
+                    <li><a href="../shop/goodsPage.jsp">상점</a></li>
+                    <li><a href="Review.jsp">상품후기</a></li>
                     <li><a href="faqPage.jsp">FAQ</a></li>
                 </ul>
             </nav>

@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebServlet("/mypage/MyShoppingCart.do")
+@WebServlet("/shop/MyShoppingCart.do")
 public class ShoppingCartController extends HttpServlet {
 
     @Override

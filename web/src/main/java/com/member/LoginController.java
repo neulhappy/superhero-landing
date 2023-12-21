@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-@WebServlet("/member1/login.do")
+@WebServlet("/member/login.do")
 public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
         } else {
             // 로그인 실패
             req.setAttribute("loginResult", "fail");
-            Alert.alertLocation("로그인에 실패하였습니다.", "/member1/Login.jsp", out);
+            Alert.alertLocation("로그인에 실패하였습니다.", "/member/Login.jsp", out);
         }
     }
 }
