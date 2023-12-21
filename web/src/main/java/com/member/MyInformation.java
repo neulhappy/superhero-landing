@@ -15,8 +15,6 @@ import java.io.PrintWriter;
 public class MyInformation extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = resp.getWriter();
 
         String newPassword = req.getParameter("newPassword");
         String newEmail = req.getParameter("newEmail");
@@ -24,11 +22,10 @@ public class MyInformation extends HttpServlet {
 
         MemberDAO dao = new MemberDAO();
         boolean updateResult = dao.updateUserInformation(userId, newPassword, newEmail);
-
         if (updateResult) {
-            Alert.alertLocation("정보가 성공적으로 변경되었습니다.","/index.jsp", out);
+            resp.sendRedirect(req.getContextPath() + "/index.jsp");
         } else {
-            Alert.alertBack("정보 변경에 실패했습니다.", out);
+            resp.sendRedirect("/mypage/MyInformation.jsp");
         }
     }
 }

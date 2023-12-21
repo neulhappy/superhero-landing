@@ -101,5 +101,4 @@ public class MemberDAO extends DBConnPool {
             return false;
         }
     }
-
 }

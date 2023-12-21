@@ -18,6 +18,7 @@
         <ul>
             <li><a href="goods.jsp"><img src="../img/goodslogo02.png" alt="상품"></a></li>
             <li><a href="Photocard.jsp"><img src="../img/goodslogo03.png" alt="포토카드"></a></li>
+
         </ul>
     </nav>
 </header>

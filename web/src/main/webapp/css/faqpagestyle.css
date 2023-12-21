@@ -9,8 +9,9 @@ body {height: 1200px; overflow-x: hidden; font-family: 'Noto Sans KR', sans-seri
 #header {height: 200px;}
 h1 img{width: 500px; transform: translate(800px,-200px);}
 
+.container {padding: 0 10px;}
+
 #myList a {height: 80px; font-size: 1.2rem}
 .list-group-item-action.active { background: #73879b; border: #73879b}
 .tab-content {color: #ddd}
 
-footer {padding-top: 50px;}

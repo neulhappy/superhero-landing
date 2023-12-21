@@ -20,6 +20,7 @@
     <h1><img src="../img/faqlogo.png"></h1>
 </header>
 
+<div class="container">
 <main id="main">
     <div role="tabpanel">
         <!-- List group -->
@@ -66,10 +67,12 @@
 
 
 <jsp:include page="faqPage_grid.jsp"/>
+</div>
 
 <footer>
 <jsp:include page="../include/Footer.jsp"/>
 </footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
