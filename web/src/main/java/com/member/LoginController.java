@@ -21,19 +21,19 @@ public class LoginController extends HttpServlet {
 
         String id = req.getParameter("id");
         String hashedPw = req.getParameter("pw");
-        out.println(id);
-        out.println(hashedPw);
         String mode = req.getParameter("mode");
 
         MemberDAO dao = new MemberDAO();
-        boolean isSuccess = dao.login(id, hashedPw);
+        int pid = dao.login(id, hashedPw);
         dao.close();
-        if (isSuccess) {
+        if (pid > 0) {
             // 로그인 성공
             HttpSession session = req.getSession();
             switch (mode) {
                 case "login" -> {
                     session.setAttribute("userId", id);
+                    session.setAttribute("userPw", hashedPw);
+                    session.setAttribute("userPID", pid);
                     // 로그인 후 이동할 페이지로 리다이렉트 또는 포워딩
                     resp.sendRedirect("/index.jsp");
                 }
@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
         } else {
             // 로그인 실패
             req.setAttribute("loginResult", "fail");
-            Alert.alertLocation("로그인에 실패하였습니다.","/member1/Login.jsp" , out);
+            Alert.alertLocation("로그인에 실패하였습니다.", "/member1/Login.jsp", out);
         }
     }
 }

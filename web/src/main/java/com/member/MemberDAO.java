@@ -27,21 +27,25 @@ public class MemberDAO extends DBConnPool {
         return result;
     }
 
-    public boolean login(String id, String hashedPw) {
+    public int login(String user_id, String hashedPw) {
         try {
-            String query = "SELECT password FROM custom WHERE user_id = ?";
+            String query = "SELECT id, password, quit FROM custom WHERE user_id = ?";
             psmt = con.prepareStatement(query);
-            psmt.setString(1, id);
+            psmt.setString(1, user_id);
             rs = psmt.executeQuery();
 
             if (rs.next()) {
-                String storedHashedPassword = rs.getString("password");
-                return storedHashedPassword.equals(hashedPw); // 데이터베이스의 해시와 비교
+                int id = rs.getInt("id");
+                String DBHashedPw = rs.getString("password");
+                boolean quit = rs.getBoolean("quit");
+                if (DBHashedPw.equals(hashedPw) && !quit) {
+                    return id; //내부id를 반환
+                } else return -1; //비밀번호 틀림
             }
         } catch (SQLException e) {
             Logger.error("Login 중 에러 발생", e);
         }
-        return false;
+        return -1; // 처리 실패
     }
 
     public boolean isIdAvailable(String id) {
@@ -61,6 +65,7 @@ public class MemberDAO extends DBConnPool {
         }
         return false; // 예외가 발생하는 경우 false 반환
     }
+
     public boolean updateUserInformation(String userId, String newPassword, String newEmail) {
         Map<String, String> updates = new HashMap<>();
         if (newPassword != null && !newPassword.isEmpty()) {
