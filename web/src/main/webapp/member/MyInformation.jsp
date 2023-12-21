@@ -77,7 +77,7 @@
         }
         #emailMessage,
         #passwordMessage {
-            font-size: 0.7rem;
+            font-size: 0.8rem;
         }
     </style>
 </head>
@@ -185,8 +185,6 @@
                 formData += "newEmail=" + newEmail;
             }
         }
-
-        if (!isValid || formData.length === 0) return;
 
         // AJAX 요청으로 서버에 데이터 전송
         var xhr = new XMLHttpRequest();

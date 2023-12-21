@@ -1,5 +1,7 @@
 package com.shop;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.sql.Date;
 import java.util.ArrayList;
 
@@ -109,10 +111,31 @@ public class OrderDTO {
         return productList.get(num).quantity;
     }
 
+    public int setProductListByRequest(HttpServletRequest req) {
+        ArrayList<ProductSet> productList = new ArrayList<>();
+        int i = 1;
+        while (req.getParameter("prod_id_" + i) != null) {
+            int prodId = Integer.parseInt(req.getParameter("prod_id_" + i));
+            int quantity = Integer.parseInt(req.getParameter("quantity_" + i));
+            ProductSet product = new ProductSet(prodId, quantity);
+            productList.add(product);
+            i++;
+        }
+        this.productList = productList;
+        return i - 1;
+    }
 
     static class ProductSet {
         private int prod_id;
         private int quantity;
+
+        public ProductSet(int prodId, int quantity) {
+            this.prod_id = prodId;
+            this.quantity = quantity;
+        }
+
+        public ProductSet() {
+        }
 
         public int getProd_id() {
             return prod_id;
@@ -130,5 +153,6 @@ public class OrderDTO {
             this.quantity = quantity;
         }
     }
+
 
 }
