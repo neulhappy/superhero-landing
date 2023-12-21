@@ -15,7 +15,7 @@ public class OrderDAO extends DBConnPool {
     public int insertOrder(OrderDTO dto) {
         int orderId = 0;
         try {
-            String query = "INSERT INTO 'order' (" +
+            String query = "INSERT INTO p_order (" +
                     "custom_id, purchaser_name, recipient_name, address, contact" +
                     ") VALUES (?, ?, ?, ?, ?)";
 
@@ -70,7 +70,7 @@ public class OrderDAO extends DBConnPool {
         String query = "SELECT * FROM (" +
                 " SELECT Tb.*, ROWNUM rNUM FROM (" +
                 " SELECT * FROM" +
-                " 'order'" +
+                " p_order" +
                 " WHERE custom_id = ?" +
                 " ORDER BY order_date DESC ) Tb )" +
                 " WHERE rNUM " +
@@ -107,7 +107,7 @@ public class OrderDAO extends DBConnPool {
 
     public OrderDTO selectOrder(String id) {
         OrderDTO dto = new OrderDTO();
-        String query = "SELECT * FROM 'order' WHERE order_id = ?";
+        String query = "SELECT * FROM p_order WHERE order_id = ?";
 
         try {
             psmt = con.prepareStatement(query);
@@ -157,7 +157,7 @@ public class OrderDAO extends DBConnPool {
     }
 
     public void updateStatus(String id, String status) {
-        String query = "UPDATE 'order' SET status = ? WHERE id = ?";
+        String query = "UPDATE p_order SET status = ? WHERE id = ?";
 
         try {
             psmt = con.prepareStatement(query);
@@ -170,7 +170,7 @@ public class OrderDAO extends DBConnPool {
     }
 
     public void updateInvoice(String id, String invoice) {
-        String query = "UPDATE 'order' SET invoice = ? WHERE id = ?";
+        String query = "UPDATE p_order SET invoice = ? WHERE id = ?";
 
         try {
             psmt = con.prepareStatement(query);
