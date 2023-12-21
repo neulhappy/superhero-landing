@@ -24,8 +24,8 @@ public class ListController extends HttpServlet {
 
         req.setAttribute("bbs", bbs);
         switch (board) {
-            case "1" -> req.getRequestDispatcher("/jsp/Review.jsp").forward(req, resp);
-            case "2" -> req.getRequestDispatcher("/jsp/faqPage.jsp").forward(req, resp);
+            case "1" -> req.getRequestDispatcher("/board/Review.jsp").forward(req, resp);
+            case "2" -> req.getRequestDispatcher("/board/faqPage.jsp").forward(req, resp);
             default -> {
                 resp.setContentType("text/html;charset=UTF-8");
                 PrintWriter out = resp.getWriter();

@@ -22,13 +22,13 @@ public class WriteController extends HttpServlet {
             Alert.alertBack("잘못된 접근입니다.", out);
         } else {
             if (postId.isEmpty()) {
-                req.getRequestDispatcher("/jsp/writePage.jsp").forward(req, resp);
+                req.getRequestDispatcher("/board/writePage.jsp").forward(req, resp);
             } else {
                 //todo: 로그인 유효성 검사
                 BoardDAO dao = new BoardDAO();
                 BoardDTO post = dao.selectView(postId, board);
                 req.setAttribute("post", post);
-                req.getRequestDispatcher("/jsp/writePage.jsp").forward(req, resp);
+                req.getRequestDispatcher("/board/writePage.jsp").forward(req, resp);
                 dao.close();
             }
         }

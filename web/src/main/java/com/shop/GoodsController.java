@@ -20,8 +20,8 @@ public class GoodsController extends HttpServlet {
         List<ProductDTO> prodList = dao.selectListByCat(category);
         req.setAttribute("prodList", prodList);
         switch (category) {
-            case "goods" -> req.getRequestDispatcher("/jsp/goods.jsp").forward(req, resp);
-            case "photo" -> req.getRequestDispatcher("/jsp/Photocard.jsp").forward(req, resp);
+            case "goods" -> req.getRequestDispatcher("/shop/goods.jsp").forward(req, resp);
+            case "photo" -> req.getRequestDispatcher("/shop/Photocard.jsp").forward(req, resp);
             default -> {
                 resp.setContentType("text/html;charset=UTF-8");
                 PrintWriter out = resp.getWriter();

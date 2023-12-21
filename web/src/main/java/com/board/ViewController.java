@@ -24,7 +24,7 @@ public class ViewController extends HttpServlet {
             PrintWriter out = resp.getWriter();
             Alert.alertBack("잘못된 접근입니다.", out);
         } else {
-            req.getRequestDispatcher("/jsp/textPage.jsp").forward(req, resp);
+            req.getRequestDispatcher("/board/textPage.jsp").forward(req, resp);
         }
     }
 }

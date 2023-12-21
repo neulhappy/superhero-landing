@@ -56,7 +56,9 @@
 
 
             <h1>
-                <a href=""<c:url value="/index.do"/>"<img src="img/mainlogo.png" alt="ReCoderLogo"/>
+                <a href="<c:url value='/index.do'/>">
+                    <img src="img/mainlogo.png" alt="ReCoderLogo"/>
+                </a>
             </h1>
 
             <div class="inner">
