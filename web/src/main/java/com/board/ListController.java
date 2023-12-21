@@ -1,6 +1,7 @@
 package com.board;
 
 
+import com.util.Alert;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -8,6 +9,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 
@@ -15,13 +17,22 @@ import java.util.List;
 public class ListController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BoardDAO dao = new BoardDAO();
-        String boardId = req.getParameter("boardId");
-        List<BoardDTO> bbs = dao.selectList(boardId);
+        String board = req.getParameter("board");
+        List<BoardDTO> bbs = dao.selectList(board);
         dao.close();
 
+
         req.setAttribute("bbs", bbs);
-        req.getRequestDispatcher("/jsp/CommunityPage.jsp").forward(req, resp);
+        switch (board) {
+            case "1" -> req.getRequestDispatcher("/jsp/CommunityPage.jsp").forward(req, resp);
+            case "2" -> req.getRequestDispatcher("/jsp/faqPage.jsp").forward(req, resp);
+            default -> {
+                resp.setContentType("text/html;charset=UTF-8");
+                PrintWriter out = resp.getWriter();
+                Alert.alertBack("잘못된 접근입니다.", out);
+            }
 
 
+        }
     }
 }

@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-@WebServlet("/goods.do")
+@WebServlet("/jsp/goods.do")
 public class GoodsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -21,7 +21,7 @@ public class GoodsController extends HttpServlet {
         req.setAttribute("prodList", prodList);
         switch (category) {
             case "goods" -> req.getRequestDispatcher("/jsp/goods.jsp").forward(req, resp);
-            case "photoCard" -> req.getRequestDispatcher("/jsp/Photocard.jsp").forward(req, resp);
+            case "photo" -> req.getRequestDispatcher("/jsp/Photocard.jsp").forward(req, resp);
             default -> {
                 resp.setContentType("text/html;charset=UTF-8");
                 PrintWriter out = resp.getWriter();

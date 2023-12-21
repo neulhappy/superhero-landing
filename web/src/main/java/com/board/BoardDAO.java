@@ -14,10 +14,10 @@ public class BoardDAO extends DBConnPool {
         String table = "board" + boardId;
         String query = "SELECT b.*, m.user_id FROM " +
                 table + " b " +
-                "INNER JOIN member m ON b.author_id = m.id " +
+                "INNER JOIN custom m ON b.author_id = m.id " +
                 "WHERE b.is_published = 'Y' " +
-                "ORDER BY b.num DESC";
-
+                "ORDER BY b.id DESC";
+        System.out.println(query);
         try {
             psmt = con.prepareStatement(query);
             rs = psmt.executeQuery();
@@ -30,8 +30,8 @@ public class BoardDAO extends DBConnPool {
                 dto.setContent(rs.getString("content"));
                 dto.setAuthor_id(rs.getInt("author_id"));
                 dto.setAuthor_uid(rs.getString("user_id"));
-                dto.setPostdate(rs.getDate("postdate"));
-                dto.setLastchanged(rs.getDate("lastchanged"));
+                dto.setPostdate(getUtilDate(rs.getDate("postdate")));
+                dto.setLastchanged(getUtilDate(rs.getDate("lastchanged")));
                 dto.setVisitcount(rs.getInt("visitcount"));
                 dto.setIs_published(getBoolean(rs.getString("is_published")));
                 dto.setIs_notice(getBoolean(rs.getString("is_notice")));
@@ -52,7 +52,7 @@ public class BoardDAO extends DBConnPool {
 
         String query = "SELECT b.*, m.user_id " +
                 "FROM " + table + " b " +
-                "JOIN member m ON b.author_id = m.id " +
+                "JOIN custom m ON b.author_id = m.id " +
                 "WHERE b.id=?";
 
         try {
@@ -67,8 +67,8 @@ public class BoardDAO extends DBConnPool {
                 dto.setContent(rs.getString("content"));
                 dto.setAuthor_id(rs.getInt("author_id"));
                 dto.setAuthor_uid(rs.getString("user_id"));
-                dto.setPostdate(rs.getDate("postdate"));
-                dto.setLastchanged(rs.getDate("lastchanged"));
+                dto.setPostdate(getUtilDate(rs.getDate("postdate")));
+                dto.setLastchanged(getUtilDate(rs.getDate("lastchanged")));
                 dto.setVisitcount(rs.getInt("visitcount"));
                 dto.setIs_published(getBoolean(rs.getString("is_published")));
                 dto.setIs_notice(getBoolean(rs.getString("is_notice")));

@@ -47,6 +47,10 @@
         #emCheckResult{
             top: 28%;
         }
+        #pwCheckResult {
+            width: 400px;
+            left: 3%;
+        }
         h1 {
            text-align: center;
             padding-top: 30px;
@@ -104,16 +108,23 @@
     }
 
     // 비밀번호 유효성 검사
+    function joinPw(password) {
+        return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{4,}$/.test(password);
+    }
+    // 비밀번호 유효성 검사 및 결과 표시
     function checkPw() {
         const pwCk = document.getElementById("pwCheckResult");
-        if(elInputPw.value.length >= 4) {
-            pwCk.innerText = "사용 가능한 비밀번호입니다.";
+        if (joinPw(elInputPw.value)) {
+            pwCk.innerText = "안전한 비밀번호입니다.";
             pwCk.style.color = "green";
+            pwCk.style.left = "15%";
         } else {
-            pwCk.innerText = "4~10글자, 영어와 숫자로 입력해주세요.";
+            pwCk.innerText = "4~10글자, 대소문자, 숫자, 특수문자를 포함해주세요.";
             pwCk.style.color = "red";
+            pwCk.style.left = "3%";
         }
     }
+
 
     // 이메일 유효성 검사
     function checkEm() {
@@ -158,6 +169,12 @@
         if (!joinEmail(elInputEm.value)) {
             alert("이메일을 다시 입력해주세요.");
             elInputEm.focus();
+            return false;
+        }
+        // 비밀번호 검사 추가
+        if (!joinPw(elInputPw.value)) {
+            alert("비밀번호를 다시 입력해주세요.");
+            elInputPw.focus();
             return false;
         }
         elInputPw.value = await sha256(elInputPw.value);

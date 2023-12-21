@@ -1,12 +1,12 @@
 package com.member;
 
+import com.util.Alert;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,12 +24,14 @@ public class JoinController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("doPost 진입 성공!");
         req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = resp.getWriter();
 
         String id = (req.getParameter("id"));
         String pw = req.getParameter("pw");
         String email = req.getParameter("email");
 
-        MemberDao dao = new MemberDao();
+        MemberDAO dao = new MemberDAO();
         MemberDTO mDto = new MemberDTO();
 
         mDto.setUser_id(id);
@@ -37,14 +39,12 @@ public class JoinController extends HttpServlet {
         mDto.setEmail(email);
         System.out.println(pw);
         int joinResult = dao.join(mDto);
-
-        resp.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = resp.getWriter();
+        dao.close();
 
         if (joinResult == 1) {
-            out.println("<script>alert('회원가입에 성공했습니다.');location.href='/member1/Login.jsp';</script>");
+            Alert.alertLocation("회원가입에 성공했습니다.", "/member1/Login.jsp", out);
         } else {
-            out.println("<script>alert('회원가입에 실패했습니다.');location.href='../member1/Join.jsp';</script>");
+            Alert.alertLocation("회원가입에 실패했습니다.", "../member1/Join.jsp", out);
         }
         out.flush();
     }

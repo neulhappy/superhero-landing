@@ -1,7 +1,6 @@
 package com.member;
 
 import com.util.Alert;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,9 +25,10 @@ public class LoginController extends HttpServlet {
         out.println(hashedPw);
         String mode = req.getParameter("mode");
 
-        MemberDao dao = new MemberDao();
-
-        if (dao.login(id, hashedPw)) {
+        MemberDAO dao = new MemberDAO();
+        boolean isSuccess = dao.login(id, hashedPw);
+        dao.close();
+        if (isSuccess) {
             // 로그인 성공
             HttpSession session = req.getSession();
             switch (mode) {
@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
         } else {
             // 로그인 실패
             req.setAttribute("loginResult", "fail");
-            Alert.alertBack("로그인에 실패하였습니다.",out);
+            Alert.alertLocation("로그인에 실패하였습니다.","/member1/Login.jsp" , out);
         }
     }
 }

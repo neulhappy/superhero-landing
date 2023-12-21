@@ -19,11 +19,11 @@ public class PasswordCheckController extends HttpServlet {
         String id = request.getParameter("id");
         String hashedPw = request.getParameter("hashedPw");
 
-        MemberDao dao = new MemberDao();
+        MemberDAO dao = new MemberDAO();
         boolean isAuthenticated = dao.login(id, hashedPw);
-
+        dao.close();
         if (isAuthenticated) {
-            response.sendRedirect("/mypage/MyInformation.jsp");
+            Alert.alertLocation("인증에 성공하였습니다.","/mypage/MyInformation.jsp",out);
         } else {
             Alert.alertBack("인증에 실패했습니다.", out);
         }

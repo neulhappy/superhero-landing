@@ -26,7 +26,7 @@ public class MypageController extends HttpServlet {
         } else {
             response.setContentType("text/html;charset=UTF-8");
             PrintWriter out = response.getWriter();
-            Alert.alertBack("잘못된 접근입니다.", out);
+            Alert.alertLocation("잘못된 접근입니다.", "/mypage/MyPage.jsp",out);
         }
     }
 }

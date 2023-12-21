@@ -57,7 +57,7 @@
                             <tr>
                                 <th scope="row">${loop.index + 1}</th>
                                 <td>
-                                    <a href="<c:url value="/view.do?boardId=${post.boardId}&postId=${post.postId}"/>">${post.title}</a>
+                                    <a href="<c:url value="/view.do?boardId=${post.boardId}&postId=${post.id}"/>">${post.title}</a>
                                 </td>
                                 <td>${post.author_uid}</td>
                                 <td><fmt:formatDate value="${post.postdate}" pattern="yyyy-MM-dd"/>
