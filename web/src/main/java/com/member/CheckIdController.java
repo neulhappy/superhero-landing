@@ -1,6 +1,5 @@
 package com.member;
 
-import com.board.BoardDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,7 +16,7 @@ public class CheckIdController extends HttpServlet {
         String id = request.getParameter("id");
 
         // MemberDao에서 아이디 중복 여부 확인
-        MemberDao dao = new MemberDao();
+        MemberDAO dao = new MemberDAO();
 
         boolean isIdAvailable = dao.isIdAvailable(id);
 

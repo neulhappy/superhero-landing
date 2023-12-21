@@ -19,7 +19,7 @@ public class PasswordCheckController extends HttpServlet {
         String id = request.getParameter("id");
         String hashedPw = request.getParameter("hashedPw");
 
-        MemberDao dao = new MemberDao();
+        MemberDAO dao = new MemberDAO();
         boolean isAuthenticated = dao.login(id, hashedPw);
 
         if (isAuthenticated) {

@@ -1,7 +1,6 @@
 package com.member;
 
 import com.util.Alert;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -26,7 +25,7 @@ public class LoginController extends HttpServlet {
         out.println(hashedPw);
         String mode = req.getParameter("mode");
 
-        MemberDao dao = new MemberDao();
+        MemberDAO dao = new MemberDAO();
 
         if (dao.login(id, hashedPw)) {
             // 로그인 성공

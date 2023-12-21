@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet("/logout")
 public class LogoutController extends HttpServlet {
-    MemberDao dao = new MemberDao();
+    MemberDAO dao = new MemberDAO();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
