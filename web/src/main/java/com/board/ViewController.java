@@ -20,10 +20,13 @@ public class ViewController extends HttpServlet {
         BoardDTO post = dao.selectView(postId, board);
         req.setAttribute("post", post);
         if (board.isEmpty() || postId.isEmpty()) {
+            dao.close();
             resp.setContentType("text/html;charset=UTF-8");
             PrintWriter out = resp.getWriter();
             Alert.alertBack("잘못된 접근입니다.", out);
         } else {
+            dao.updateVisitCount(postId, board);
+            dao.close();
             req.getRequestDispatcher("/board/textPage.jsp").forward(req, resp);
         }
     }

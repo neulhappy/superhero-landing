@@ -46,7 +46,7 @@
                 el: document.querySelector('#viewer'),
                 viewer: true,
                 height: '500px',
-                initialValue: '# hello'
+                initialValue: '${post.content}'
             });
         });
     </script>
