@@ -138,13 +138,13 @@ public class BoardDAO extends DBConnPool {
         }
     }
 
-    public int deletePost(String id, String boardId) {
+    public int deletePost(int id, String boardId) {
         String table = "board" + boardId;
         int result = 0;
         try {
             String query = "UPDATE " + table + " SET is_published = 'N' WHERE id = ?";
             psmt = con.prepareStatement(query);
-            psmt.setString(1, id);
+            psmt.setString(1, String.valueOf(id));
             result = psmt.executeUpdate();
         } catch (SQLException e) {
             Logger.error("deletePost 중 에러 발생", e);
@@ -153,5 +153,22 @@ public class BoardDAO extends DBConnPool {
         return result;
     }
 
+    public int selectAuthor(int id, String boardId) {
+        String table = "board" + boardId;
+        int authorId = 0;
+        try {
+            String query = "SELECT author_id FROM " + table + " WHERE id = ?";
+            psmt = con.prepareStatement(query);
+            psmt.setInt(1, id);
+            ResultSet rs = psmt.executeQuery();
+            if (rs.next()) {
+                authorId = rs.getInt("author_id");
+            }
+        } catch (SQLException e) {
+            Logger.error("selectAuthor 중 에러 발생", e);
+        }
+        return authorId;
+    }
 }
+
 
