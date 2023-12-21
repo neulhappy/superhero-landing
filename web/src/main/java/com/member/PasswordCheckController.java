@@ -21,7 +21,7 @@ public class PasswordCheckController extends HttpServlet {
 
         MemberDAO dao = new MemberDAO();
         boolean isAuthenticated = dao.login(id, hashedPw);
-
+        dao.close();
         if (isAuthenticated) {
             response.sendRedirect("/mypage/MyInformation.jsp");
         } else {

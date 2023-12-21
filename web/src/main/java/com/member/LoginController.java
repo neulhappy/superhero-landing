@@ -26,8 +26,9 @@ public class LoginController extends HttpServlet {
         String mode = req.getParameter("mode");
 
         MemberDAO dao = new MemberDAO();
-
-        if (dao.login(id, hashedPw)) {
+        boolean isSuccess = dao.login(id, hashedPw);
+        dao.close();
+        if (isSuccess) {
             // 로그인 성공
             HttpSession session = req.getSession();
             switch (mode) {
@@ -43,7 +44,7 @@ public class LoginController extends HttpServlet {
         } else {
             // 로그인 실패
             req.setAttribute("loginResult", "fail");
-            Alert.alertBack("로그인에 실패하였습니다.",out);
+            Alert.alertBack("로그인에 실패하였습니다.", out);
         }
     }
 }

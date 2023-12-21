@@ -36,7 +36,7 @@ public class JoinController extends HttpServlet {
         mDto.setEmail(email);
         System.out.println(pw);
         int joinResult = dao.join(mDto);
-
+        dao.close();
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
 
