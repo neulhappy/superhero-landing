@@ -14,6 +14,7 @@
             font-family: 'Noto Sans KR', sans-serif;
             font-size: 1.3em;
             line-height: 1.6;
+            color: #676767;
         }
 
         .mypage {
@@ -53,12 +54,31 @@
         span {
             color: rgb(128, 128, 128);
         }
-        .info > ul {
-            width: 800px;
-            text-align: left;
-            padding-top: 100px;
+        table {
+            margin-top: 120px;
+            width: 700px;
+            height: 400px;
+            text-align: center;
+        }
+        .btn {
+            padding: 70px 0 0 250px;
         }
 
+        .btn  button {
+            border: none;
+            border-radius: 7px;
+            cursor: pointer;
+            color: #f3f3f3;
+            width: 100px;
+            height: 30px;
+            background: #575757;
+            font-family: 'Noto Sans KR', sans-serif;
+            font-size: 0.7em;
+        }
+        #emailMessage,
+        #passwordMessage {
+            font-size: 0.7rem;
+        }
     </style>
 </head>
 <body>
@@ -77,13 +97,13 @@
         con = dbPool.getConnection();
 
         // 이메일 조회 쿼리
-        String query = "SELECT MEMBERMAIL FROM GAME_MEMBER WHERE MEMBERID = ?";
+        String query = "SELECT email FROM custom WHERE user_id = ?";
         pstmt = con.prepareStatement(query);
         pstmt.setString(1, userId);
         rs = pstmt.executeQuery();
 
         if (rs.next()) {
-            userEmail = rs.getString("MEMBERMAIL"); // 여기를 수정
+            userEmail = rs.getString("email"); // 여기를 수정
         }
     } catch (Exception e) {
         e.printStackTrace();
@@ -106,12 +126,94 @@
         </ul>
     </div>
     <div class="info">
-    <ul >
-        <li>내 아이디 <%= session.getAttribute("userId") %></li>
-        <li>내 이메일 <%= userEmail %> <button>변경</button></li>
-        <li>비밀번호 <button>변경</button></li>
-    </ul>
+        <table>
+            <tr>
+                <th>내 아이디</th>
+                <th><%= session.getAttribute("userId") %></th>
+            </tr>
+            <tr>
+                <th>내 이메일</th>
+                <th><%= userEmail %> </th>
+            </tr>
+            <tr>
+                <th>새 이메일</th>
+                <td><input type="email" id="newEmail" placeholder="새 이메일"><div id="emailMessage"></div></td>
+
+            </tr>
+            <tr>
+                <th>새 비밀번호</th>
+                <td><input type="password" id="newPassword" placeholder="새 비밀번호"><div id="passwordMessage"></div></td>
+            </tr>
+            <tr>
+                <th></th>
+                <th><input type="password" id="confirmNewPassword" placeholder="새 비밀번호 확인"></th>
+            </tr>
+        </table>
+        <div class="btn">
+            <button onclick="updateInformation()">정보 변경</button>
+        </div>
     </div>
 </div>
+
+<script>
+    async function updateInformation() {
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+        const newEmail = document.getElementById('newEmail').value;
+        let isValid = true;
+        let formData = '';
+
+        if (newPassword) {
+            if (!validatePassword(newPassword)) {
+                document.getElementById('passwordMessage').innerText = '비밀번호 형식이 잘못되었습니다.';
+                isValid = false;
+            } else if (newPassword !== confirmNewPassword) {
+                document.getElementById('passwordMessage').innerText = '비밀번호가 일치하지 않습니다.';
+                isValid = false;
+            } else {
+                const hashedNewPassword = await sha256(newPassword);
+                formData += "newPassword=" + hashedNewPassword;
+            }
+        }
+
+        if (newEmail) {
+            if (!validateEmail(newEmail)) {
+                document.getElementById('emailMessage').innerText = '이메일 형식이 잘못되었습니다.';
+                isValid = false;
+            } else {
+                if (formData.length > 0) formData += '&';
+                formData += "newEmail=" + newEmail;
+            }
+        }
+
+        if (!isValid || formData.length === 0) return;
+
+        // AJAX 요청으로 서버에 데이터 전송
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "/mypage/myinform.do", true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.send(formData);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                alert(xhr.responseText);
+            }
+        }
+    }
+
+    function validatePassword(password) {
+        return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{4,}$/.test(password);
+    }
+
+    function validateEmail(email) {
+        return /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test(email);
+    }
+
+    async function sha256(str) {
+        const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+        return Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join('');
+    }
+
+</script>
 </body>
 </html>

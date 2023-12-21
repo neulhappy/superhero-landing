@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
         } else {
             // 로그인 실패
             req.setAttribute("loginResult", "fail");
-            Alert.alertBack("로그인에 실패하였습니다.", out);
+            Alert.alertLocation("로그인에 실패하였습니다.","/member1/Login.jsp" , out);
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.member;
 
+import com.util.Alert;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,6 +24,8 @@ public class JoinController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         System.out.println("doPost 진입 성공!");
         req.setCharacterEncoding("UTF-8");
+        resp.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = resp.getWriter();
 
         String id = (req.getParameter("id"));
         String pw = req.getParameter("pw");
@@ -37,13 +40,11 @@ public class JoinController extends HttpServlet {
         System.out.println(pw);
         int joinResult = dao.join(mDto);
         dao.close();
-        resp.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = resp.getWriter();
 
         if (joinResult == 1) {
-            out.println("<script>alert('회원가입에 성공했습니다.');location.href='/member1/Login.jsp';</script>");
+            Alert.alertLocation("회원가입에 성공했습니다.", "/member1/Login.jsp", out);
         } else {
-            out.println("<script>alert('회원가입에 실패했습니다.');location.href='../member1/Join.jsp';</script>");
+            Alert.alertLocation("회원가입에 실패했습니다.", "../member1/Join.jsp", out);
         }
         out.flush();
     }

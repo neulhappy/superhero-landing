@@ -50,12 +50,13 @@
 
         .box {
             position: relative;
-            margin: 300px auto;
+            margin: 250px auto;
             width: 400px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             border-radius: 7px;
+            font-size: 0.7em;
         }
 
         .box input,
