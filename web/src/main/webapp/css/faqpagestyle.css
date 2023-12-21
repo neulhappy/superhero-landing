@@ -13,4 +13,4 @@ h1 img{width: 500px; transform: translate(800px,-200px);}
 .list-group-item-action.active { background: #73879b; border: #73879b}
 .tab-content {color: #ddd}
 
-footer {transform: translate(0, -200px)}
+footer {padding-top: 50px;}

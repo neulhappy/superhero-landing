@@ -23,7 +23,7 @@
 </header>
 
 <footer id="footer">
-<jsp:include page="Footer.jsp"/>
+    <jsp:include page="Footer.jsp"/>
 </footer>
 </body>
 </html>
