@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 2023-12-14
-  Time: 오후 2:12
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -66,15 +60,16 @@
         </h1>
 
         <div class="inner">
-        <ul class="login">
-            <% if(session.getAttribute("userId") == null) { %>
-            <li><a href="member1/Login.jsp">로그인</a></li> <!-- Login -->
-            <li><a href="member1/Join.jsp">회원가입</a></li> <!-- Sign Up -->
-            <% } else { %>
-            <li><a href="logout">로그아웃</a></li> <!-- Logout -->
-            <li><a href="mypage/MyPage.jsp">마이페이지</a></li>
-            <% } %>
-        </ul>
+            <ul class="login">
+                <c:if test="${empty sessionScope.userId}">
+                    <li><a href="member1/Login.jsp">로그인</a></li> <!-- Login -->
+                    <li><a href="member1/Join.jsp">회원가입</a></li> <!-- Sign Up -->
+                </c:if>
+                <c:if test="${not empty sessionScope.userId}">
+                    <li><a href="logout">로그아웃</a></li> <!-- Logout -->
+                    <li><a href="mypage/MyPage.jsp">마이페이지</a></li>
+                </c:if>
+            </ul>
 
         <nav id="menu">
             <ul>
