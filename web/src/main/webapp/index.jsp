@@ -64,8 +64,8 @@
             <div class="inner">
                 <ul class="login">
                     <c:if test="${empty sessionScope.userId}">
-                        <li><a href="<c:url value="/member/join.do"/>">로그인</a></li>
-                        <li><a href="<c:url value="/member/login.do"/>">회원가입</a></li>
+                        <li><a href="<c:url value="/member/login.do"/>">로그인</a></li>
+                        <li><a href="<c:url value="/member/join.do"/>">회원가입</a></li>
                     </c:if>
                     <c:if test="${not empty sessionScope.userId}">
                         <li><a href="<c:url value="/member/logout.do"/>">로그아웃</a></li>

@@ -154,8 +154,6 @@
         </div>
     </form>
     </div>
-</div>
-
 <script>
 
     async function updateInformation() {
@@ -192,7 +190,7 @@
 
         // AJAX 요청으로 서버에 데이터 전송
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "member/inform.do", true);
+        xhr.open("POST", "/member/inform.do", true);
         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         xhr.send(formData);
 
