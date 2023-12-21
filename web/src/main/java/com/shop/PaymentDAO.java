@@ -19,21 +19,18 @@ public class PaymentDAO extends DBConnPool {
         return pDao;
     }
 
-    public int updatePayment(PaymentDTO pDto){
-        System.out.println("updatePayment 실행됨");
+    public int updatePayDate(PaymentDTO pDto){
         DBConnPool connectionPool = new DBConnPool();
-        String query= QueryBuilder.updateQuery("W_ORDER", "PAYMENTS", "?");
-        System.out.println(query);
+        String query= QueryBuilder.updateQuery("P_ORDER", "PAY_DATE", "?");
         try {
             Connection conn = connectionPool.getConnection();
             psmt = conn.prepareStatement(query);
-            psmt.setString(1,pDto.getPayment());
-            System.out.println(query);
+            psmt.setString(1, String.valueOf(pDto.getPayDate()));
             result = psmt.executeUpdate();
         }catch (SQLException e){
             logger.error("SQLException");
         }catch (Exception e){
-            logger.error("payment값을 수정하던 중 예외 발생");
+            logger.error("payDate값을 수정하던 중 예외 발생");
         }
         return result;
     }
