@@ -1,8 +1,7 @@
 const IMP = window.IMP;
 IMP.init("imp85622471");
 
-let total = 0;
-let products = [];
+let total;
 let orderId;
 const kakaoButton = document.querySelector(".kakao");
 
@@ -11,14 +10,13 @@ const onKakaoPay = async () => {
     IMP.request_pay({
         pg: "kakaopay.TC0ONETIME",
         pay_method: "card",
-        amount: 1,  //-->${productDTO.price} * n +
-        name: "히어로 굿즈", // -->${productDTO.name}
+        amount: parseInt(total),
+        name: "히어로 굿즈",
         buyer_email: "구매자 이메일", // -->${memberDTO.email} 필요 없을시 제거 필요
         merchant_uid: "merchant_" + new Date().getTime()
     }, function (rsp) {
         if (rsp.success) {
             pay_info(rsp);
-
         } else {
             alert("결제에 실패하셨습니다.");
         }
@@ -135,11 +133,13 @@ function submitForm() {
 
     $.ajax({
         type: "post",
-        url: "orderSuccess.do",
+        url: "order.do",
         data: formData,
         dataType: 'json',
         success: function (data) {
             orderId = data.orderId;
+            total = data.total;
+
         },
         error: function (request, status, error) {
             console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -148,7 +148,10 @@ function submitForm() {
     });
 }
 
+function goPay(){
+    submitForm();
 
+}
 // 장바구니에 담긴 상품들을 표시하는 함수
 // function displayCart() {
 //     let cart = JSON.parse(sessionStorage.getItem('cart')) || [];

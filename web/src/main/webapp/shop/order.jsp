@@ -5,7 +5,7 @@
     <title>주문지 작성</title>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-    <script type="text/javascript" src="<c:url value="/js/shop.js"/>"></script>
+    <script type="text/javascript" src="<c:url value='/js/shop.js'/>"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/paymentstyle.css"/>
@@ -34,16 +34,6 @@
 
 <body>
 <div class="orderPage" >
-    <div class="container bag">
-        <h2 class="text-center">장바구니</h2>
-        <div id="ct" class="card">
-            <!-- displayCart 함수에서 장바구니 목록이 표시됩니다. -->
-        </div>
-        <div class = "text-center fs-2">
-            <p><span id="total"></span></p>
-        </div>
-    </div>
-
     <div class="container mt-5">
         <form id="orderForm" class="row g-3 mx-auto p-2 col-md-6" style="width: 800px;" action="orderSuccess.do"
               method="post">
@@ -80,14 +70,10 @@
         </div>
     </div>
 </div>
-<div class="empty">
-    <button class="btn btn-danger btn-lg align-middle" type="button" onclick="clearCart()">장바구니 비우기</button>
-</div>
 
 
 <footer>
     <jsp:include page="../include/Footer.jsp"/>
-
 </footer>
 
 <script src="../js/order.js"></script>

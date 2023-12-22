@@ -81,17 +81,17 @@ function renderCartTable() {
 
 function deleteProduct(index) {
     const cartJson = sessionStorage.getItem('cart');
-    const cart = JSON.parse(cartJson) || [];
+    let cart = JSON.parse(cartJson) || [];
 
     cart.splice(index, 1);
 
-    renderCartTable();
-    updateSessionStorage();
+    updateSessionStorage(cart);
 }
 
-function updateSessionStorage() {
+function updateSessionStorage(cart) {
     const cartJson = JSON.stringify(cart);
     sessionStorage.setItem('cart', cartJson);
+    renderCartTable();
 }
 
 function clearCart() {
