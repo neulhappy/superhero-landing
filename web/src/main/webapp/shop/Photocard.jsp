@@ -23,21 +23,8 @@
                 </dd>
             </dl>
         </c:forEach>
-        <dl>
-            <dt><img src="../img/goods/6.jpg" alt="포토카드 이미지1"></dt>
-            <dd>
-                <p>아이언맨 포토카드</p>
-                <p>5,500원</p><input type="button" value="장바구니"></dd>
-        </dl>
-        <dl>
-            <dt><img src="../img/goods/10.jpg" alt="포토카드 이미지2"></dt>
-            <dd>
-                <p>윈터솔져 포토카드</p>
-                <p>6,000원</p><input type="button" value="장바구니"></dd>
-        </dl>
-
         <div class="basket">
-            <a href="#"><img src="../img/basket.png" alt="장바구니"></a>
+            <a href="<c:url value='/shop/order.do'/>"><img src="../img/basket.png" alt="장바구니"></a>
         </div>
 
     </div>

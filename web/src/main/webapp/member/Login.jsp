@@ -87,9 +87,9 @@
 </head>
 <body>
     <h1>
-        <a href="<c:url value="/index.do"/>">Super Hero Story</a>
+        <a href="<c:url value='/index.do'/>">Super Hero Story</a>
     </h1>
-    <form id="loginform" class="box" action="login.do" method="post" onsubmit="return validateForm(this)">
+    <form id="loginform" class="box" action="<c:url value='/member/login.do'/>" method="post" onsubmit="return validateForm(this)">
         <input type="hidden" name="mode" value="login"/>
         <input type="text" placeholder="ID" name="id" id="id"/>
         <input type="password" placeholder="Password" name="pw" id="pw" autocomplete="current-password"/>

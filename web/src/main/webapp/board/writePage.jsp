@@ -26,7 +26,7 @@
     </header>
 
     <main id="main">
-        <form name="writeFrm" method="post" action="<c:url value="/board/write.do?action=write"/>" onsubmit="return validateForm(this)">
+        <form name="writeFrm" method="post" action="<c:url value='/board/write.do?action=write'/>" onsubmit="return validateForm(this)">
             <table border="1" style="width: 100%; min-height: 50px;">
                 <tr>
                     <td style="text-align: center; font-size: 1.6rem; font-weight: 700; border-bottom: 1px solid black">제목</td>

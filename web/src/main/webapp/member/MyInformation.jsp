@@ -3,6 +3,7 @@
 <%@ page import="java.sql.Connection" %>
 <%@ page import="java.sql.ResultSet" %>
 <%@ page import="com.util.DBConnPool" %>
+<%@ page import="com.util.Logger" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -107,23 +108,23 @@
             userEmail = rs.getString("email"); // 여기를 수정
         }
     } catch (Exception e) {
-        e.printStackTrace();
+        Logger.error("이메일 조회 중 에러", e);
     } finally {
         dbPool.close(); // DBConnPool의 close 메서드를 사용하여 자원 반납
     }
 %>
 
 <h1>
-    <a href="<c:url value="/index.do"/>">Super Hero Story</a>
+    <a href="<c:url value='/index.do'/>">Super Hero Story</a>
 </h1>
 <div class="mypage">
     <div class="nav">
         <ul>
             <li>회원정보</li>
-            <li><a href="<c:url value="/member/mypage.do?action=Order"/>">주문내역</a></li>
-            <li><a href="<c:url value="/member/mypage.do?action=QnA"/>">나의 문의내역</a></li>
-            <li><a href="<c:url value="/member/mypage.do?action=Review"/>">나의 후기</a></li>
-            <li><a href="<c:url value="/member/mypage.do?action=Shopping"/>">장바구니</a></li>
+            <li><a href="<c:url value='/member/mypage.do?action=Order'/>">주문내역</a></li>
+            <li><a href="<c:url value='/member/mypage.do?action=QnA'/>">나의 문의내역</a></li>
+            <li><a href="<c:url value='/member/mypage.do?action=Review'/>">나의 후기</a></li>
+            <li><a href="<c:url value='/member/mypage.do?action=Shopping'/>">장바구니</a></li>
         </ul>
     </div>
     <form class="info">
