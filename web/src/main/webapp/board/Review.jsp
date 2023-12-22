@@ -18,25 +18,28 @@
     <div id="wrap">
         <header id="header">
             <h1>
-                <a href="../index.jsp">Super Hero Story</a>
+                <a href="../index.jsp"><img src="../img/mainlogo.png" alt="ReCoderLogo"/></a>
             </h1>
 
             <ul class="login">
-                <% if (session.getAttribute("userId") == null) { %>
-                <li><a href="../member/Login.jsp">로그인</a></li> <!-- Login -->
-                <li><a href="../member/Join.jsp">회원가입</a></li> <!-- Sign Up -->
-                <% } else { %>
-                <li><a href="${pageContext.request.contextPath}/logout">로그아웃</a></li> <!-- Logout -->
-                <li><a href="../member/MyPage.jsp">마이페이지</a></li>
-                <% } %>
+                <c:if test="${empty sessionScope.userId}">
+                    <li><a href="<c:url value="/member/login.do"/>">로그인</a></li>
+                    <li><a href="<c:url value="/member/join.do"/>">회원가입</a></li>
+                </c:if>
+                <c:if test="${not empty sessionScope.userId}">
+                    <li><a href="<c:url value="/member/logout.do"/>">로그아웃</a></li>
+                    <li><a href="<c:url value='/member/mypage.do'><c:param name='action' value='mypage' /></c:url>">마이페이지</a>
+                    </li>
+                </c:if>
             </ul>
 
             <nav id="menu">
                 <ul>
-                    <li><a href="profilePage.jsp">소개</a></li>
-                    <li><a href="../shop/goodsPage.jsp">상점</a></li>
-                    <li><a href="Review.jsp">상품후기</a></li>
-                    <li><a href="faqPage.jsp">FAQ</a></li>
+                    <li><a href="<c:url value="/board/profile.do"><c:param name='action' value='intro' /></c:url>">소개</a></li>
+                    <li>
+                        <a href="<c:url value='/shop/goods.do'><c:param name='category' value='goods' /></c:url>">상점</a>
+                    <li><a href="<c:url value='/board/list.do'><c:param name='board' value='1' /></c:url>">상품후기</a>
+                    <li><a href="<c:url value='/board/list.do'><c:param name='board' value='2' /></c:url>">FAQ</a>
                 </ul>
             </nav>
         </header>
@@ -57,7 +60,7 @@
                             <tr>
                                 <th scope="row">${loop.index + 1}</th>
                                 <td>
-                                    <a href="<c:url value="board/view.do?boardId=${post.boardId}&postId=${post.id}"/>">${post.title}</a>
+                                    <a href="<c:url value="/board/view.do?board=${post.boardId}&id=${post.id}"/>" style="text-decoration: none; color: black">${post.title}</a>
                                 </td>
                                 <td>${post.author_uid}</td>
                                 <td><fmt:formatDate value="${post.postdate}" pattern="yyyy-MM-dd"/>
@@ -68,13 +71,20 @@
                 </table>
 
                 <div class="write_btn">
-                    <a href="<c:url value='/board/write.do'><c:param name='board' value='1' /><c:param name="action" value="write"/> </c:url>"><img src="../img/pen.png" alt="펜"></a>
+                    <a href="<c:url value='/board/write.do'><c:param name='board' value='1' /><c:param name="action" value="write"/> </c:url>"><img
+                            src="../img/pen.png" alt="펜"></a>
                     <!--        writePage로 이동-->
                 </div>
             </div>
+
+            <div class="image">
+                <img src="../img/reviewfooter.jpg" alt="게시판 하단 이미지">
+                <img src="../img/reviewfooter.jpg" alt="게시판 하단 이미지">
+                <img src="../img/reviewfooter.jpg" alt="게시판 하단 이미지">
+            </div>
         </main>
 
-        <footer id="footer">Copyright (c) 2023 Re-Coder</footer>
+        <footer id="footer"><jsp:include page="../include/Footer.jsp"/></footer>
 
     </div>
 
