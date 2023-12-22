@@ -54,7 +54,7 @@ public class MypageController extends HttpServlet {
 
             case "Shopping" -> req.getRequestDispatcher("/member/MyShoppingCart.jsp").forward(req, resp);
 
-            default -> req.getRequestDispatcher("/member/MyReview.jsp").forward(req, resp);
+            default -> req.getRequestDispatcher("/member/MyPage.jsp").forward(req, resp);
         }
     }
 }
