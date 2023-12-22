@@ -13,7 +13,7 @@
 </head>
 <body>
 <header id="header">
-    <h1><img src="../img/goodslogo.png"></h1>
+    <h1><img src="../img/goodslogo.png" alt="상점 페이지 로고"></h1>
     <nav class="menu">
         <ul>
             <li><a href="goods.jsp"><img src="../img/goodslogo02.png" alt="상품"></a></li>

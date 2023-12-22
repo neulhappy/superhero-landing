@@ -15,7 +15,7 @@
         <input type="hidden" name="id" value="${post.id}"/>
         <input type="hidden" name="action" value="delete"/>
         <header id="header">
-            <h1><a href="../index.jsp"><img src="../img/textlogo.png"></a></h1>
+            <h1><a href="../index.jsp"><img src="../img/textlogo.png" alt="상세페이지 로고"></a></h1>
             <div class="icon">
                 <a href="<c:url value='/board/list.do'><c:param name='board' value='${post.boardId}' /></c:url>">
                     <button type="button" class="btn btn-outline-success">List</button>
@@ -29,14 +29,14 @@
 
         <main id="main">
             <!-- Additional information -->
-            <div id="post-info" style="padding: 20px 50px; background: blanchedalmond">
-                <h2 id="post-title">${post.title}</h2>
-                <p id="post-author">${post.author_uid}</p>
-                <p id="post-date"><fmt:formatDate value="${post.postdate}" pattern="yyyy-MM-dd"/></p>
-                <p id="post-views">${post.visitcount}</p>
+            <div id="post-info" style="padding: 40px 50px 20px; background: url('../img/titlebg.jpg') no-repeat bottom; background-size: 1800px; text-align: center;">
+                <h2 id="post-title" style="font-weight: 700; color: #eece84">TITLE: ${post.title}</h2>
+                <p id="post-author" style="font-weight: 600;  color: #e7fcbc">AUTHOR: ${post.author_uid}</p>
+                <p id="post-date" style="font-weight: 600;  color: #e7fcbc">DATE: <fmt:formatDate value="${post.postdate}" pattern="yyyy-MM-dd"/></p>
+                <p id="post-views" style="font-weight: 600;  color: #e7fcbc">VISIT: ${post.visitcount}</p>
             </div>
 
-            <div id="viewer"></div>
+            <div id="viewer" style="background: #e1f6e3; min-height: 800px; padding: 10px; transform: translate(0, 30px)"></div>
         </main>
 
 
@@ -67,5 +67,6 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
                 integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
                 crossorigin="anonymous"></script>
+    </form>
 </body>
 </html>

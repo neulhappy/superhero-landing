@@ -34,7 +34,7 @@
 <body>
 
     <header id="header">
-        <h1><img src="../img/profile02logo.png"></h1>
+        <h1><img src="../img/profile02logo.png" alt="프로필로고02"></h1>
         <nav>
             <ul class="menu">
                 <li><a href="<c:url value="/board/profile.do"><c:param name='action' value='intro' /></c:url>">브랜드 소개</a></li>
