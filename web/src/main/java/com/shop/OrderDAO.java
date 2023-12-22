@@ -174,7 +174,7 @@ public class OrderDAO extends DBConnPool {
         }
     }
 
-    public void updatePayment(String id, Date date) {
+    public void updatePaydate(String id, Date date) {
         String query = "UPDATE p_order SET pay_date = ? WHERE id = ?";
 
         try {

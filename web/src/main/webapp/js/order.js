@@ -3,7 +3,7 @@ IMP.init("imp85622471");
 
 let total = 0;
 let products = [];
-
+let orderId;
 const kakaoButton = document.querySelector(".kakao");
 
 const onKakaoPay = async () => {
@@ -20,7 +20,6 @@ const onKakaoPay = async () => {
             pay_info(rsp);
 
         } else {
-            //todo;failled 처리
             alert("결제에 실패하셨습니다.");
         }
     });
@@ -73,6 +72,12 @@ function pay_info(rsp) {
     objs.setAttribute('type', 'hidden');
     objs.setAttribute('name', 'paymentMethod');
     objs.setAttribute('value', rsp.pg_provider);
+    form.appendChild(objs);
+
+    objs = document.createElement('input');
+    objs.setAttribute('type', 'hidden');
+    objs.setAttribute('name', 'orderId');
+    objs.setAttribute('value', orderId);
     form.appendChild(objs);
 
     form.setAttribute('method', 'post');
@@ -134,8 +139,7 @@ function submitForm() {
         data: formData,
         dataType: 'json',
         success: function (data) {
-            alert("success");
-            console.log(data);
+            orderId = data.orderId;
         },
         error: function (request, status, error) {
             console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
