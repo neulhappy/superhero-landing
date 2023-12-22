@@ -186,5 +186,29 @@ public class OrderDAO extends DBConnPool {
             Logger.error("updateInvoice 중 에러 발생", e);
         }
     }
+
+    public int totalPrice(int orderId) {
+        int totalPrice = 0;
+            String query = "SELECT op.QUANTITY, p.PRICE"
+                            +" FROM ORDER_PRODUCT op"
+                            +" INNER JOIN PRODUCT p ON op.PROD_ID = p.ID"
+                            +" WHERE ORDER_ID = ?";
+
+            try {
+                psmt = con.prepareStatement(query);
+                psmt.setInt(1, orderId);
+                rs = psmt.executeQuery();
+
+                while (rs.next()){
+                    int quantity = rs.getInt("quantity");
+                    int price = rs.getInt("price");
+                    totalPrice += (quantity*price);
+                }
+
+            } catch (SQLException e) {
+                Logger.error("insertOrderProduct 중 메소드 오류 발생");
+            }
+        return totalPrice;
+    }
 }
 
