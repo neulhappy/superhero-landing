@@ -21,7 +21,7 @@ import java.io.PrintWriter;
 public class OrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("shop/order.jsp").forward(req, resp);
+        req.getRequestDispatcher("/shop/order.jsp").forward(req, resp);
     }
 
     @Override
