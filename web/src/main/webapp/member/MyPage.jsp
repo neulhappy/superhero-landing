@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -81,7 +82,7 @@
 </head>
 <body>
     <h1>
-        <a href="/index.jsp">Super Hero Landing</a>
+        <a href="<c:url value="/index.do"/>">Super Hero Story</a>
     </h1>
     <div class="mypage">
         <div class="nav">

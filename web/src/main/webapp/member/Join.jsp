@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -64,7 +65,7 @@
 </head>
 <body>
 <h1>
-    <a href="/index.jsp">Super Hero Story!</a>
+    <a href="<c:url value="/index.do"/>">Super Hero Story</a>
 </h1>
 <form id="joinform" class="box" action="join.do" method="post" onsubmit="return validateForm(this);">
     <div id="idCheckResult"></div>

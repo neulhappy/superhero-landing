@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 2023-12-15
-  Time: 오후 4:18
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <%@ page import="com.board.hero.HeroManager" %>
 <%@ page import="com.board.hero.HeroName" %>
@@ -43,8 +37,8 @@
         <h1><img src="../img/profile02logo.png"></h1>
         <nav>
             <ul class="menu">
-                <li><a href="profilePage.jsp">브랜드 소개</a></li>
-                <li><a href="profilePage02.jsp">Hero 소개</a></li>
+                <li><a href="<c:url value="/board/profile.do"><c:param name='action' value='intro' /></c:url>">브랜드 소개</a></li>
+                <li><a href="<c:url value="/board/profile.do"><c:param name='action' value='hero' /></c:url>">Hero 소개</a></li>
             </ul>
         </nav>
     </header>
