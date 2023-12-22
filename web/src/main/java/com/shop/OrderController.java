@@ -4,6 +4,7 @@ import com.member.MemberDAO;
 import com.util.Alert;
 
 
+import com.util.LookUp;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,6 +22,7 @@ import java.io.PrintWriter;
 public class OrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        LookUp.getAuth(req, resp);
         req.getRequestDispatcher("/shop/order.jsp").forward(req, resp);
     }
 
