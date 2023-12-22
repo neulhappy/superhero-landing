@@ -86,7 +86,7 @@ public class BoardDAO extends DBConnPool {
         try {
             // Prepare the query with placeholders
             String query = "INSERT INTO " + table + " (title, content, author_id) VALUES (?, ?, ?)";
-            psmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            psmt = con.prepareStatement(query, new String[]{"id"});
 
             // Set parameter values using PreparedStatement
             psmt.setString(1, dto.getTitle());

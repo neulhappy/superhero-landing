@@ -92,7 +92,7 @@
     <form id="loginform" class="box" action="login.do" method="post" onsubmit="return validateForm(this)">
         <input type="hidden" name="mode" value="login"/>
         <input type="text" placeholder="ID" name="id" id="id"/>
-        <input type="password" placeholder="Password" name="pw" id="pw"/>
+        <input type="password" placeholder="Password" name="pw" id="pw" autocomplete="current-password"/>
         <button name="submit">Login</button>
         <div class="sign-up-box" id="signup">
             <i class="material-icons"><a href="Join.jsp">Sign Up</a></i>
@@ -102,19 +102,21 @@
         const inpId = document.querySelector('#id');
         const inpPw = document.querySelector('#pw');
 
-
         const myForm = document.getElementById('loginform');
         myForm.addEventListener('submit', async function (event) {
             event.preventDefault(); // 기본 제출 동작을 막음
-            if (await validateForm()) {
+            try {
+                if (await validateForm()) {
                 HTMLFormElement.prototype.submit.call(myForm);
+                }
+            } catch (error) {
+                alert(error.message); // 에러 메시지를 알림으로 표시
             }
         });
 
         async function validateForm() {
             if (inpId.value === "" || inpPw.value === "") {
-                alert("아이디와 패스워드를 모두 입력하세요.");
-                return false;
+                throw new Error("아이디와 패스워드를 모두 입력하세요."); // 예외 발생
             }
             // 해시화 진행
             inpPw.value = await sha256(inpPw.value);
@@ -124,7 +126,7 @@
 
         async function sha256(str) {
             return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str))
-                .then(buffer => Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join(''));
+            .then(buffer => Array.prototype.map.call(new Uint8Array(buffer), x => ('00' + x.toString(16)).slice(-2)).join(''));
         }
     </script>
 </body>

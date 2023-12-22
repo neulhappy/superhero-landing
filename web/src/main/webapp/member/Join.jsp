@@ -92,8 +92,12 @@
         const myForm = document.getElementById('joinform');
         myForm.addEventListener('submit', async function(event) {
             event.preventDefault(); // 기본 제출 동작을 막음
-            if (await validateForm()) {
-                HTMLFormElement.prototype.submit.call(myForm);
+            try {
+                if (await validateForm()) {
+                    HTMLFormElement.prototype.submit.call(myForm);
+                }
+            } catch (error) {
+                alert(error.message); // 에러 메시지를 알림으로 표시
             }
         });
     });
@@ -163,20 +167,13 @@
     // 폼 유효성 검사
     async function validateForm() {
         if (!joinId(elInputId.value)) {
-            alert("아이디를 다시 입력해주세요");
-            elInputId.focus();
-            return false;
+            throw new Error("아이디를 다시 입력해주세요");
         }
         if (!joinEmail(elInputEm.value)) {
-            alert("이메일을 다시 입력해주세요.");
-            elInputEm.focus();
-            return false;
+            throw new Error("이메일을 다시 입력해주세요.");
         }
-        // 비밀번호 검사 추가
         if (!joinPw(elInputPw.value)) {
-            alert("비밀번호를 다시 입력해주세요.");
-            elInputPw.focus();
-            return false;
+            throw new Error("비밀번호 양식은 대소문자, 숫자 또는 특수문자를 입력해주세요.");
         }
         elInputPw.value = await sha256(elInputPw.value);
         return true;
