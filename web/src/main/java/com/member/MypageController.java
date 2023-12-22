@@ -54,11 +54,7 @@ public class MypageController extends HttpServlet {
 
             case "Shopping" -> req.getRequestDispatcher("/member/MyShoppingCart.jsp").forward(req, resp);
 
-            default -> {
-                resp.setContentType("text/html;charset=UTF-8");
-                PrintWriter out = resp.getWriter();
-                Alert.alertLocation("잘못된 접근입니다.", "/index.do", out);
-            }
+            default -> req.getRequestDispatcher("/member/MyReview.jsp").forward(req, resp);
         }
     }
 }

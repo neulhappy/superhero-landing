@@ -119,11 +119,11 @@
 <div class="mypage">
     <div class="nav">
         <ul>
-            <li><a href="OrderMypage.jsp">주문내역</a></li>
-            <li><a href="${pageContext.request.contextPath}mypage.do?action=QnA">나의 문의내역</a></li>
-            <li><a href="MyReview.jsp">나의 후기</a></li>
-            <li><a href="MyShoppingCart.jsp">장바구니</a></li>
-            <li><a href="MyInformation.jsp"><span>회원정보</span></a></li>
+            <li><a href="<c:url value="/member/mypage.do"/>">회원정보</a></li>
+            <li><a href="<c:url value="/member/mypage.do?action=Order"/>">주문내역</a></li>
+            <li><a href="<c:url value="/member/mypage.do?action=QnA"/>">나의 문의내역</a></li>
+            <li><a href="<c:url value="/member/mypage.do?action=Review"/>">나의 후기</a></li>
+            <li><a href="<c:url value="/member/mypage.do?action=Shopping"/>">장바구니</a></li>
         </ul>
     </div>
     <form class="info">
