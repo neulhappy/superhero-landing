@@ -119,7 +119,7 @@
 <div class="mypage">
     <div class="nav">
         <ul>
-            <li><a href="<c:url value="/member/mypage.do"/>">회원정보</a></li>
+            <li>회원정보</li>
             <li><a href="<c:url value="/member/mypage.do?action=Order"/>">주문내역</a></li>
             <li><a href="<c:url value="/member/mypage.do?action=QnA"/>">나의 문의내역</a></li>
             <li><a href="<c:url value="/member/mypage.do?action=Review"/>">나의 후기</a></li>
