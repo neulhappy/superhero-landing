@@ -124,8 +124,8 @@ function submitForm() {
     let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 
     cart.forEach(function (product, index){
-        formData.push({ name: 'prod_id' + index+1, value: product.productId });
-        formData.push({ name: 'quantity_' + index+1, value: product.quantity });
+        formData.push({ name: 'prod_id_' + index, value: product.productId });
+        formData.push({ name: 'quantity_' + index, value: product.quantity });
     });
 
     $.ajax({

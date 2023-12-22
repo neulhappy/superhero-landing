@@ -30,8 +30,6 @@ public class OrderController extends HttpServlet {
             PrintWriter out = resp.getWriter();
             Alert.alertLocation("잘못된 접근입니다.", "/index.jsp", out);
         } else {
-
-
             OrderDTO dto = new OrderDTO();
             dto.setCustom_id(PID);
             dto.setPurchaser_name(req.getParameter("purchaser_name"));
@@ -39,7 +37,7 @@ public class OrderController extends HttpServlet {
             dto.setAddress(req.getParameter("address"));
             dto.setContact(req.getParameter("contact"));
             int productsLength = dto.setProductListByRequest(req);
-            if (productsLength < 0) {
+            if (productsLength <= 0) {
                 PrintWriter out = resp.getWriter();
                 Alert.alertBack("상품이 없습니다.", out);
             } else {

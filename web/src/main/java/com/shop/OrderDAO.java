@@ -3,6 +3,7 @@ package com.shop;
 import com.util.DBConnPool;
 import com.util.Logger;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -20,7 +21,7 @@ public class OrderDAO extends DBConnPool {
                     "custom_id, purchaser_name, recipient_name, address, contact" +
                     ") VALUES (?, ?, ?, ?, ?) ";
 
-            psmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            psmt = con.prepareStatement(query, new String[]{"id"});
             psmt.setInt(1, dto.getCustom_id());
             psmt.setString(2, dto.getPurchaser_name());
             psmt.setString(3, dto.getRecipient_name());
@@ -51,8 +52,9 @@ public class OrderDAO extends DBConnPool {
 
     private void insertOrderProducts(int orderId, ArrayList<OrderDTO.ProductSet> productList) {
         for (OrderDTO.ProductSet set : productList) {
+
             String productQuery = "INSERT INTO " +
-                    "'order_product' " +
+                    "order_product " +
                     "(order_id, prod_id, quantity)" +
                     " VALUES (?, ?, ?)";
             try {
@@ -171,6 +173,20 @@ public class OrderDAO extends DBConnPool {
             Logger.error("updateStatus 중 에러 발생", e);
         }
     }
+
+    public void updatePayment(String id, Date date) {
+        String query = "UPDATE p_order SET pay_date = ? WHERE id = ?";
+
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setDate(1, date);
+            psmt.setString(2, id);
+            psmt.executeUpdate();
+        } catch (SQLException e) {
+            Logger.error("updateStatus 중 에러 발생", e);
+        }
+    }
+
 
     public void updateInvoice(String id, String invoice) {
         String query = "UPDATE p_order SET invoice = ? WHERE id = ?";
