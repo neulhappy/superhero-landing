@@ -3,6 +3,7 @@ package com.shop;
 import com.util.DBConnPool;
 import com.util.Logger;
 
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -51,8 +52,7 @@ public class OrderDAO extends DBConnPool {
 
     private void insertOrderProducts(int orderId, ArrayList<OrderDTO.ProductSet> productList) {
         for (OrderDTO.ProductSet set : productList) {
-            String productQuery = "INSERT INTO " +
-                    "'order_product' " +
+            String productQuery = "INSERT INTO order_product " +
                     "(order_id, prod_id, quantity)" +
                     " VALUES (?, ?, ?)";
             try {
@@ -67,37 +67,20 @@ public class OrderDAO extends DBConnPool {
         }
     }
 
-    public List<OrderDTO> selectOrderList(Map<String, Object> map, String userId) {
+    public List<OrderDTO> selectOrderList(String userId) {
         List<OrderDTO> orderList = new ArrayList<>();
 
-        String query = "SELECT * FROM (" +
-                " SELECT Tb.*, ROWNUM rNUM FROM (" +
-                " SELECT * FROM" +
-                " p_order" +
-                " WHERE custom_id = ?" +
-                " ORDER BY order_date DESC ) Tb )" +
-                " WHERE rNUM " +
-                "BETWEEN ? AND ? ";
+        String query = "SELECT * FROM p_order WHERE custom_id = ? ORDER BY order_date desc";
 
         try {
             psmt = con.prepareStatement(query);
             psmt.setString(1, userId);
-            psmt.setInt(2, Integer.parseInt(map.get("start").toString()));
-            psmt.setInt(3, Integer.parseInt(map.get("end").toString()));
 
             rs = psmt.executeQuery();
 
             while (rs.next()) {
                 OrderDTO dto = new OrderDTO();
-                dto.setId(rs.getInt("1"));
-                dto.setCustom_id(rs.getInt("2"));
-                dto.setStatus(rs.getInt("3"));
-                dto.setPurchaser_name(rs.getString("4"));
-                dto.setRecipient_name(rs.getString("5"));
-                dto.setAddress(rs.getString("6"));
-                dto.setContact(rs.getString("7"));
-                dto.setOrder_date(rs.getDate("8"));
-                dto.setInvoice(rs.getString("9"));
+                makeWholeDTO(userId, dto);
 
                 orderList.add(dto);
             }
@@ -108,25 +91,30 @@ public class OrderDAO extends DBConnPool {
         return orderList;
     }
 
+    private void makeWholeDTO(String userId, OrderDTO dto) throws SQLException {
+        dto.setId(rs.getInt("1"));
+        dto.setCustom_id(rs.getInt("2"));
+        dto.setStatus(rs.getInt("3"));
+        dto.setPurchaser_name(rs.getString("4"));
+        dto.setRecipient_name(rs.getString("5"));
+        dto.setAddress(rs.getString("6"));
+        dto.setContact(rs.getString("7"));
+        dto.setOrder_date(rs.getDate("8"));
+        dto.setInvoice(rs.getString("9"));
+        dto.setProductList(selectOrderProductLists(Integer.parseInt(userId)));
+    }
+
+
     public OrderDTO selectOrder(String id) {
         OrderDTO dto = new OrderDTO();
-        String query = "SELECT * FROM p_order WHERE order_id = ?";
+        String query = "SELECT * FROM p_order WHERE id = ?";
 
         try {
             psmt = con.prepareStatement(query);
             psmt.setString(1, id);
             rs = psmt.executeQuery();
             if (rs.next()) {
-                dto.setId(rs.getInt("1"));
-                dto.setCustom_id(rs.getInt("2"));
-                dto.setStatus(rs.getInt("3"));
-                dto.setPurchaser_name(rs.getString("4"));
-                dto.setRecipient_name(rs.getString("5"));
-                dto.setAddress(rs.getString("6"));
-                dto.setContact(rs.getString("7"));
-                dto.setOrder_date(rs.getDate("8"));
-                dto.setInvoice(rs.getString("9"));
-                dto.setProductList(selectOrderProductLists(Integer.parseInt(id)));
+                makeWholeDTO(id, dto);
             }
         } catch (SQLException e) {
             Logger.error("selectView 중 예외 발생", e);
@@ -137,7 +125,7 @@ public class OrderDAO extends DBConnPool {
     public ArrayList<OrderDTO.ProductSet> selectOrderProductLists(int orderId) {
         ArrayList<OrderDTO.ProductSet> orderProducts = new ArrayList<>();
 
-        String query = "SELECT * FROM 'order_product' WHERE order_id = ?";
+        String query = "SELECT * FROM order_product WHERE order_id = ?";
 
         try {
             psmt = con.prepareStatement(query);
@@ -171,6 +159,20 @@ public class OrderDAO extends DBConnPool {
             Logger.error("updateStatus 중 에러 발생", e);
         }
     }
+
+    public void updatePaydate(String id, Date date) {
+        String query = "UPDATE p_order SET pay_date = ? WHERE id = ?";
+
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setDate(1, date);
+            psmt.setString(2, id);
+            psmt.executeUpdate();
+        } catch (SQLException e) {
+            Logger.error("updateStatus 중 에러 발생", e);
+        }
+    }
+
 
     public void updateInvoice(String id, String invoice) {
         String query = "UPDATE p_order SET invoice = ? WHERE id = ?";

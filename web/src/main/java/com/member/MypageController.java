@@ -1,5 +1,9 @@
 package com.member;
 
+import com.board.BoardDAO;
+import com.board.BoardDTO;
+import com.shop.OrderDAO;
+import com.shop.OrderDTO;
 import com.util.Alert;
 import com.util.LookUp;
 import jakarta.servlet.ServletException;
@@ -8,27 +12,49 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
+import java.util.Optional;
 
 @WebServlet("/member/mypage.do")
 public class MypageController extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String action = request.getParameter("action");
-        LookUp.getAuth(request, response);
-        if ("Order".equals(action)) {
-            request.getRequestDispatcher("/member/OrderMypage.jsp").forward(request, response);
-        } else if ("QnA".equals(action)) {
-            request.getRequestDispatcher("/member/MyQnA.jsp").forward(request, response);
-        } else if ("Review".equals(action)) {
-            request.getRequestDispatcher("/member/MyReview.jsp").forward(request, response);
-        } else if ("Shopping".equals(action)) {
-            request.getRequestDispatcher("/member/MyShoppingCart.jsp").forward(request, response);
-        } else {
-            response.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = response.getWriter();
-            Alert.alertLocation("잘못된 접근입니다.", "/index.do", out);
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String action = Optional.ofNullable(req.getParameter("action"))
+                .filter(s -> !s.isEmpty())
+                .orElse("null");
+        int pid = LookUp.getAuth(req, resp);
+        switch (action) {
+            case "Order" -> {
+                OrderDAO dao = new OrderDAO();
+                List<OrderDTO> orderList = dao.selectOrderList(String.valueOf(pid));
+                dao.close();
+                req.setAttribute("orderList", orderList);
+                req.getRequestDispatcher("/member/OrderMypage.jsp").forward(req, resp);
+            }
+
+
+            case "QnA" -> {
+                BoardDAO dao = new BoardDAO();
+                List<BoardDTO> bbs = dao.selectListById("2", String.valueOf(pid));
+                dao.close();
+                req.setAttribute("bbs", bbs);
+                req.getRequestDispatcher("/member/MyQnA.jsp").forward(req, resp);
+            }
+
+            case "Review" -> {
+                BoardDAO dao = new BoardDAO();
+                List<BoardDTO> bbs = dao.selectListById("1", String.valueOf(pid));
+                dao.close();
+                req.setAttribute("bbs", bbs);
+                req.getRequestDispatcher("/member/MyReview.jsp").forward(req, resp);
+            }
+
+            case "Shopping" -> req.getRequestDispatcher("/member/MyShoppingCart.jsp").forward(req, resp);
+
+            default -> req.getRequestDispatcher("/member/MyPage.jsp").forward(req, resp);
         }
     }
 }

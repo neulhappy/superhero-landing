@@ -25,13 +25,9 @@ public class PayController extends HttpServlet {
         String amount = req.getParameter("amount");
         String status = req.getParameter("status");
         String paymentMethod = req.getParameter("paymentMethod");
-
         long paymentUnixTime = Long.parseLong(req.getParameter("paymentTime"));
-        Instant instant = Instant.ofEpochSecond(paymentUnixTime);
-        LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String paymentTime = dateTime.format(formatter);
-
+        Date pay_date = new Date(paymentUnixTime * 1000);
+        String orderId = req.getParameter("orderId");
 
 
         // 클라이언트에 응답을 보냅니다.
@@ -48,12 +44,10 @@ public class PayController extends HttpServlet {
         out.println("</body>");
         out.println("</html>");
 
-        //폼값을 DTO에 저장
-        PaymentDTO pDto = new PaymentDTO();
-        pDto.setPayDate(paymentTime);
 
         //결제 일자를 업데이트
-        PaymentDAO pDao = PaymentDAO.getInstance();
-        int joinResult = pDao.updatePayDate(pDto);
+        OrderDAO dao = new OrderDAO();
+        dao.updatePaydate(orderId, pay_date);
+        dao.updateStatus(orderId, "2");
     }
 }

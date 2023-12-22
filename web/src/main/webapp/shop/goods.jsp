@@ -69,7 +69,7 @@
         </dl>
 
         <div class="basket">
-            <a href="/shop/order.jsp"><img src="../img/basket.png" alt="장바구니"></a>
+            <a href="<c:url value="/shop/order.jsp"/>"><img src="../img/basket.png" alt="장바구니"></a>
         </div>
     </div>
     </main>
