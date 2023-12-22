@@ -24,8 +24,5 @@
     </nav>
 </header>
 
-<footer id="footer">
-    <jsp:include page="../include/Footer.jsp"/>
-</footer>
 </body>
 </html>

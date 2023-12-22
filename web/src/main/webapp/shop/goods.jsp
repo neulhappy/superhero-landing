@@ -30,5 +30,6 @@
         <a href="<c:url value='/shop/order.do'/>"><img src="../img/basket.png" alt="장바구니"></a>
     </div>
 
+
 </body>
 </html>

@@ -16,8 +16,8 @@ button {border: 0; background: transparent;}
 fieldset,input,textarea,select {vertical-align: middle; border: 0;}
 legend,caption {display: none;}
 
-
-h1{font-size: 5rem; padding: 20px;}
+#wrap{padding: 0 100px}
+h1{font-size: 5rem; padding: 30px 20px 50px;}
 
 .btn{margin: 10px;}
 .btn-light{padding: 5px; font-size: 1.6rem; font-weight: 600; }

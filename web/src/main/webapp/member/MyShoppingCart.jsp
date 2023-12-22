@@ -42,7 +42,7 @@
 
         li {
             margin-left: 100px;
-            padding: 50px;
+            padding: 30px;
         }
 
         li > a {
