@@ -18,6 +18,7 @@ const onKakaoPay = async () => {
     }, function (rsp) {
         if (rsp.success) {
             pay_info(rsp);
+            clearCart();
         } else {
             alert("결제에 실패하셨습니다.");
         }
