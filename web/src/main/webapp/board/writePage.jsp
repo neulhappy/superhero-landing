@@ -1,13 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
-  Created by IntelliJ IDEA.
-  User: admin
-  Date: 2023-12-14
-  Time: 오후 2:45
-  To change this template use File | Settings | File Templates.
---%>
-<%--todo:?auto-save--%>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,20 +69,19 @@
                 initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
                 previewStyle: 'vertical',                // 마크다운 프리뷰 스타일 (tab || vertical)
             });
-
-            function publishPost() {
-                // 편집기의 내용을 폼 데이터에 추가
-                document.writeFrm.content.value = editor.getMarkdown();
-                // 폼 제출
-                document.writeFrm.submit();
-            }
         </script>
 
         <script type="text/javascript">
             function validateForm(form) {
+                document.writeFrm.content.value = editor.getMarkdown();
                 if (!form.title.value) {
                     alert("제목을 입력 하세요");
                     form.title.focus();
+                    return false;
+                }
+                if (!form.content.value) {
+                    alert("내용을 입력하세요.");
+                    document.querySelector('#content').focus();
                     return false;
                 }
             }
