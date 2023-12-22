@@ -37,7 +37,7 @@
 
         .nav > ul > li {
             margin-left: 100px;
-            padding: 50px;
+            padding: 30px;
         }
 
         .nav > ul > li > a {
@@ -45,7 +45,7 @@
         }
 
         .order {
-            margin-top: 50px;
+            margin-top: 30px;
             font-size: 1.1rem;
             width: 800px;
 
@@ -54,22 +54,20 @@
         .order > .title {
             display: flex;
             justify-content: left;
-            gap: 20px;
-            height: 30px;
+            height: 20px;
             width: 700px;
             background: black;
             border-radius: 4px;
-            color: #e7e7e7;
-            padding: 15px 0 15px 30px;
+            color: #ffffff;
+            padding: 10px 0 15px 30px;
             font-weight: 600;
         }
 
         table {
             width: 700px;
-            height: 400px;
+            height: 300px;
             text-align: center;
         }
-
 
         span {
             color: rgb(128, 128, 128);
@@ -93,7 +91,6 @@
     <div class="order">
         <ul class="title">
             <li>주문내역조회</li>
-            <li>반품/환불조회</li>
         </ul>
         <table>
             <tr>

@@ -44,7 +44,7 @@
 
         li {
             margin-left: 100px;
-            padding: 50px;
+            padding: 30px;
         }
 
         li > a {
@@ -57,7 +57,7 @@
             color: rgb(128, 128, 128);
         }
         table {
-            margin-top: 120px;
+            margin-top: 50px;
             width: 700px;
             height: 400px;
             text-align: center;
@@ -168,9 +168,12 @@
         if (newPassword) {
             if (!validatePassword(newPassword)) {
                 document.getElementById('passwordMessage').innerText = '비밀번호 형식이 잘못되었습니다.';
+                document.getElementById('passwordMessage').style.color = 'red';
                 isValid = false;
             } else if (newPassword !== confirmNewPassword) {
                 document.getElementById('passwordMessage').innerText = '비밀번호가 일치하지 않습니다.';
+                document.getElementById('passwordMessage').style.color = 'red';
+                console.log(newPassword !== confirmNewPassword)
                 isValid = false;
             } else {
                 const hashedNewPassword = await sha256(newPassword);
@@ -181,6 +184,7 @@
         if (newEmail) {
             if (!validateEmail(newEmail)) {
                 document.getElementById('emailMessage').innerText = '이메일 형식이 잘못되었습니다.';
+                document.getElementById('emailMessage').style.color = 'red';
                 isValid = false;
             } else {
                 if (formData.length > 0) formData += '&';

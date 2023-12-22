@@ -38,7 +38,7 @@
 
         li {
             margin-left: 100px;
-            padding: 50px;
+            padding: 30px;
         }
 
         li > a {
@@ -51,7 +51,7 @@
 
         .box {
             position: relative;
-            margin: 250px auto;
+            margin: 150px auto;
             width: 400px;
             display: flex;
             flex-direction: column;
@@ -69,14 +69,19 @@
 
         .box input {
             margin-bottom: 25px;
-            border: #8f8a8a solid 2px;
+            border: #5e5e5e solid 2px;
             border-radius: 4px;
         }
 
         .box button {
-            background-color: #575757;
-            color: #dce0ec;
+            background-color: #5e5e5e;
+            color: #ffffff;
             border-radius: 4px;
+            font-weight: 600;
+        }
+        p {
+            padding-left: 20px;
+            font-size: 1rem;
         }
     </style>
 </head>
@@ -98,6 +103,7 @@
             <form id="passwordForm" class="box" action="<c:url value='/member/passwordCheck.do'/>" method="post">
                 <input type="hidden" name="mode" value="inform">
                 <input type="hidden" name="id" value="<%= session.getAttribute("userId") %>">
+                <p>개인정보 수정을 원하시면 비밀번호 인증을 해주세요.</p>
                 <input type="password" placeholder="Password" name="pw" id="pw"/>
                 <button type="submit">인증하기</button>
             </form>
