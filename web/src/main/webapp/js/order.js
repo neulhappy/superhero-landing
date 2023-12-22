@@ -3,7 +3,7 @@ IMP.init("imp85622471");
 
 let total = 0;
 let products = [];
-
+let orderId;
 const kakaoButton = document.querySelector(".kakao");
 
 const onKakaoPay = async () => {
@@ -20,7 +20,6 @@ const onKakaoPay = async () => {
             pay_info(rsp);
 
         } else {
-            //todo;failled 처리
             alert("결제에 실패하셨습니다.");
         }
     });
@@ -75,6 +74,12 @@ function pay_info(rsp) {
     objs.setAttribute('value', rsp.pg_provider);
     form.appendChild(objs);
 
+    objs = document.createElement('input');
+    objs.setAttribute('type', 'hidden');
+    objs.setAttribute('name', 'orderId');
+    objs.setAttribute('value', orderId);
+    form.appendChild(objs);
+
     form.setAttribute('method', 'post');
     form.setAttribute('action', "paySuccess.do");
     form.setAttribute('accept-charset', 'UTF-8');
@@ -124,8 +129,8 @@ function submitForm() {
     let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 
     cart.forEach(function (product, index){
-        formData.push({ name: 'prod_id' + index+1, value: product.productId });
-        formData.push({ name: 'quantity_' + index+1, value: product.quantity });
+        formData.push({ name: 'prod_id_' + index, value: product.productId });
+        formData.push({ name: 'quantity_' + index, value: product.quantity });
     });
 
     $.ajax({
@@ -134,8 +139,7 @@ function submitForm() {
         data: formData,
         dataType: 'json',
         success: function (data) {
-            alert("success");
-            console.log(data);
+            orderId = data.orderId;
         },
         error: function (request, status, error) {
             console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);

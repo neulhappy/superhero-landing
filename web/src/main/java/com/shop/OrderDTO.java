@@ -113,7 +113,7 @@ public class OrderDTO {
 
     public int setProductListByRequest(HttpServletRequest req) {
         ArrayList<ProductSet> productList = new ArrayList<>();
-        int i = 1;
+        int i = 0;
         while (req.getParameter("prod_id_" + i) != null) {
             int prodId = Integer.parseInt(req.getParameter("prod_id_" + i));
             int quantity = Integer.parseInt(req.getParameter("quantity_" + i));
@@ -122,7 +122,7 @@ public class OrderDTO {
             i++;
         }
         this.productList = productList;
-        return i - 1;
+        return i;
     }
 
     static class ProductSet {

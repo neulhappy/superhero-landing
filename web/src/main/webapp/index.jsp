@@ -57,7 +57,7 @@
 
             <h1>
                 <a href="<c:url value='/index.do'/>">
-                    <img src="img/mainlogo.png" alt="ReCoderLogo"/>
+                    <img src="img/mainlogo.png" alt="메인로고"/>
                 </a>
             </h1>
 
