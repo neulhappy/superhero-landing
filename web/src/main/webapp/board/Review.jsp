@@ -18,7 +18,7 @@
     <div id="wrap">
         <header id="header">
             <h1>
-                <a href="../index.jsp">Super Hero Story</a>
+                <a href="../index.jsp"><img src="../img/mainlogo.png" alt="ReCoderLogo"/></a>
             </h1>
 
             <ul class="login">
@@ -73,9 +73,16 @@
                     <!--        writePage로 이동-->
                 </div>
             </div>
+            
+            <div class="image">
+                <img src="../img/reviewfooter.jpg">
+                <img src="../img/reviewfooter.jpg">
+                <img src="../img/reviewfooter.jpg">
+                <img src="../img/reviewfooter.jpg">
+            </div>
         </main>
 
-        <footer id="footer">Copyright (c) 2023 Re-Coder</footer>
+        <footer id="footer"><jsp:include page="../include/Footer.jsp"/></footer>
 
     </div>
 
