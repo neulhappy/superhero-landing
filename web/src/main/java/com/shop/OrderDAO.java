@@ -5,6 +5,7 @@ import com.util.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,9 +18,9 @@ public class OrderDAO extends DBConnPool {
         try {
             String query = "INSERT INTO p_order (" +
                     "custom_id, purchaser_name, recipient_name, address, contact" +
-                    ") VALUES (?, ?, ?, ?, ?)";
+                    ") VALUES (?, ?, ?, ?, ?) ";
 
-            psmt = con.prepareStatement(query, psmt.RETURN_GENERATED_KEYS);
+            psmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
             psmt.setInt(1, dto.getCustom_id());
             psmt.setString(2, dto.getPurchaser_name());
             psmt.setString(3, dto.getRecipient_name());
@@ -33,17 +34,20 @@ public class OrderDAO extends DBConnPool {
                         orderId = generatedKeys.getInt(1);
                     }
                 }
+                Logger.info("생성된 주문 ID: " + orderId);
             }
-            // Insert order products
+
             if (orderId > 0) {
                 insertOrderProducts(orderId, dto.getProductList());
+            } else {
+                Logger.error("주문 ID 생성에 실패했습니다.");
             }
         } catch (SQLException e) {
-            Logger.error("insertOrder 메소드 오류 발생");
+            Logger.error("insertOrder 메소드 오류", e);
         }
-
         return orderId;
     }
+
 
     private void insertOrderProducts(int orderId, ArrayList<OrderDTO.ProductSet> productList) {
         for (OrderDTO.ProductSet set : productList) {
