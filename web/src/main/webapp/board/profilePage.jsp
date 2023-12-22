@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../css/profilepagestyle.css"/>
 </head>
 <body>
-
+<div id="wrap">
     <header id="header">
         <h1><img src="../img/profilelogo.png"></h1>
         <nav>
@@ -34,6 +34,6 @@
         <p>Copyright (c) 2023 Re-Coder</p>
         <out_logo><a href="../index.jsp"><img src="../img/profooterlogo.png"></a></out_logo>
     </footer>
-
+</div>
 </body>
 </html>

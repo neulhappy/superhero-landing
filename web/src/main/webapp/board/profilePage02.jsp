@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../css/profilepage02style.css"/>
 </head>
 <body>
-
+<div id="wrap">
     <header id="header">
         <h1><img src="../img/profile02logo.png" alt="프로필로고02"></h1>
         <nav>
@@ -495,6 +495,7 @@
         <p>Copyright (c) 2023 Re-Coder</p>
         <out_logo><a href="../index.jsp"><img src="../img/profooterlogo.png"></a></out_logo>
     </footer>
+</div>
 
     <script>
 
