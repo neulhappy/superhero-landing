@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-@WebServlet("/shop/orderSuccess.do")
+@WebServlet("/shop/order.do")
 public class OrderController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -46,13 +46,14 @@ public class OrderController extends HttpServlet {
             } else {
                 OrderDAO oDao = new OrderDAO();
                 int orderId = oDao.insertOrder(dto);
+                int totalPrice = oDao.totalPrice(orderId);
                 System.out.println("insertQuery작동됨");
 
                 oDao.close();
                 if (orderId != 0) {
                     JSONObject json = new JSONObject();
                     json.put("orderId", orderId);
-
+                    json.put("total", totalPrice);
                     resp.setContentType("application/x-json; charset=utf-8");
                     resp.getWriter().print(json);
 

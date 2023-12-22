@@ -34,16 +34,6 @@
 
 <body>
 <div class="orderPage" >
-    <div class="container bag">
-        <h2 class="text-center">장바구니</h2>
-        <div id="ct" class="card">
-            <!-- displayCart 함수에서 장바구니 목록이 표시됩니다. -->
-        </div>
-        <div class = "text-center fs-2">
-            <p><span id="total"></span></p>
-        </div>
-    </div>
-
     <div class="container mt-5">
         <form id="orderForm" class="row g-3 mx-auto p-2 col-md-6" style="width: 800px;" action="orderSuccess.do"
               method="post">
@@ -80,14 +70,10 @@
         </div>
     </div>
 </div>
-<div class="empty">
-    <button class="btn btn-danger btn-lg align-middle" type="button" onclick="clearCart()">장바구니 비우기</button>
-</div>
 
 
 <footer>
     <jsp:include page="../include/Footer.jsp"/>
-
 </footer>
 
 <script src="../js/order.js"></script>
