@@ -35,7 +35,6 @@ public class MypageController extends HttpServlet {
                 req.getRequestDispatcher("/member/OrderMypage.jsp").forward(req, resp);
             }
 
-
             case "QnA" -> {
                 BoardDAO dao = new BoardDAO();
                 List<BoardDTO> bbs = dao.selectListById("2", String.valueOf(pid));
