@@ -58,6 +58,7 @@
             justify-content: center;
             border-radius: 7px;
             font-size: 0.7em;
+            padding-left: 50px;
         }
 
         .box input,
