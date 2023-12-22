@@ -20,7 +20,7 @@ public class OrderDAO extends DBConnPool {
                     "custom_id, purchaser_name, recipient_name, address, contact" +
                     ") VALUES (?, ?, ?, ?, ?) ";
 
-            psmt = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            psmt = con.prepareStatement(query, new String[]{"id"});
             psmt.setInt(1, dto.getCustom_id());
             psmt.setString(2, dto.getPurchaser_name());
             psmt.setString(3, dto.getRecipient_name());
