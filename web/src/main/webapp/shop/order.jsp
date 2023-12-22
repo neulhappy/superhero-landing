@@ -63,13 +63,9 @@
                 <p id="cartTable"></p>
             </div>
         </form>
+
         <div class="row g-3 mx-auto p-2" style="width: 500px">
-            <button id="submitButton" disabled class="btn btn-danger btn-lg align-middle" onclick="submitForm()">
-                배송 정보 보내기
-            </button>
-        </div>
-        <div class="row g-3 mx-auto p-2" style="width: 500px">
-            <button id="payButton" disabled class="kakao btn btn-primary btn-lg align-middle">
+            <button id="submitButton" disabled class="kakao btn btn-primary btn-lg align-middle">
                 카카오페이 간편 결제하기
             </button>
         </div>

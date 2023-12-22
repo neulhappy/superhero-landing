@@ -23,7 +23,15 @@ const onKakaoPay = async () => {
         }
     });
 }
-kakaoButton.addEventListener("click", onKakaoPay);
+kakaoButton.addEventListener("click", async () => {
+    try{
+        await submitForm();
+        onKakaoPay();
+    }catch (error){
+        console.error(error);
+        alert("주문 처리중 오류발생");
+    }
+});
 
 
 function pay_info(rsp) {
@@ -124,9 +132,7 @@ function validateForm() {
 
 function submitForm() {
     return new Promise((resolve, reject) => {
-
         let formData = $("#orderForm").serializeArray();
-
         let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 
         cart.forEach(function (product, index) {
@@ -142,8 +148,7 @@ function submitForm() {
             success: function (data) {
                 orderId = data.orderId;
                 total = data.total;
-                alert("배송정보를 성공적으로 전송하였습니다.");
-                payButton.disabled = false;
+                resolve();
             },
             error: function (request, status, error) {
                 console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
