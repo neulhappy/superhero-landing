@@ -2,6 +2,7 @@ package com.board;
 
 import com.member.MemberDAO;
 import com.util.Alert;
+import com.util.LookUp;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -16,24 +17,6 @@ import java.util.Optional;
 @WebServlet("/board/write.do")
 public class WriteController extends HttpServlet {
 
-    private int getAuth(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        HttpSession session = req.getSession();
-        String userId = (String) session.getAttribute("userId");
-        String userPw = (String) session.getAttribute("userPw");
-        int pid = 0;
-        if (!(userId == null || userPw == null)) {
-            MemberDAO mDao = new MemberDAO();
-            pid = mDao.login(userId, userPw);
-            mDao.close();
-        }
-        if (pid < 1) {
-            resp.setContentType("text/html;charset=UTF-8");
-            PrintWriter out = resp.getWriter();
-            Alert.alertLocation("로그인 후 이용해 주시기 바랍니다.", "/member/login.do", out);
-        }
-        return pid;
-    }
-
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String board = req.getParameter("board");
@@ -44,7 +27,7 @@ public class WriteController extends HttpServlet {
             PrintWriter out = resp.getWriter();
             Alert.alertBack("잘못된 접근입니다.", out);
         } else {
-            int pid = getAuth(req, resp);
+            int pid = LookUp.getAuth(req, resp);
             req.setAttribute("board", board);
             if (postId == null || postId.isEmpty()) {
                 req.getRequestDispatcher("/board/writePage.jsp").forward(req, resp);
@@ -82,7 +65,7 @@ public class WriteController extends HttpServlet {
             Alert.alertBack("잘못된 접근입니다..", out);
             return;
         }
-        int pid = getAuth(req, resp);
+        int pid = LookUp.getAuth(req, resp);
         switch (action) {
             case "delete" -> {
                 BoardDAO bDao = new BoardDAO();
@@ -102,6 +85,8 @@ public class WriteController extends HttpServlet {
                 BoardDAO bDao = new BoardDAO();
                 BoardDTO dto = new BoardDTO();
                 dto.setTitle(req.getParameter("title"));
+                System.out.println(req.getParameter("title") + "타이틀");
+                System.out.println(req.getParameter("content") + "컨텐츠 내용");
                 dto.setContent(req.getParameter("content"));
                 dto.setAuthor_id(pid);
                 dto.setBoardId(Integer.parseInt(board));
