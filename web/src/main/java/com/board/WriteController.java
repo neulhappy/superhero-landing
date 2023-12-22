@@ -11,18 +11,26 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Optional;
 
 @WebServlet("/board/write.do")
 public class WriteController extends HttpServlet {
 
-    private int getPID(HttpServletRequest req) throws IOException {
+    private int getAuth(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         String userId = (String) session.getAttribute("userId");
         String userPw = (String) session.getAttribute("userPw");
-        MemberDAO mDao = new MemberDAO();
         int pid = 0;
-        pid = mDao.login(userId, userPw);
-        mDao.close();
+        if (!(userId == null || userPw == null)) {
+            MemberDAO mDao = new MemberDAO();
+            pid = mDao.login(userId, userPw);
+            mDao.close();
+        }
+        if (pid < 1) {
+            resp.setContentType("text/html;charset=UTF-8");
+            PrintWriter out = resp.getWriter();
+            Alert.alertLocation("로그인 후 이용해 주시기 바랍니다.", "/member/login.do", out);
+        }
         return pid;
     }
 
@@ -31,23 +39,22 @@ public class WriteController extends HttpServlet {
         String board = req.getParameter("board");
         String postId = req.getParameter("id");
 
-        if (board.isEmpty()) {
+        if (board == null || board.isEmpty()) {
             resp.setContentType("text/html;charset=UTF-8");
             PrintWriter out = resp.getWriter();
             Alert.alertBack("잘못된 접근입니다.", out);
         } else {
-            if (postId.isEmpty()) {
+            int pid = getAuth(req, resp);
+            if (postId == null || postId.isEmpty()) {
                 req.getRequestDispatcher("/board/writePage.jsp").forward(req, resp);
             } else {
-                int pid = getPID(req);
                 if (pid > 0) {
                     BoardDAO dao = new BoardDAO();
                     BoardDTO post = dao.selectView(postId, board);
-
+                    dao.close();
                     if (pid == post.getAuthor_id()) {
                         req.setAttribute("post", post);
                         req.getRequestDispatcher("/board/writePage.jsp").forward(req, resp);
-                        dao.close();
                     } else {
                         resp.setContentType("text/html;charset=UTF-8");
                         PrintWriter out = resp.getWriter();
@@ -62,54 +69,59 @@ public class WriteController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         String board = req.getParameter("board");
-        int postId = Integer.parseInt(req.getParameter("id"));
-
-        int pid = getPID(req);
-
-        if (pid < 1) {
+        int postId = Optional.ofNullable(req.getParameter("id"))
+                .map(Integer::parseInt)
+                .orElse(0);
+        if (action == null || board == null) {
             resp.setContentType("text/html;charset=UTF-8");
             PrintWriter out = resp.getWriter();
-            Alert.alertBack("인증 오류가 발생했습니다.", out);
+            Alert.alertBack("잘못된 접근입니다..", out);
             return;
         }
+        int pid = getAuth(req, resp);
+        switch (action) {
+            case "delete" -> {
+                BoardDAO bDao = new BoardDAO();
+                if (pid == bDao.selectAuthor(postId, board)) {
+                    bDao.deletePost(postId, board);
+                    bDao.close();
+                    req.setAttribute("board", board);
+                    req.getRequestDispatcher("/board/list.do").forward(req, resp);
+                } else {
+                    resp.setContentType("text/html;charset=UTF-8");
+                    PrintWriter out = resp.getWriter();
+                    Alert.alertBack("작성자만 삭제할 수 있습니다.", out);
+                }
+            }
+            case "write", "update" -> {
+                BoardDAO bDao = new BoardDAO();
+                BoardDTO dto = new BoardDTO();
+                dto.setTitle(req.getParameter("title"));
+                dto.setContent(req.getParameter("content"));
+                dto.setAuthor_id(pid);
+                dto.setBoardId(Integer.parseInt(board));
 
-        BoardDAO bDao = new BoardDAO();
-        if (action.equals("delete")) {
-            if (pid == bDao.selectAuthor(postId, board)) {
-                bDao.deletePost(postId, board);
-            } else {
-                resp.setContentType("text/html;charset=UTF-8");
-                PrintWriter out = resp.getWriter();
-                Alert.alertBack("작성자만 삭제할 수 있습니다.", out);
+                if (postId > 0) {
+                    postId = bDao.insertWrite(dto);
+                } else {
+                    dto.setId(postId);
+                    postId = bDao.updateWrite(dto);
+                }
                 bDao.close();
-                return;
+                if (postId > 0) {
+                    req.setAttribute("id", postId);
+                    req.setAttribute("board", board);
+                    req.getRequestDispatcher("/board/view.do").forward(req, resp);
+                } else {
+                    resp.setContentType("text/html;charset=UTF-8");
+                    PrintWriter out = resp.getWriter();
+                    Alert.alertBack("게시글 작성에 실패했습니다.", out);
+                }
             }
-            req.setAttribute("board", board);
-            req.getRequestDispatcher("/board/list.do").forward(req, resp);
-        } else if (action.equals("write") || action.equals("update")) {
-            BoardDTO dto = new BoardDTO();
-            dto.setTitle(req.getParameter("title"));
-            dto.setContent(req.getParameter("content"));
-            dto.setAuthor_id(pid);
-            dto.setBoardId(Integer.parseInt(board));
-
-            if (action.equals("write")) {
-                postId = bDao.insertWrite(dto);
-            } else {
-                dto.setId(postId);
-                postId = bDao.updateWrite(dto);
-            }
-
-            bDao.close();
-
-            if (postId > 0) {
-                req.setAttribute("id", postId);
-                req.setAttribute("board", board);
-                req.getRequestDispatcher("/board/view.do").forward(req, resp);
-            } else {
+            default -> {
                 resp.setContentType("text/html;charset=UTF-8");
                 PrintWriter out = resp.getWriter();
-                Alert.alertBack("게시글 작성에 실패했습니다.", out);
+                Alert.alertBack("잘못된 접근입니다..", out);
             }
         }
     }
