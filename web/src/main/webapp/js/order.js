@@ -5,8 +5,9 @@ let total;
 let orderId;
 const kakaoButton = document.querySelector(".kakao");
 
-const onKakaoPay = async () => {
 
+
+const onKakaoPay = async () => {
     IMP.request_pay({
         pg: "kakaopay.TC0ONETIME",
         pay_method: "card",
@@ -114,83 +115,41 @@ function validateForm() {
         && nameRule(InputPurchaserName.value) === true
         && nameRule(InputRecipientName.value) === true
         && addressRule(InputAddress.value) === true) {
-        submitButton.disabled = false; // 유효성 검사 성공 시 버튼 활성화
+        submitButton.disabled = false; // 유효성 검사 성공 시 버튼 활성화]
     } else {
         submitButton.disabled = true; // 유효성 검사 실패 시 버튼 비활성화
+
     }
 }
 
 function submitForm() {
-    //const form = document.getElementById('orderForm');
-    let formData = $("#orderForm").serializeArray();
+    return new Promise((resolve, reject) => {
 
-    let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
+        let formData = $("#orderForm").serializeArray();
 
-    cart.forEach(function (product, index){
-        formData.push({ name: 'prod_id_' + index, value: product.productId });
-        formData.push({ name: 'quantity_' + index, value: product.quantity });
-    });
+        let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
 
-    $.ajax({
-        type: "post",
-        url: "order.do",
-        data: formData,
-        dataType: 'json',
-        success: function (data) {
-            orderId = data.orderId;
-            total = data.total;
+        cart.forEach(function (product, index) {
+            formData.push({name: 'prod_id_' + index, value: product.productId});
+            formData.push({name: 'quantity_' + index, value: product.quantity});
+        });
 
-        },
-        error: function (request, status, error) {
-            console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+        $.ajax({
+            type: "post",
+            url: "order.do",
+            data: formData,
+            dataType: 'json',
+            success: function (data) {
+                orderId = data.orderId;
+                total = data.total;
+                alert("배송정보를 성공적으로 전송하였습니다.");
+                payButton.disabled = false;
+            },
+            error: function (request, status, error) {
+                console.log("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 
-        }
+            }
+        });
     });
 }
 
-function goPay(){
-    submitForm();
-
-}
-// 장바구니에 담긴 상품들을 표시하는 함수
-// function displayCart() {
-//     let cart = JSON.parse(sessionStorage.getItem('cart')) || [];
-//
-//     // HTML로 장바구니에 담긴 상품들을 만듭니다.
-//     let cartItemsHTML = '<ul>';
-//     let orderList = '';
-//     if (cart.length === 0) {
-//         cartItemsHTML += '<li>장바구니에 상품이 없습니다.</li>';
-//     } else {
-//         // 각 상품마다 3개씩 정보가 들어있으므로, 각각의 정보를 가져와서 표시합니다.
-//         for (let i = 0; i < cart.length; i += 3) {
-//             const productId = cart[i].productId;
-//             const productName = cart[i + 1].productName;
-//             const productPrice = cart[i + 2].productPrice;
-//             cartItemsHTML += `<li><img src="../img/goods/${productId}.jpg" style="width: 150px; height: 150px;">     상품명: ${productName}      가격 : ${productPrice}원</li>`;
-//
-//             products.push(productId);
-//             total += parseInt(productPrice);
-//
-//             orderList += `<input type="number" name="${productId}">`
-//
-//         }
-//     }
-//     document.getElementById('orderList').innerHTML = orderList;
-//     document.getElementById('cartItems').innerHTML = cartItemsHTML;
-//     document.getElementById("total").textContent = `${total}원`;
-// }
-//
-// function clearCart() {
-//     sessionStorage.removeItem('cart'); // 'cart' 세션 삭제
-//     // 여기에 세션 삭제 후의 추가적인 처리를 할 수 있습니다.
-//     // 예: 장바구니 화면을 리로드하여 업데이트하는 등의 작업
-//     total = 0;
-//     displayCart(); // 장바구니 화면 다시 표시
-// }
-
-
-
-
-// 페이지가 로드될 때 장바구니를 표시합니다.
-// window.onload = displayCart;
