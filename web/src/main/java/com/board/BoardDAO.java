@@ -24,17 +24,7 @@ public class BoardDAO extends DBConnPool {
 
             while (rs.next()) {
                 BoardDTO dto = new BoardDTO();
-                dto.setBoardId(Integer.parseInt(boardId));
-                dto.setId(rs.getInt("id"));
-                dto.setTitle(rs.getString("title"));
-                dto.setContent(rs.getString("content"));
-                dto.setAuthor_id(rs.getInt("author_id"));
-                dto.setAuthor_uid(rs.getString("user_id"));
-                dto.setPostdate(getUtilDate(rs.getDate("postdate")));
-                dto.setLastchanged(getUtilDate(rs.getDate("lastchanged")));
-                dto.setVisitcount(rs.getInt("visitcount"));
-                dto.setIs_published(getBoolean(rs.getString("is_published")));
-                dto.setIs_notice(getBoolean(rs.getString("is_notice")));
+                makeWholeDTO(boardId, dto);
 
                 bbs.add(dto);
             }
@@ -45,6 +35,31 @@ public class BoardDAO extends DBConnPool {
         return bbs;
     }
 
+    public List<BoardDTO> selectListById(String boardId, String userId) {
+        List<BoardDTO> bbs = new ArrayList<>();
+        String table = "board" + boardId;
+        String query = "SELECT b.*, m.user_id FROM " +
+                table + " b " +
+                "INNER JOIN custom m ON b.author_id = m.id " +
+                "WHERE b.is_published = 'Y' AND b.author_id = ? " +
+                "ORDER BY b.id DESC";
+        System.out.println(query);
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setString(1, userId);
+            rs = psmt.executeQuery();
+
+            while (rs.next()) {
+                BoardDTO dto = new BoardDTO();
+                makeWholeDTO(boardId, dto);
+                bbs.add(dto);
+            }
+        } catch (SQLException e) {
+            Logger.error("selectList 중 예외 발생", e);
+        }
+
+        return bbs;
+    }
 
     public BoardDTO selectView(String id, String boardId) {
         String table = "board" + boardId;
@@ -61,22 +76,26 @@ public class BoardDAO extends DBConnPool {
             rs = psmt.executeQuery();
 
             if (rs.next()) {
-                dto.setBoardId(Integer.parseInt(boardId));
-                dto.setId(rs.getInt("id"));
-                dto.setTitle(rs.getString("title"));
-                dto.setContent(rs.getString("content"));
-                dto.setAuthor_id(rs.getInt("author_id"));
-                dto.setAuthor_uid(rs.getString("user_id"));
-                dto.setPostdate(getUtilDate(rs.getDate("postdate")));
-                dto.setLastchanged(getUtilDate(rs.getDate("lastchanged")));
-                dto.setVisitcount(rs.getInt("visitcount"));
-                dto.setIs_published(getBoolean(rs.getString("is_published")));
-                dto.setIs_notice(getBoolean(rs.getString("is_notice")));
+                makeWholeDTO(boardId, dto);
             }
         } catch (SQLException e) {
             Logger.error("selectView 중 예외 발생", e);
         }
         return dto;
+    }
+
+    private void makeWholeDTO(String boardId, BoardDTO dto) throws SQLException {
+        dto.setBoardId(Integer.parseInt(boardId));
+        dto.setId(rs.getInt("id"));
+        dto.setTitle(rs.getString("title"));
+        dto.setContent(rs.getString("content"));
+        dto.setAuthor_id(rs.getInt("author_id"));
+        dto.setAuthor_uid(rs.getString("user_id"));
+        dto.setPostdate(getUtilDate(rs.getDate("postdate")));
+        dto.setLastchanged(getUtilDate(rs.getDate("lastchanged")));
+        dto.setVisitcount(rs.getInt("visitcount"));
+        dto.setIs_published(getBoolean(rs.getString("is_published")));
+        dto.setIs_notice(getBoolean(rs.getString("is_notice")));
     }
 
 
