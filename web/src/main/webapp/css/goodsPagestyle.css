@@ -16,5 +16,3 @@ h1 img {width: 500px; transform: translate(720px, -90px); }
 .menu ul li a img {width: 300px; }
 .menu ul li:nth-child(1){transform: translate(600px, -300px);}
 .menu ul li:nth-child(2){transform: translate(750px, -345px);}
-
-#footer{transform: translate(0, 500px); }

@@ -7,11 +7,13 @@
     <script src="../js/shop.js"></script>
 </head>
 <body>
+
+<div id="wrap">
     <header>
         <jsp:include page="goodsPage.jsp"/>
     </header>
 
-
+<main id="main">
     <div class="content">
         <c:forEach var="product" items="${prodList}">
             <dl>
@@ -65,12 +67,18 @@
                 <p>묠니르</p>
                 <p>45,000원</p><input type="button" value="장바구니"></dd>
         </dl>
+
         <div class="basket">
             <a href="/shop/order.jsp"><img src="../img/basket.png" alt="장바구니"></a>
         </div>
     </div>
+    </main>
 
+    <footer id="footer">
+        <jsp:include page="../include/Footer.jsp"/>
+    </footer>
 
+</div>
 
 </body>
 </html>
