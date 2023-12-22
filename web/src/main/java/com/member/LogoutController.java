@@ -19,7 +19,7 @@ public class LogoutController extends HttpServlet {
         if (session != null) {
             session.invalidate(); // 세션이 존재하면 세션을 무효화
         }
-        response.sendRedirect("index.jsp"); // 메인 페이지로 리디렉션
+        response.sendRedirect("/index.do"); // 메인 페이지로 리디렉션
     }
 }
 
