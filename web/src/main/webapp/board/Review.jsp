@@ -76,6 +76,12 @@
                     <!--        writePage로 이동-->
                 </div>
             </div>
+
+            <div class="image">
+                <img src="../img/reviewfooter.jpg">
+                <img src="../img/reviewfooter.jpg">
+                <img src="../img/reviewfooter.jpg">
+            </div>
         </main>
 
         <footer id="footer"><jsp:include page="../include/Footer.jsp"/></footer>
