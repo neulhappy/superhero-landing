@@ -27,7 +27,6 @@ public class OrderDAO extends DBConnPool {
             psmt.setString(3, dto.getRecipient_name());
             psmt.setString(4, dto.getAddress());
             psmt.setString(5, dto.getContact());
-
             int result = psmt.executeUpdate();
             if (result > 0) {
                 try (ResultSet generatedKeys = psmt.getGeneratedKeys()) {
@@ -52,7 +51,8 @@ public class OrderDAO extends DBConnPool {
 
     private void insertOrderProducts(int orderId, ArrayList<OrderDTO.ProductSet> productList) {
         for (OrderDTO.ProductSet set : productList) {
-            String productQuery = "INSERT INTO order_product " +
+            String productQuery = "INSERT INTO " +
+                    "order_product " +
                     "(order_id, prod_id, quantity)" +
                     " VALUES (?, ?, ?)";
             try {
@@ -169,7 +169,7 @@ public class OrderDAO extends DBConnPool {
             psmt.setString(2, id);
             psmt.executeUpdate();
         } catch (SQLException e) {
-            Logger.error("updateStatus 중 에러 발생", e);
+            Logger.error("updatePaydate 중 에러 발생", e);
         }
     }
 
@@ -206,7 +206,7 @@ public class OrderDAO extends DBConnPool {
                 }
 
             } catch (SQLException e) {
-                Logger.error("insertOrderProduct 중 메소드 오류 발생");
+                Logger.error("totalPrice 실행중 메소드 오류 발생");
             }
         return totalPrice;
     }
