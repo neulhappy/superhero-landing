@@ -137,6 +137,9 @@ public class BoardDAO extends DBConnPool {
             psmt.setInt(4, dto.getId());
             result = psmt.executeUpdate();
 
+            if (result > 0) {
+                return dto.getId();
+            }
         } catch (SQLException e) {
             Logger.error("updateWrite 중 에러 발생", e);
         }
