@@ -18,13 +18,15 @@ function addCart(productId, productName, productPrice) {
     sessionStorage.setItem('cart', JSON.stringify(cart));
 }
 
+
 function renderCartTable() {
     const cartTable = document.getElementById('cartTable');
     if (!cartTable) {
-        return;
+        checkAndRenderCart(null)
     }
     const cartJson = sessionStorage.getItem('cart');
     const cart = JSON.parse(cartJson) || [];
+    checkAndRenderCart(cart)
     cartTable.innerHTML = '';
 
     const thead = document.createElement('thead');
@@ -61,6 +63,9 @@ function renderCartTable() {
         quantInput.type = 'number';
         quantInput.name = 'quantity_' + index;
         quantInput.value = product.quantity;
+        quantInput.addEventListener('input', function () {
+            updateQuantity(index, parseInt(quantInput.value, 10));
+        });
         cell2.appendChild(quantInput);
         row.appendChild(cell2);
 
@@ -77,6 +82,24 @@ function renderCartTable() {
     });
 
     cartTable.appendChild(tbody);
+}
+
+function checkAndRenderCart(cart) {
+    if (cart === null || cart.length === 0) {
+        alert('장바구니가 비었습니다.');
+        window.history.back();
+        return false;
+    }
+    return true;
+}
+
+function updateQuantity(index, newQuantity) {
+    const cartJson = sessionStorage.getItem('cart');
+    let cart = JSON.parse(cartJson) || [];
+
+    cart[index].quantity = newQuantity;
+
+    updateSessionStorage(cart);
 }
 
 function deleteProduct(index) {

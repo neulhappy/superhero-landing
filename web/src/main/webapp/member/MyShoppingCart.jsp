@@ -3,7 +3,6 @@
 
 <html>
 <head>
-    <script type="text/javascript" src="<c:url value='/js/shop.js'/>"></script>
 
     <title>회원정보</title>
     <style>
@@ -72,8 +71,9 @@
                 <li><a href="<c:url value='/member/mypage.do?action=Shopping'/>">장바구니</a></li>
             </ul>
         </div>
-        <table id="cartTable"></table>
+        <p id="cartTable"></p>
 
     </div>
+    <script src="../js/shop.js"></script>
 </body>
 </html>

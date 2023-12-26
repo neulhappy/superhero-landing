@@ -43,7 +43,6 @@ public class OrderController extends HttpServlet {
             dto.setAddress(req.getParameter("address"));
             dto.setContact(req.getParameter("contact"));
             int productsLength = dto.setProductListByRequest(req);
-            //TODO 철홍 : 상품이 없을때는 장바구니 페이지로 넘어갈수 없도록 하기
             if (productsLength <= 0) {
                 PrintWriter out = resp.getWriter();
                 Alert.alertBack("상품이 없습니다.", out);
