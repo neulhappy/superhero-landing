@@ -81,7 +81,7 @@
     <form id="joinform" class="box" action="join.do" method="post" onsubmit="return validateForm(this);">
         <div id="idCheckResult"></div>
         <input type="text" onkeyup="checkId()" placeholder="ID" name="id" id="id" minlength="4" maxlength="10" required>
-        <input type="email" placeholder="Email" onkeyup="checkEm()" name="email" id=email/>
+        <input type="email" placeholder="Email" onkeyup="checkEm()" name="email" id="email"/>
         <div id="emCheckResult"></div>
         <input type="password" onkeyup="checkPw()" placeholder="Password" name="pw" id="pw" minlength="4" maxlength="10"
                required/>
@@ -126,7 +126,7 @@
 
         // 비밀번호 유효성 검사
         function joinPw(password) {
-            return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{4,}$/.test(password);
+            return /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z])(?=.*[!@#$%^&*()\-_=+{};:,<.>]).{4,}$/.test(password);
         }
 
         // 비밀번호 유효성 검사 및 결과 표시
