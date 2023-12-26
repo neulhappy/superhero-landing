@@ -45,10 +45,18 @@ public class LoginController extends HttpServlet {
                     req.getRequestDispatcher("/member/MyInformation.jsp").forward(req, resp);
                 }
             }
-        } else {
+        } else if (pid == 0 || pid == -1) {
+            // 아이디 또는 비밀번호가 틀림
+            req.setAttribute("loginResult", "fail");
+            Alert.alertLocation("아이디 또는 비밀번호가 유효하지 않습니다.", "/member/Login.jsp", out);
+        } else if (pid == -2) {
+            // 탈퇴한 회원
+            req.setAttribute("loginResult", "fail");
+            Alert.alertLocation("탈퇴한 회원입니다.", "/member/Login.jsp", out);
+        } else if (pid == -3) {
             // 로그인 실패
             req.setAttribute("loginResult", "fail");
-            Alert.alertLocation("로그인에 실패하였습니다.", "/member/Login.jsp", out);
+            Alert.alertLocation("로그인 중 문제가 발생했습니다. 동일한 오류가 계속될 경우 관리자에게 문의 해 주세요.", "/member/Login.jsp", out);
         }
     }
 }
