@@ -60,7 +60,6 @@ public class OrderController extends HttpServlet {
                     resp.setContentType("application/x-json; charset=utf-8");
                     resp.getWriter().print(json);
 
-
                 } else {
                     //order 생성 실패
                 }

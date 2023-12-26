@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -93,34 +94,44 @@
             <li>주문내역조회</li>
         </ul>
         <table>
-            <tr>
-                <th>주문번호[상품번호]</th>
-                <th>상품명</th>
-                <th>수량</th>
-                <th>주문일자</th>
-                <th>처리상태</th>
-            </tr>
-            <tr>
-                <td>123456</td>
-                <td>아이언맨 포토카드</td>
-                <td>5</td>
-                <td>2023-12-19</td>
-                <td>상품 준비중</td>
-            </tr>
-            <tr>
-                <td>123156</td>
-                <td>윈터솔저 포토카드</td>
-                <td>2</td>
-                <td>2023-12-19</td>
-                <td>상품 준비중</td>
-            </tr>
-            <tr>
-                <td>122156</td>
-                <td>닥터스트레인지 피규어</td>
-                <td>3</td>
-                <td>2023-12-19</td>
-                <td>상품 준비중</td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>주문 번호</th>
+                    <th>상품 정보</th>
+                    <th>주문 일자</th>
+                    <th>주문 상태</th>
+                </tr>
+            </thead>
+            <c:choose>
+                <c:when test="${not empty orderList}">
+                    <tbody>
+                        <c:forEach items="${orderList}" var="order" varStatus="loop">
+                            <tr>
+                                <td>${order.id}</td>
+                                <td>${order.productList[0]} 등 ${order.productList.length} 상품</td>
+                                <td><fmt:formatDate value="${order.order_date}" pattern="yyyy-MM-dd"/></td>
+                                <td>
+                                    <c:choose>
+                                        <c:when test="${order.status == 1}">결제 대기중</c:when>
+                                        <c:when test="${order.status == 2}">결제 완료</c:when>
+                                        <c:when test="${order.status == 3}">배송 준비중</c:when>
+                                        <c:when test="${order.status == 4}">배송중</c:when>
+                                        <c:when test="${order.status == 5}">배송 완료</c:when>
+                                        <c:otherwise>오류 발생</c:otherwise>
+                                    </c:choose>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </c:when>
+                <c:otherwise>
+                    <tbody>
+                        <tr>
+                            <td colspan="4">주문하신 내역이 없습니다.</td>
+                        </tr>
+                    </tbody>
+                </c:otherwise>
+            </c:choose>
         </table>
     </div>
 </div>

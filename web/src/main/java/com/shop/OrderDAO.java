@@ -6,10 +6,8 @@ import com.util.Logger;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class OrderDAO extends DBConnPool {
 
@@ -80,7 +78,7 @@ public class OrderDAO extends DBConnPool {
 
             while (rs.next()) {
                 OrderDTO dto = new OrderDTO();
-                makeWholeDTO(userId, dto);
+                makeWholeDTO(dto);
                 orderList.add(dto);
             }
         } catch (SQLException e) {
@@ -90,9 +88,10 @@ public class OrderDAO extends DBConnPool {
         return orderList;
     }
 
-    private void makeWholeDTO(String userId, OrderDTO dto) throws SQLException {
+    private void makeWholeDTO(OrderDTO dto) throws SQLException {
         dto.setId(rs.getInt("ID"));
-        dto.setCustom_id(rs.getInt("CUSTOM_ID"));
+        int userId = rs.getInt("CUSTOM_ID");
+        dto.setCustom_id(userId);
         dto.setStatus(rs.getInt("STATUS"));
         dto.setPurchaser_name(rs.getString("PURCHASER_NAME"));
         dto.setRecipient_name(rs.getString("RECIPIENT_NAME"));
@@ -100,7 +99,7 @@ public class OrderDAO extends DBConnPool {
         dto.setContact(rs.getString("CONTACT"));
         dto.setOrder_date(rs.getDate("ORDER_DATE"));
         dto.setInvoice(rs.getString("INVOICE"));
-        dto.setProductList(selectOrderProductLists(Integer.parseInt(userId)));
+        dto.setProductList(selectOrderProductLists(userId));
     }
 
 
@@ -113,7 +112,7 @@ public class OrderDAO extends DBConnPool {
             psmt.setString(1, id);
             rs = psmt.executeQuery();
             if (rs.next()) {
-                makeWholeDTO(id, dto);
+                makeWholeDTO(dto);
             }
         } catch (SQLException e) {
             Logger.error("selectView 중 예외 발생", e);
@@ -188,25 +187,25 @@ public class OrderDAO extends DBConnPool {
 
     public int totalPrice(int orderId) {
         int totalPrice = 0;
-            String query = "SELECT op.QUANTITY, p.PRICE"
-                            +" FROM ORDER_PRODUCT op"
-                            +" INNER JOIN PRODUCT p ON op.PROD_ID = p.ID"
-                            +" WHERE ORDER_ID = ?";
+        String query = "SELECT op.QUANTITY, p.PRICE"
+                + " FROM ORDER_PRODUCT op"
+                + " INNER JOIN PRODUCT p ON op.PROD_ID = p.ID"
+                + " WHERE ORDER_ID = ?";
 
-            try {
-                psmt = con.prepareStatement(query);
-                psmt.setInt(1, orderId);
-                rs = psmt.executeQuery();
+        try {
+            psmt = con.prepareStatement(query);
+            psmt.setInt(1, orderId);
+            rs = psmt.executeQuery();
 
-                while (rs.next()){
-                    int quantity = rs.getInt("quantity");
-                    int price = rs.getInt("price");
-                    totalPrice += (quantity*price);
-                }
-
-            } catch (SQLException e) {
-                Logger.error("totalPrice 실행중 메소드 오류 발생");
+            while (rs.next()) {
+                int quantity = rs.getInt("quantity");
+                int price = rs.getInt("price");
+                totalPrice += (quantity * price);
             }
+
+        } catch (SQLException e) {
+            Logger.error("totalPrice 실행중 메소드 오류 발생");
+        }
         return totalPrice;
     }
 }

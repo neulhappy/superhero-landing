@@ -11,10 +11,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import javax.swing.*;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,8 +48,10 @@ public class MypageController extends HttpServlet {
                 req.setAttribute("bbs", bbs);
                 req.getRequestDispatcher("/member/MyReview.jsp").forward(req, resp);
             }
-
-            case "Shopping" -> req.getRequestDispatcher("/member/MyShoppingCart.jsp").forward(req, resp);
+            case "Shopping" -> {
+                HttpSession session = req.getSession();
+                req.getRequestDispatcher("/member/MyShoppingCart.jsp").forward(req, resp);
+            }
 
             default -> req.getRequestDispatcher("/member/MyPage.jsp").forward(req, resp);
         }

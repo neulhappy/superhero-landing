@@ -59,18 +59,22 @@
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
+                        <c:choose>
+                        <c:when test="${not empty bbs}">
+                    <tbody>
                         <c:forEach items="${bbs}" var="post" varStatus="loop">
                             <tr>
-                                <th scope="row">${loop.index + 1}</th>
-                                <td>
-                                    <a href="<c:url value='/board/view.do?board=${post.boardId}&id=${post.id}'/>"
-                                       style="text-decoration: none; color: black">${post.title}</a>
-                                </td>
+                                <td>${loop.index + 1}</td>
+                                <td><a href="<c:url value='/board/view.do?board=${post.boardId}&id=${post.id}'/>">${post.title}</a></td>
                                 <td>${post.author_uid}</td>
-                                <td><fmt:formatDate value="${post.postdate}" pattern="yyyy-MM-dd"/>
-                                </td>
+                                <td><fmt:formatDate value="${post.postdate}" pattern="yyyy-MM-dd"/></td>
                             </tr>
                         </c:forEach>
+                        </c:when>
+                        <c:otherwise>
+                            <td>후기 게시판에 글이 없습니다.</td>
+                        </c:otherwise>
+                        </c:choose>
                     </tbody>
                 </table>
             </div>

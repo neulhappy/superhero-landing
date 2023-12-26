@@ -33,19 +33,25 @@ public class MemberDAO extends DBConnPool {
             psmt = con.prepareStatement(query);
             psmt.setString(1, user_id);
             rs = psmt.executeQuery();
-
+            int id = 0;
+            String DBHashedPw = "";
+            boolean quit = true;
             if (rs.next()) {
-                int id = rs.getInt("id");
-                String DBHashedPw = rs.getString("password");
-                boolean quit = rs.getBoolean("quit");
-                if (DBHashedPw.equals(hashedPw) && !quit) {
-                    return id; //내부id를 반환
-                } else return -1; //비밀번호 틀림
+                id = rs.getInt("id");
+                DBHashedPw = rs.getString("password");
+                quit = rs.getBoolean("quit");
             }
+            if (id == 0)
+                return 0; // 회원 없음
+            if (quit)
+                return -2; // 탈퇴한 회원
+            if (DBHashedPw.equals(hashedPw)) {
+                return id; //내부id를 반환
+            } else return -1; //비밀번호 틀림
         } catch (SQLException e) {
             Logger.error("Login 중 에러 발생", e);
         }
-        return -1; // 처리 실패
+        return -3; // 처리 실패
     }
 
     public boolean isIdAvailable(String id) {

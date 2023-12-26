@@ -56,10 +56,12 @@ public class WriteController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         String board = req.getParameter("board");
+        System.out.println(req.getParameter("id"));
         int postId = Optional.ofNullable(req.getParameter("id"))
                 .filter(s -> !s.isEmpty())
                 .map(Integer::parseInt)
                 .orElse(0);
+        System.out.println(postId);
         if (action == null || board == null) {
             resp.setContentType("text/html;charset=UTF-8");
             PrintWriter out = resp.getWriter();
@@ -71,27 +73,30 @@ public class WriteController extends HttpServlet {
             case "delete" -> {
                 BoardDAO bDao = new BoardDAO();
                 if (pid == bDao.selectAuthor(postId, board)) {
-                    bDao.deletePost(postId, board);
+                    int result = bDao.deletePost(postId, board);
                     bDao.close();
-                    req.setAttribute("board", board);
-                    resp.sendRedirect(req.getContextPath() + "/board/list.do?board=" + board);
+                    if (result > 0) {
+                        req.setAttribute("board", board);
+                        resp.sendRedirect(req.getContextPath() + "/board/list.do?board=" + board);
+                    } else {
+                        resp.setContentType("text/html;charset=UTF-8");
+                        PrintWriter out = resp.getWriter();
+                        Alert.alertBack("삭제할 게시글이 없습니다.", out);
+                    }
                 } else {
                     resp.setContentType("text/html;charset=UTF-8");
                     PrintWriter out = resp.getWriter();
                     Alert.alertBack("작성자만 삭제할 수 있습니다.", out);
                 }
-                //todo: 삭제할 글이 db에 없을 떄 오류
+
             }
             case "write" -> {
                 BoardDAO bDao = new BoardDAO();
                 BoardDTO dto = new BoardDTO();
                 dto.setTitle(req.getParameter("title"));
-                System.out.println(req.getParameter("title") + "타이틀");
-                System.out.println(req.getParameter("content") + "컨텐츠 내용");
                 dto.setContent(req.getParameter("content"));
                 dto.setAuthor_id(pid);
                 dto.setBoardId(Integer.parseInt(board));
-
                 if (postId == 0) {
                     postId = bDao.insertWrite(dto);
                 } else if (postId > 0) {
