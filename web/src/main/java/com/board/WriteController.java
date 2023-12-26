@@ -59,7 +59,7 @@ public class WriteController extends HttpServlet {
                 .map(Integer::parseInt)
                 .orElse(0);
 
-        //TODO 철홍 : 글작성시 이쪽으로 빠지는듯 합니다.
+        //TODO 철홍 : board => null 오류
         if (action == null || board == null) {
             resp.setContentType("text/html;charset=UTF-8");
             PrintWriter out = resp.getWriter();
