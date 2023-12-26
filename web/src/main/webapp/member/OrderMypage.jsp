@@ -107,23 +107,30 @@
             <c:choose>
                 <c:when test="${not empty orderList}">
                     <tbody>
-                        <c:forEach items="${orderList}" var="order" varStatus="loop">
-                            <tr>
-                                <td>${order.id}</td>
-                                <td>${order.getProductName(0)} 등, ${order.getProductListLength()}개 상품</td>
-                                <td><fmt:formatDate value="${order.order_date}" pattern="yyyy-MM-dd"/></td>
-                                <td>
-                                    <c:choose>
-                                        <c:when test="${order.status == 1}">결제 대기중</c:when>
-                                        <c:when test="${order.status == 2}">결제 완료</c:when>
-                                        <c:when test="${order.status == 3}">배송 준비중</c:when>
-                                        <c:when test="${order.status == 4}">배송중</c:when>
-                                        <c:when test="${order.status == 5}">배송 완료</c:when>
-                                        <c:otherwise>오류 발생</c:otherwise>
-                                    </c:choose>
-                                </td>
-                            </tr>
-                        </c:forEach>
+                    <c:forEach items="${orderList}" var="order" varStatus="loop">
+                        <tr>
+                            <td>${order.id}</td>
+                            <c:choose>
+                                    <c:when test="${order.getProductListLength() > 0}">
+                                        <td>${order.getProductName(0)} 등, ${order.getProductListLength()}개 상품</td>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <td>상품 목록이 없습니다.</td>
+                                    </c:otherwise>
+                            </c:choose>
+                            <td><fmt:formatDate value="${order.order_date}" pattern="yyyy-MM-dd"/></td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${order.status == 1}">결제 대기중</c:when>
+                                    <c:when test="${order.status == 2}">결제 완료</c:when>
+                                    <c:when test="${order.status == 3}">배송 준비중</c:when>
+                                    <c:when test="${order.status == 4}">배송중</c:when>
+                                    <c:when test="${order.status == 5}">배송 완료</c:when>
+                                    <c:otherwise>오류 발생</c:otherwise>
+                                </c:choose>
+                            </td>
+                        </tr>
+                    </c:forEach>
                     </tbody>
                 </c:when>
                 <c:otherwise>
