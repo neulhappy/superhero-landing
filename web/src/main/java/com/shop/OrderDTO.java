@@ -111,6 +111,10 @@ public class OrderDTO {
         return productList.get(num).quantity;
     }
 
+    public String getProductName(int num) {
+        return productList.get(num).getProd_name();
+    }
+
     public int setProductListByRequest(HttpServletRequest req) {
         ArrayList<ProductSet> productList = new ArrayList<>();
         int i = 0;
@@ -128,6 +132,7 @@ public class OrderDTO {
     static class ProductSet {
         private int prod_id;
         private int quantity;
+        public String prod_name;
 
         public ProductSet(int prodId, int quantity) {
             this.prod_id = prodId;
@@ -135,6 +140,14 @@ public class OrderDTO {
         }
 
         public ProductSet() {
+        }
+
+        public String getProd_name() {
+            return prod_name;
+        }
+
+        public void setProd_name(String prod_name) {
+            this.prod_name = prod_name;
         }
 
         public int getProd_id() {
