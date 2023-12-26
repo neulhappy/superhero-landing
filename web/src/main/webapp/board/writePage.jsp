@@ -26,7 +26,7 @@
             <form name="writeFrm" method="post" action="<c:url value="/board/write.do?action=write"/>"
                   onsubmit="return validateForm(this)">
                 <input type="hidden" name="id" value="${post.id}">
-                <input type="hidden" name="board" value="${post.boardId}">
+                <input type="hidden" name="board" value="${board}">
                 <input type="hidden" name="content" value="">
                 <table border="1" style="width: 100%; min-height: 50px;">
                     <tr>
