@@ -535,7 +535,7 @@
 
         // Modal 영역 밖을 클릭하면 Modal을 닫습니다.
         window.onclick = function (event) {
-            if (event.target.className == "modal") {
+            if (event.target.className === "modalWrap") {
                 event.target.style.display = "none";
             }
         };

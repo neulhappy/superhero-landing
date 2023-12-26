@@ -20,13 +20,13 @@
 
     <header id="header">
     <h1>게시글 작성</h1>
-        <input type="hidden" name="id" value="${id}">
-        <input type="hidden" name="board" value="${board}">
-        <input type="hidden" name="content" value="">
     </header>
 
     <main id="main">
         <form name="writeFrm" method="post" action="<c:url value="/board/write.do?action=write"/>" onsubmit="return validateForm(this)">
+            <input type="hidden" name="id" value="${id}">
+            <input type="hidden" name="board" value="${board}">
+            <input type="hidden" name="content" value="">
             <table border="1" style="width: 100%; min-height: 50px;">
                 <tr>
                     <td style="text-align: center; font-size: 1.6rem; font-weight: 700; border-bottom: 1px solid black">제목</td>
