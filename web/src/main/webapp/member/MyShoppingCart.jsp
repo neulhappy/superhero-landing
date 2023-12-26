@@ -75,5 +75,8 @@
 
     </div>
     <script src="../js/shop.js"></script>
+    <script type="text/javascript">
+        renderCartTable();
+    </script>
 </body>
 </html>

@@ -124,4 +124,3 @@ function clearCart() {
 }
 
 
-renderCartTable();
