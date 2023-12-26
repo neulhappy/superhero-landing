@@ -18,7 +18,7 @@
             width: 1200px;
             display: flex;
             justify-content: space-between;
-            width: calc((100% - 100px) / 2);
+            width: 900px;
         }
 
         h1 {

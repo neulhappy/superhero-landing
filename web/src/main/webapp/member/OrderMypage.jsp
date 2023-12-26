@@ -110,7 +110,7 @@
                         <c:forEach items="${orderList}" var="order" varStatus="loop">
                             <tr>
                                 <td>${order.id}</td>
-                                <td>${order.productList[0]} 등 ${order.productList.length} 상품</td>
+                                <td>${order.getProductName(0)} 등, ${order.getProductListLength()}개 상품</td>
                                 <td><fmt:formatDate value="${order.order_date}" pattern="yyyy-MM-dd"/></td>
                                 <td>
                                     <c:choose>
