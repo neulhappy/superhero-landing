@@ -19,7 +19,7 @@
                 <dt><img src="../img/goods/${product.id}.jpg" alt="제품 이미지"></dt>
                 <dd>
                     <p>${product.name}</p>
-                    <p>${product.price}</p>
+                    <p>${product.price}원</p>
                     <input type="button" value="장바구니"
                            onclick="addCart(${product.id},'${product.name}', ${product.price})">
                 </dd>
