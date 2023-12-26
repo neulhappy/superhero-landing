@@ -7,6 +7,11 @@ body { overflow-x: hidden; font-family: 'Noto Sans KR', sans-serif; font-size: 1
 #wrap {width: 100%; background: black;}
 *{margin: 0; padding: 0;}
 
+.max-height-container {
+    max-height: 1450px; /* Adjust as needed */
+    overflow: hidden; /* Optional: to hide content that exceeds the height */
+}
+
 ul{list-style: none;}
 
 #header {max-height: 360px; background: white}

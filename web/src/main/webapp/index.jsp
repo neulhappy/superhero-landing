@@ -8,7 +8,7 @@
     <link rel="stylesheet" type="text/css" href="css/mainpagestyle.css"/>
 </head>
 <body>
-    <div id="wrap">
+    <div id="wrap" class="max-height-container">
         <header id="header">
             <div class="image">
                 <ul class="img1">
