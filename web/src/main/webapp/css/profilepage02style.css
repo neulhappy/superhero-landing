@@ -63,6 +63,13 @@ header{height: 300px;}
       display: none;
   }
 
+/*모달 본문*/
+.modalContent{
+    width: 604.4px;
+    margin: 0 auto;
+}
+
+
 /*모달 팝업창*/
   .modalBody {
       width: 500px;
