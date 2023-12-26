@@ -122,7 +122,6 @@ public class OrderDAO extends DBConnPool {
 
     public ArrayList<OrderDTO.ProductSet> selectOrderProductLists(int orderId) {
         ArrayList<OrderDTO.ProductSet> orderProducts = new ArrayList<>();
-
         String query = "SELECT op.*, p.name as prod_name " +
                 "FROM order_product op " +
                 "INNER JOIN product p ON op.prod_id = p.id " +
@@ -132,19 +131,18 @@ public class OrderDAO extends DBConnPool {
             psmt = con.prepareStatement(query);
             psmt.setInt(1, orderId);
 
-            rs = psmt.executeQuery();
-
-            while (rs.next()) {
+            ResultSet LocalRs = psmt.executeQuery();
+            while (LocalRs.next()) {
                 OrderDTO.ProductSet dto = new OrderDTO.ProductSet();
                 dto.setProd_id(rs.getInt("prod_id"));
                 dto.setQuantity(rs.getInt("quantity"));
                 dto.setProd_name(rs.getString("prod_name"));
                 orderProducts.add(dto);
             }
+            LocalRs.close();
         } catch (SQLException e) {
             Logger.error("selectOrderProductLists 중 예외 발생", e);
         }
-
         return orderProducts;
     }
 
