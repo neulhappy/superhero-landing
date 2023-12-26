@@ -16,7 +16,6 @@ public class HeroManager {
     }
 
 
-    //TODO 히어로별 스테이터스 조정하기
     private void init() {
         heros.put(HeroName.DOCTOR_STRANGE, new HeroInfo("닥터 스트레인지",
                 "스티븐 빈센트 스트레인지",
