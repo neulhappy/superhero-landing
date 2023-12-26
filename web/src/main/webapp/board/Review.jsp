@@ -79,7 +79,7 @@
             <a href="<c:url value='/board/write.do'><c:param name='board' value='1' /><c:param name="action" value="write"/> </c:url>"><img
                     src="../img/pen.png" alt="펜"></a>
             <!--        writePage로 이동-->
-        </div>
+            </div>
 
             <div class="image">
                 <img src="../img/reviewfooter.jpg" alt="게시판 하단 이미지">
