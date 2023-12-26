@@ -89,6 +89,10 @@
         <button name="submit">Sign Up</button>
     </form>
 
+    <footer>
+        <jsp:include page="../include/Footer.jsp"/>
+    </footer>
+
     <script type="text/javascript">
         const elInputId = document.querySelector('#id');
         const elInputPw = document.querySelector('#pw');

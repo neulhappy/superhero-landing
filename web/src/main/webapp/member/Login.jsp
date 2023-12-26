@@ -98,6 +98,11 @@
             <i class="material-icons">Sign Up</i>
         </div></a>
     </form>
+
+    <footer>
+        <jsp:include page="../include/Footer.jsp"/>
+    </footer>
+
     <script>
         const inpId = document.querySelector('#id');
         const inpPw = document.querySelector('#pw');
