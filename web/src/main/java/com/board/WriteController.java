@@ -59,6 +59,7 @@ public class WriteController extends HttpServlet {
                 .map(Integer::parseInt)
                 .orElse(0);
 
+        //TODO 철홍 : 글작성시 이쪽으로 빠지는듯 합니다.
         if (action == null || board == null) {
             resp.setContentType("text/html;charset=UTF-8");
             PrintWriter out = resp.getWriter();
@@ -109,7 +110,7 @@ public class WriteController extends HttpServlet {
             default -> {
                 resp.setContentType("text/html;charset=UTF-8");
                 PrintWriter out = resp.getWriter();
-                Alert.alertBack("잘못된 접근입니다..", out);
+                Alert.alertBack("잘못된 접근입니다.", out);
             }
         }
     }
