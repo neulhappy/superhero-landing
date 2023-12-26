@@ -41,7 +41,7 @@
                     </tr>
                     <tr>
                         <td style="text-align: center; font-size: 1.4rem; font-weight: 400">작성일</td>
-                        <td style="border: 0.5px solid black" name="postdate" style="width: 90%; height: 40px;">
+                        <td style="border: 0.5px solid black; width: 90%; height: 40px;" name="postdate">
                             <%
                                 Date date = new Date();
                                 SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
@@ -70,7 +70,7 @@
                 height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
                 initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
                 previewStyle: 'vertical',                // 마크다운 프리뷰 스타일 (tab || vertical)
-                initialValue: ${post.content}
+                initialValue: '${post.content}'
             });
         </script>
 
