@@ -28,7 +28,7 @@
             <c:forEach items="${bbs}" var="post" varStatus="loop">
                 <tr>
                     <td>${loop.index + 1}</td>
-                    <td><a href="<c:url value='/board/view.do?board=${post.boardId}&id=${post.id}'/>">${post.title}</a></td>
+                    <td><a href="<c:url value='/board/view.do?board=${post.boardId}&id=${post.id}'/>" style="text-decoration: none; color: black">${post.title}</a></td>
                     <td>${post.author_uid}</td>
                     <td><fmt:formatDate value="${post.postdate}" pattern="yyyy-MM-dd"/></td>
                 </tr>

@@ -4,8 +4,7 @@
 
 /* 공통사항 */
 body {overflow-x: hidden; font-family: 'Noto Sans KR', sans-serif; font-size: 1.6rem; line-height: 1.6; color: #000; }
-#wrap {width: 100%; background: rgba(160, 25, 238, 0.6)
-}
+#wrap {width: 100%; background: rgba(160, 25, 238, 0.6); }
 *{margin: 0; padding: 0;}
 
 #header {max-height: 400px; background: white}
@@ -57,8 +56,8 @@ h1 a img {width: 400px; height: 400px;}
 .write_btn img {width: 200px; }
 
 .image {display: flex; transform: translate(-400px,100px); animation: slide 6s ;
-    animation-iteration-count: infinite;}
-.image img {width: 500px}
+    animation-iteration-count: infinite; }
+.image img {width: 500px; }
 
 @keyframes slide {
     0% { transform: translate(-100%,100%) }
@@ -68,4 +67,4 @@ h1 a img {width: 400px; height: 400px;}
     100% { transform: translate(100%,100%) ; }
 }
 
-#footer {background: white}
+#footer {background: white; transform: translate(0, 91px)}

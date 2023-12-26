@@ -12,13 +12,13 @@
             list-style: none;
         }
         body {
-            width: 1200px;
             font-family: 'Noto Sans KR', sans-serif;
             font-size: 1.3em;
             line-height: 1.6;
         }
 
         .mypage {
+            width: 1200px;
             display: flex;
             justify-content: space-between;
         }
@@ -73,6 +73,8 @@
         span {
             color: rgb(128, 128, 128);
         }
+
+        footer {transform: translate(0, 50px)}
     </style>
 </head>
 <body>
@@ -135,5 +137,9 @@
         </table>
     </div>
 </div>
+
+<footer>
+    <jsp:include page="../include/Footer.jsp"/>
+</footer>
 </body>
 </html>

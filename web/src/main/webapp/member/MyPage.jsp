@@ -7,13 +7,14 @@
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
         body {
-            width: 1200px;
+
             font-family: 'Noto Sans KR', sans-serif;
             font-size: 1.3em;
             line-height: 1.6;
         }
 
         .mypage {
+            width: 1200px;
             display: flex;
             justify-content: space-between;
             width: calc((100% - 100px) / 2);
@@ -84,12 +85,16 @@
             padding-left: 20px;
             font-size: 1rem;
         }
+
+        footer {transform: translate(0, 50px)}
     </style>
 </head>
 <body>
+<div id="wrap">
     <h1>
         <a href="<c:url value='/index.do'/>">Super Hero Story</a>
     </h1>
+
     <div class="mypage">
         <div class="nav">
             <ul>
@@ -110,6 +115,12 @@
             </form>
         </div>
     </div>
+
+    <footer>
+        <jsp:include page="../include/Footer.jsp"/>
+    </footer>
+
+</div>
     <script>
         async function sha256(str) {
             const buffer = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));

@@ -29,6 +29,8 @@
             list-style: none;
         }
 
+        footer {transform: translate(0, 50px)}
+
 
     </style>
 </head>

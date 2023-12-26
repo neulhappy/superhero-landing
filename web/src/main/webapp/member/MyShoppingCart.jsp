@@ -9,13 +9,13 @@
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
         body {
-            width: 1200px;
             font-family: 'Noto Sans KR', sans-serif;
             font-size: 1.3em;
             line-height: 1.6;
         }
 
         .mypage {
+            width: 1200px;
             display: flex;
             justify-content: space-between;
             width: calc((100% - 100px) / 2);
@@ -55,6 +55,8 @@
         span {
             color: rgb(128, 128, 128);
         }
+
+        footer{transform: translate(0, 50px)}
     </style>
 </head>
 <body>
@@ -74,6 +76,11 @@
         <p id="cartTable"></p>
 
     </div>
+
+    <footer>
+        <jsp:include page="../include/Footer.jsp"/>
+    </footer>
+
     <script src="../js/shop.js"></script>
     <script type="text/javascript">
         renderCartTable();
