@@ -11,6 +11,7 @@
             text-decoration: none;
             list-style: none;
         }
+
         body {
             width: 1200px;
             font-family: 'Noto Sans KR', sans-serif;
@@ -76,64 +77,71 @@
     </style>
 </head>
 <body>
-<h1>
-    <a href="<c:url value='/index.do'/>">Super Hero Story</a>
-</h1>
-<div class="mypage">
-    <div class="nav">
-        <ul>
-            <li><a href="<c:url value='/member/mypage.do'/>">회원정보</a></li>
-            <li><a href="<c:url value='/member/mypage.do?action=Order'/>">주문내역</a></li>
-            <li><a href="<c:url value='/member/mypage.do?action=QnA'/>">나의 문의내역</a></li>
-            <li><a href="<c:url value='/member/mypage.do?action=Review'/>">나의 후기</a></li>
-            <li><a href="<c:url value='/member/mypage.do?action=Shopping'/>">장바구니</a></li>
-        </ul>
-    </div>
-    <div class="order">
-        <ul class="title">
-            <li>주문내역조회</li>
-        </ul>
-        <table>
-            <thead>
-                <tr>
-                    <th>주문 번호</th>
-                    <th>상품 정보</th>
-                    <th>주문 일자</th>
-                    <th>주문 상태</th>
-                </tr>
-            </thead>
-            <c:choose>
-                <c:when test="${not empty orderList}">
-                    <tbody>
-                        <c:forEach items="${orderList}" var="order" varStatus="loop">
-                            <tr>
-                                <td>${order.id}</td>
-                                <td>${order.getProductName(0)} 등, ${order.getProductListLength()}개 상품</td>
-                                <td><fmt:formatDate value="${order.order_date}" pattern="yyyy-MM-dd"/></td>
-                                <td>
+    <h1>
+        <a href="<c:url value='/index.do'/>">Super Hero Story</a>
+    </h1>
+    <div class="mypage">
+        <div class="nav">
+            <ul>
+                <li><a href="<c:url value='/member/mypage.do'/>">회원정보</a></li>
+                <li><a href="<c:url value='/member/mypage.do?action=Order'/>">주문내역</a></li>
+                <li><a href="<c:url value='/member/mypage.do?action=QnA'/>">나의 문의내역</a></li>
+                <li><a href="<c:url value='/member/mypage.do?action=Review'/>">나의 후기</a></li>
+                <li><a href="<c:url value='/member/mypage.do?action=Shopping'/>">장바구니</a></li>
+            </ul>
+        </div>
+        <div class="order">
+            <ul class="title">
+                <li>주문내역조회</li>
+            </ul>
+            <table>
+                <thead>
+                    <tr>
+                        <th>주문 번호</th>
+                        <th>상품 정보</th>
+                        <th>주문 일자</th>
+                        <th>주문 상태</th>
+                    </tr>
+                </thead>
+                <c:choose>
+                    <c:when test="${not empty orderList}">
+                        <tbody>
+                            <c:forEach items="${orderList}" var="order" varStatus="loop">
+                                <tr>
+                                    <td>${order.id}</td>
                                     <c:choose>
-                                        <c:when test="${order.status == 1}">결제 대기중</c:when>
-                                        <c:when test="${order.status == 2}">결제 완료</c:when>
-                                        <c:when test="${order.status == 3}">배송 준비중</c:when>
-                                        <c:when test="${order.status == 4}">배송중</c:when>
-                                        <c:when test="${order.status == 5}">배송 완료</c:when>
-                                        <c:otherwise>오류 발생</c:otherwise>
+                                        <c:when test="${order.getProductListLength() > 0}">
+                                            ${order.getProductName(0)} 등, ${order.getProductListLength()}개 상품
+                                        </c:when>
+                                        <c:otherwise>
+                                            상품 목록이 없습니다.
+                                        </c:otherwise>
                                     </c:choose>
-                                </td>
+                                    <td><fmt:formatDate value="${order.order_date}" pattern="yyyy-MM-dd"/></td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${order.status == 1}">결제 대기중</c:when>
+                                            <c:when test="${order.status == 2}">결제 완료</c:when>
+                                            <c:when test="${order.status == 3}">배송 준비중</c:when>
+                                            <c:when test="${order.status == 4}">배송중</c:when>
+                                            <c:when test="${order.status == 5}">배송 완료</c:when>
+                                            <c:otherwise>오류 발생</c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </c:when>
+                    <c:otherwise>
+                        <tbody>
+                            <tr>
+                                <td colspan="4">주문하신 내역이 없습니다.</td>
                             </tr>
-                        </c:forEach>
-                    </tbody>
-                </c:when>
-                <c:otherwise>
-                    <tbody>
-                        <tr>
-                            <td colspan="4">주문하신 내역이 없습니다.</td>
-                        </tr>
-                    </tbody>
-                </c:otherwise>
-            </c:choose>
-        </table>
+                        </tbody>
+                    </c:otherwise>
+                </c:choose>
+            </table>
+        </div>
     </div>
-</div>
 </body>
 </html>
