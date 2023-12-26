@@ -27,6 +27,7 @@ public class MypageController extends HttpServlet {
                 .orElse("null");
         int pid = LookUp.getAuth(req, resp);
         switch (action) {
+            //TODO 철홍: 하드코딩 -> 구현 필요
             case "Order" -> {
                 OrderDAO dao = new OrderDAO();
                 List<OrderDTO> orderList = dao.selectOrderList(String.valueOf(pid));
@@ -50,7 +51,7 @@ public class MypageController extends HttpServlet {
                 req.setAttribute("bbs", bbs);
                 req.getRequestDispatcher("/member/MyReview.jsp").forward(req, resp);
             }
-
+            //TODO 철홍: 장바구니에 상품이 없을 때도 '상품이 없습니다.'가 뜨게 + 기능 구현
             case "Shopping" -> req.getRequestDispatcher("/member/MyShoppingCart.jsp").forward(req, resp);
 
             default -> req.getRequestDispatcher("/member/MyPage.jsp").forward(req, resp);
