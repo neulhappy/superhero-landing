@@ -20,7 +20,7 @@
                 <dd>
                     <p>${product.name}</p>
                     <p>${product.price}원</p>
-                    <input type="button" value="장바구니" onclick="addCart(${product.id})">
+                    <input type="button" value="장바구니" onclick="addCart(${product.id},'${product.name}', ${product.price})">
                 </dd>
             </dl>
         </c:forEach>

@@ -94,9 +94,9 @@
         <input type="text" placeholder="ID" name="id" id="id"/>
         <input type="password" placeholder="Password" name="pw" id="pw" autocomplete="current-password"/>
         <button name="submit">Login</button>
-        <div class="sign-up-box" id="signup">
-            <i class="material-icons"><a href="Join.jsp">Sign Up</a></i>
-        </div>
+        <a href="Join.jsp"><div class="sign-up-box" id="signup">
+            <i class="material-icons">Sign Up</i>
+        </div></a>
     </form>
     <script>
         const inpId = document.querySelector('#id');
