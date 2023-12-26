@@ -40,7 +40,7 @@ public class PayController extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         out.println("<h1>결제가 완료되었습니다.</h1>");
-        out.println("<button onclick=\"window.location.href='order.jsp'\">다음으로</button>");
+        out.println("<button onclick=\"window.location.href='../index.jsp'\">처음으로</button>");
         out.println("</body>");
         out.println("</html>");
 
