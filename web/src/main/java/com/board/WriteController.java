@@ -28,22 +28,24 @@ public class WriteController extends HttpServlet {
             Alert.alertBack("잘못된 접근입니다.", out);
         } else {
             int pid = LookUp.getAuth(req, resp);
-            req.setAttribute("board", board);
-            if (postId == null || postId.isEmpty()) {
-                req.getRequestDispatcher("/board/writePage.jsp").forward(req, resp);
-            } else {
-                if (pid > 0) {
-                    BoardDAO dao = new BoardDAO();
-                    BoardDTO post = dao.selectView(postId, board);
-                    dao.close();
-                    if (pid == post.getAuthor_id()) {
-                        req.setAttribute("post", post);
-                        req.setAttribute("action", "update");
-                        req.getRequestDispatcher("/board/writePage.jsp").forward(req, resp);
-                    } else {
-                        resp.setContentType("text/html;charset=UTF-8");
-                        PrintWriter out = resp.getWriter();
-                        Alert.alertBack("작성자만 수정할 수 있습니다.", out);
+            if (pid > 1) {
+                req.setAttribute("board", board);
+                if (postId == null || postId.isEmpty()) {
+                    req.getRequestDispatcher("/board/writePage.jsp").forward(req, resp);
+                } else {
+                    if (pid > 0) {
+                        BoardDAO dao = new BoardDAO();
+                        BoardDTO post = dao.selectView(postId, board);
+                        dao.close();
+                        if (pid == post.getAuthor_id()) {
+                            req.setAttribute("post", post);
+                            req.setAttribute("action", "update");
+                            req.getRequestDispatcher("/board/writePage.jsp").forward(req, resp);
+                        } else {
+                            resp.setContentType("text/html;charset=UTF-8");
+                            PrintWriter out = resp.getWriter();
+                            Alert.alertBack("작성자만 수정할 수 있습니다.", out);
+                        }
                     }
                 }
             }
@@ -58,8 +60,6 @@ public class WriteController extends HttpServlet {
                 .filter(s -> !s.isEmpty())
                 .map(Integer::parseInt)
                 .orElse(0);
-
-        //TODO 철홍 : 글작성시 이쪽으로 빠지는듯 합니다.
         if (action == null || board == null) {
             resp.setContentType("text/html;charset=UTF-8");
             PrintWriter out = resp.getWriter();
