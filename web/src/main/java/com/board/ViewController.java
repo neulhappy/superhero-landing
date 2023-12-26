@@ -17,7 +17,6 @@ public class ViewController extends HttpServlet {
         String board = req.getParameter("board");
         String postId = req.getParameter("id");
         BoardDAO dao = new BoardDAO();
-        //TODO 철홍: 이곳의 문제인지는 모르겠는데 FAQ 사이트에서 봄입니다를 상세보기 하려면 postId가 null값이라고 하네요
         BoardDTO post = dao.selectView(postId, board);
         req.setAttribute("post", post);
         if (board.isEmpty() || postId.isEmpty()) {
