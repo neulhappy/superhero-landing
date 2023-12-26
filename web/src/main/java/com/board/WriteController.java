@@ -56,12 +56,10 @@ public class WriteController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String action = req.getParameter("action");
         String board = req.getParameter("board");
-        System.out.println(req.getParameter("id"));
         int postId = Optional.ofNullable(req.getParameter("id"))
                 .filter(s -> !s.isEmpty())
                 .map(Integer::parseInt)
                 .orElse(0);
-        System.out.println(postId);
         if (action == null || board == null) {
             resp.setContentType("text/html;charset=UTF-8");
             PrintWriter out = resp.getWriter();
