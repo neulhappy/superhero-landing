@@ -81,7 +81,6 @@ public class OrderDAO extends DBConnPool {
             while (rs.next()) {
                 OrderDTO dto = new OrderDTO();
                 makeWholeDTO(userId, dto);
-
                 orderList.add(dto);
             }
         } catch (SQLException e) {
@@ -92,15 +91,15 @@ public class OrderDAO extends DBConnPool {
     }
 
     private void makeWholeDTO(String userId, OrderDTO dto) throws SQLException {
-        dto.setId(rs.getInt("1"));
-        dto.setCustom_id(rs.getInt("2"));
-        dto.setStatus(rs.getInt("3"));
-        dto.setPurchaser_name(rs.getString("4"));
-        dto.setRecipient_name(rs.getString("5"));
-        dto.setAddress(rs.getString("6"));
-        dto.setContact(rs.getString("7"));
-        dto.setOrder_date(rs.getDate("8"));
-        dto.setInvoice(rs.getString("9"));
+        dto.setId(rs.getInt("ID"));
+        dto.setCustom_id(rs.getInt("CUSTOM_ID"));
+        dto.setStatus(rs.getInt("STATUS"));
+        dto.setPurchaser_name(rs.getString("PURCHASER_NAME"));
+        dto.setRecipient_name(rs.getString("RECIPIENT_NAME"));
+        dto.setAddress(rs.getString("ADDRESS"));
+        dto.setContact(rs.getString("CONTACT"));
+        dto.setOrder_date(rs.getDate("ORDER_DATE"));
+        dto.setInvoice(rs.getString("INVOICE"));
         dto.setProductList(selectOrderProductLists(Integer.parseInt(userId)));
     }
 
