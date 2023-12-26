@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
@@ -27,7 +28,7 @@
                   onsubmit="return validateForm(this)">
                 <input type="hidden" name="id" value="${post.id}">
                 <input type="hidden" name="board" value="${board}">
-                <input type="hidden" name="content" value="">
+                <input type="hidden" name="content" value="${fn:escapeXml(post.content)}">
                 <table border="1" style="width: 100%; min-height: 50px;">
                     <tr>
                         <td style="text-align: center; font-size: 1.6rem; font-weight: 700; border-bottom: 1px solid black">
@@ -70,7 +71,7 @@
                 height: '500px',                        // 에디터 영역의 높이 값 (OOOpx || auto)
                 initialEditType: 'markdown',            // 최초로 보여줄 에디터 타입 (markdown || wysiwyg)
                 previewStyle: 'vertical',                // 마크다운 프리뷰 스타일 (tab || vertical)
-                initialValue: '${post.content}'
+                initialValue: document.forms['writeFrm'].content.value
             });
         </script>
 

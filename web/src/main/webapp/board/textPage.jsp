@@ -1,5 +1,6 @@
 <%@ taglib prefix="fmt" uri="jakarta.tags.fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8" %>
 <html>
 <head>
@@ -14,6 +15,7 @@
         <input type="hidden" name="board" value="${post.boardId}"/>
         <input type="hidden" name="id" value="${post.id}"/>
         <input type="hidden" name="action" value="delete"/>
+        <div id="content" style="display: none;">${fn:escapeXml(post.content)}</div>
         <header id="header">
             <h1><a href="../index.jsp"><img src="../img/textlogo.png" alt="상세페이지 로고"></a></h1>
             <div class="icon">
@@ -54,13 +56,12 @@
                     document.getElementById('deleteForm').submit();
                 }
             }
-
             document.addEventListener('DOMContentLoaded', function () {
                 const viewer = new toastui.Editor({
                     el: document.querySelector('#viewer'),
                     viewer: true,
                     height: '500px',
-                    initialValue: '${post.content}'
+                    initialValue: document.getElementById('content').innerHTML
                 });
             });
         </script>
