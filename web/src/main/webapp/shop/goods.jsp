@@ -7,6 +7,7 @@
     <script src="../js/shop.js"></script>
 </head>
 <body>
+<div id="wrap">
     <header>
         <jsp:include page="goodsPage.jsp"/>
     </header>
@@ -30,6 +31,10 @@
         <a href="<c:url value='/shop/order.do'/>"><img src="../img/basket.png" alt="장바구니"></a>
     </div>
 
+    <footer>
+        <jsp:include page="../include/Footer.jsp"/>
+    </footer>
+</div>
 
 </body>
 </html>

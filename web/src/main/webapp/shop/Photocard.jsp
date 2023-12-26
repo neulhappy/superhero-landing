@@ -24,10 +24,12 @@
                 </dd>
             </dl>
         </c:forEach>
+    </div>
+
         <div class="basket">
             <a href="<c:url value='/shop/order.do'/>"><img src="../img/basket.png" alt="장바구니"></a>
         </div>
-    </div>
+
     </main>
 
     <footer id="footer">
