@@ -12,15 +12,17 @@
             list-style: none;
         }
         body {
-            width: 1200px;
+
             font-family: 'Noto Sans KR', sans-serif;
             font-size: 1.3em;
             line-height: 1.6;
         }
 
         .mypage {
+            width: 1200px;
             display: flex;
             justify-content: space-between;
+            width: calc((100% - 100px) / 2);
         }
 
         h1 {
@@ -46,8 +48,8 @@
         }
 
         .order {
-            margin-top: 30px;
-            font-size: 1.1rem;
+            padding-top: 70px;
+            font-size: 1.0rem;
             width: 800px;
 
         }
@@ -55,24 +57,27 @@
         .order > .title {
             display: flex;
             justify-content: left;
-            height: 20px;
+            align-items: center;
             width: 700px;
             background: black;
             border-radius: 4px;
             color: #ffffff;
-            padding: 10px 0 15px 30px;
+            padding: 5px 0 5px 15px;
             font-weight: 600;
         }
 
         table {
             width: 700px;
-            height: 300px;
             text-align: center;
+        }
+        table td {
+            padding-top: 30px;
         }
 
         span {
             color: rgb(128, 128, 128);
         }
+        footer {transform: translate(0, 50px)}
     </style>
 </head>
 <body>
@@ -142,5 +147,8 @@
             </table>
         </div>
     </div>
+    <footer>
+        <jsp:include page="../include/Footer.jsp"/>
+    </footer>
 </body>
 </html>

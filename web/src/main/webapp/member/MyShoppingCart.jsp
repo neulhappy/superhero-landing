@@ -18,7 +18,6 @@
             width: 1200px;
             display: flex;
             justify-content: space-between;
-            width: 900px;
         }
 
         h1 {
@@ -55,7 +54,23 @@
         span {
             color: rgb(128, 128, 128);
         }
+        #cartTable {
+            padding-top: 70px;
+        }
+        #cartTable th {
+            font-size: 1.1rem;
+            background: black;
+            border-radius: 4px;
+            color: white;
+            width: 800px;
 
+        }
+        #cartTable td {
+            padding: 20px 0 0 20px;
+            font-size: 1.0rem;
+            width: 800px;
+            text-align: center;
+        }
         footer{transform: translate(0, 50px)}
     </style>
 </head>

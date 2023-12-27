@@ -76,7 +76,7 @@
         }
 
         .box button {
-            background-color: #5e5e5e;
+            background-color: #000000;
             color: #ffffff;
             border-radius: 4px;
             font-weight: 600;

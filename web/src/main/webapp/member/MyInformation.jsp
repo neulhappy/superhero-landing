@@ -73,7 +73,7 @@
             color: #f3f3f3;
             width: 100px;
             height: 30px;
-            background: #575757;
+            background: #232323;
             font-family: 'Noto Sans KR', sans-serif;
             font-size: 0.7em;
         }

@@ -10,9 +10,20 @@
           integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../css/paymentstyle.css"/>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+        }
         .orderPage {
             display: flex;
             list-style: none;
+        }
+        label {
+            background:#61A1FE;
+            border-radius: 4px;
+            color: white;
+            padding: 5px 10px;
+            font-weight: 600;
         }
 
         .bag {
@@ -31,6 +42,20 @@
 
         footer {transform: translate(0, 50px)}
 
+        #cartTable th {
+            font-size: 1.0rem;
+            background: #61A1FE;
+            border-radius: 4px;
+            color: white;
+            text-align: center;
+            width: 250px;
+
+        }
+        #cartTable td {
+            padding: 20px 0 0 20px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
 
     </style>
 </head>

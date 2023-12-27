@@ -59,6 +59,7 @@
         table thead th {
             border-radius: 3px;
             color: #ffffff;
+            padding: 5px 10px;
         }
         span {
             color: rgb(128, 128, 128);
