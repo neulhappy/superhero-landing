@@ -131,15 +131,15 @@ public class OrderDAO extends DBConnPool {
             psmt = con.prepareStatement(query);
             psmt.setInt(1, orderId);
 
-            ResultSet LocalRs = psmt.executeQuery();
-            while (LocalRs.next()) {
+            ResultSet localRs = psmt.executeQuery();
+            while (localRs.next()) {
                 OrderDTO.ProductSet dto = new OrderDTO.ProductSet();
-                dto.setProd_id(rs.getInt("prod_id"));
-                dto.setQuantity(rs.getInt("quantity"));
-                dto.setProd_name(rs.getString("prod_name"));
+                dto.setProd_id(localRs.getInt("prod_id"));
+                dto.setQuantity(localRs.getInt("quantity"));
+                dto.setProd_name(localRs.getString("prod_name"));
                 orderProducts.add(dto);
             }
-            LocalRs.close();
+            localRs.close();
         } catch (SQLException e) {
             Logger.error("selectOrderProductLists 중 예외 발생", e);
         }
