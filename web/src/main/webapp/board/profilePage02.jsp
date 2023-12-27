@@ -45,7 +45,6 @@
 
     <main id="main">
         <div class="content">
-
             <ul class="Hero">
                 <li>
                     <img src="../img/hero/dr.jpg" alt="닥터스트레인지">
@@ -541,7 +540,6 @@
         };
 
     </script>
-
 
 </body>
 </html>
