@@ -111,7 +111,7 @@
                                     <td>
                                         <c:choose>
                                             <c:when test="${order.getProductListLength() > 0}">
-                                                ${order.getProductName(0)} 등, ${order.getProductListLength()}개 상품
+                                                ${order.getProductName(0)}<c:if test="${order.getProductListLength() > 1}"> 등, ${order.getProductListLength()}개 상품</c:if>
                                             </c:when>
                                             <c:otherwise>
                                                 상품 목록이 없습니다.
