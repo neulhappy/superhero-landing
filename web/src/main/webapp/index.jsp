@@ -13,43 +13,43 @@
             <div class="image">
                 <ul class="img1">
                     <li class="image1">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                     <li class="image2">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                     <li class="image3">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                     <li class="image4">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                     <li class="image5">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                     <li class="image6">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                 </ul>
 
                 <ul class="img2">
                     <li class="image7">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                     <li class="image8">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                     <li class="image9">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                     <li class="image10">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                     <li class="image11">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                     <li class="image12">
-                        <img src="img/snow.png" alt="눈">
+                        <img src="img/snow.png" alt="캐릭터">
                     </li>
                 </ul>
             </div>
