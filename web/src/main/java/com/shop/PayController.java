@@ -30,24 +30,11 @@ public class PayController extends HttpServlet {
         String orderId = req.getParameter("orderId");
 
 
-        // 클라이언트에 응답을 보냅니다.
-        resp.setContentType("text/html; charset=UTF-8");
-        req.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
-        out.println("<html>");
-        out.println("<head>");
-        out.println("<title>결제 정보</title>");
-        out.println("</head>");
-        out.println("<body>");
-        out.println("<h1>결제가 완료되었습니다.</h1>");
-        out.println("<button onclick=\"window.location.href='../index.jsp'\">처음으로</button>");
-        out.println("</body>");
-        out.println("</html>");
-
-
         //결제 일자를 업데이트
         OrderDAO dao = new OrderDAO();
         dao.updatePaydate(orderId, pay_date);
         dao.updateStatus(orderId, "2");
+
+        req.getRequestDispatcher("../shop/paySuccess.jsp").forward(req, resp);
     }
 }

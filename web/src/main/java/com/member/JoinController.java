@@ -22,7 +22,6 @@ public class JoinController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("doPost 진입 성공!");
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
@@ -37,7 +36,6 @@ public class JoinController extends HttpServlet {
         mDto.setUser_id(id);
         mDto.setPassword(pw);
         mDto.setEmail(email);
-        System.out.println(pw);
         int joinResult = dao.join(mDto);
         dao.close();
 

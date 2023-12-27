@@ -50,7 +50,7 @@ public class OrderController extends HttpServlet {
                 OrderDAO oDao = new OrderDAO();
                 int orderId = oDao.insertOrder(dto);
                 int totalPrice = oDao.totalPrice(orderId);
-                System.out.println("insertQuery작동됨");
+
 
                 oDao.close();
                 if (orderId != 0) {

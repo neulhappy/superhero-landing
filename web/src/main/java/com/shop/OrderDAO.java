@@ -89,9 +89,9 @@ public class OrderDAO extends DBConnPool {
     }
 
     private void makeWholeDTO(OrderDTO dto) throws SQLException {
-        dto.setId(rs.getInt("ID"));
-        int userId = rs.getInt("CUSTOM_ID");
-        dto.setCustom_id(userId);
+        int orderId = rs.getInt("ID");
+        dto.setId(orderId);
+        dto.setCustom_id(rs.getInt("CUSTOM_ID"));
         dto.setStatus(rs.getInt("STATUS"));
         dto.setPurchaser_name(rs.getString("PURCHASER_NAME"));
         dto.setRecipient_name(rs.getString("RECIPIENT_NAME"));
@@ -99,7 +99,7 @@ public class OrderDAO extends DBConnPool {
         dto.setContact(rs.getString("CONTACT"));
         dto.setOrder_date(rs.getDate("ORDER_DATE"));
         dto.setInvoice(rs.getString("INVOICE"));
-        dto.setProductList(selectOrderProductLists(userId));
+        dto.setProductList(selectOrderProductLists(orderId));
     }
 
 

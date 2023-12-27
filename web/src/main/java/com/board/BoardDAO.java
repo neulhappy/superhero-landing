@@ -17,7 +17,6 @@ public class BoardDAO extends DBConnPool {
                 "INNER JOIN custom m ON b.author_id = m.id " +
                 "WHERE b.is_published = 'Y' " +
                 "ORDER BY b.id DESC";
-        System.out.println(query);
         try {
             psmt = con.prepareStatement(query);
             rs = psmt.executeQuery();
@@ -43,7 +42,6 @@ public class BoardDAO extends DBConnPool {
                 "INNER JOIN custom m ON b.author_id = m.id " +
                 "WHERE b.is_published = 'Y' AND b.author_id = ? " +
                 "ORDER BY b.id DESC";
-        System.out.println(query);
         try {
             psmt = con.prepareStatement(query);
             psmt.setString(1, userId);
