@@ -4,13 +4,13 @@ package com.board.hero;
 
 public class HeroInfo {
 
-    private String heroName;
-    private String name;
-    private String actor;
-    private int age;
-    private String mbti;
-    private int recommend;
-    private String story;
+    private final String heroName;
+    private final String name;
+    private final String actor;
+    private final int age;
+    private final String mbti;
+    private final int recommend;
+    private final String story;
 
     public HeroInfo(String heroName, String name, String actor, int age, String mbti, int recommend, String story) {
         this.heroName = heroName;

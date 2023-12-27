@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class HeroManager {
     private Files request;
-    private Map<HeroName, HeroInfo> heros = new HashMap<>();
+    private final Map<HeroName, HeroInfo> heros = new HashMap<>();
 
     // 기존 메서드들 유지...
 
