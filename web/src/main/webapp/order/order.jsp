@@ -51,7 +51,8 @@
         </div>
 
         <div class="container mt-5">
-            <form id="orderForm" class="row g-3 mx-auto p-2 col-md-6" style="width: 800px;" action="orderSuccess.do"
+            <!--action="order.do"-->
+            <form id="orderForm" class="row g-3 mx-auto p-2 col-md-6" style="width: 800px;"
                   method="post">
                 <div class="col-md-6">
                     <label class="form-label">주문자</label>
