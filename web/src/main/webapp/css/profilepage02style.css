@@ -38,30 +38,30 @@ header{height: 300px;}
 
 
 /*버튼 디자인*/
-  .popupBtn {
-      width: 150px;
-      height: 50px;
-      cursor: pointer;
-      transform: translate(-50px,-100px);
-      background: rgb(201, 91, 23);
-      font-size: 1.4rem;
-      border-radius: 20%;
-      color: white;
-  }
+.popupBtn {
+    width: 150px;
+    height: 50px;
+    cursor: pointer;
+    transform: translate(-50px,-100px);
+    background: rgb(201, 91, 23);
+    font-size: 1.4rem;
+    border-radius: 20%;
+    color: white;
+}
 
 /*모달팝업을 감싸고 있는 최상위 부모*/
-  .modalWrap {
-      position: fixed; /* Stay in place */
-      z-index: 999; /* Sit on top */
-      padding-top: 100px; /* Location of the box */
-      left: 0;
-      top: 0;
-      width: 100%; /* Full width */
-      height: 100%; /* Full height */
-      overflow: auto; /* Enable scroll if needed */
-      background-color: rgba(166, 150, 150, 0.4); /* Black w/ opacity */
-      display: none;
-  }
+.modalWrap {
+    position: fixed; /* Stay in place */
+    z-index: 999; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(166, 150, 150, 0.4); /* Black w/ opacity */
+    display: none;
+}
 
 /*모달 본문*/
 .modalContent{
@@ -71,20 +71,20 @@ header{height: 300px;}
 
 
 /*모달 팝업창*/
-  .modalBody {
-      width: 500px;
-      height: 500px;
-      padding: 30px 50px;
-      margin: 0 auto;
-      border: 3px solid #777;
-      background-color: #fff;
-  }
+.modalBody {
+    width: 500px;
+    height: 500px;
+    padding: 30px 50px;
+    margin: 0 auto;
+    border: 3px solid #777;
+    background-color: #fff;
+}
 
 /*닫기 버튼*/
-  .closeBtn {
-      float:right;
-      font-weight: bold;
-      color: #777;
-      font-size:25px;
-      cursor: pointer;
-  }
+.closeBtn {
+    float:right;
+    font-weight: bold;
+    color: #777;
+    font-size:25px;
+    cursor: pointer;
+}

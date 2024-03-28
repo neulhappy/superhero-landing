@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Text&family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 /* 공통사항 */
-body { overflow-x: hidden; font-family: 'Noto Sans KR', sans-serif; font-size: 1.6rem; line-height: 1.6; color: #000; }
+body { overflow-x: hidden; font-family: 'Noto Sans KR', sans-serif; font-size: 1.6rem; line-height: 1.6; color: #ffffff; background-color: black;  }
 #wrap {width: 100%; background: black;}
 *{margin: 0; padding: 0;}
 
@@ -14,16 +14,16 @@ body { overflow-x: hidden; font-family: 'Noto Sans KR', sans-serif; font-size: 1
 
 ul{list-style: none;}
 
-#header {max-height: 360px; background: white}
+#header {max-height: 360px; background-color: black;}
 .inner {transform: translate(0, -200px); }
 
 h1 {text-align: center}
 h1 a img {width: 400px; height: 400px;}
 .login{translate: 1500px; display: flex; font-size: 1rem; font-weight: 600;}
 .login li{transform: translate(0, -3px); }
-.login a {text-decoration: none; color: black; padding: 0 10px; font-weight: 600}
+.login a {text-decoration: none; color: white; padding: 0 10px; font-weight: 600}
 
-#header {position: relative}
+#header {position: relative; background-color: black;}
 
 #menu{
     width: 100%;
@@ -33,7 +33,7 @@ h1 a img {width: 400px; height: 400px;}
 #menu ul{
     display: flex;
     justify-content: space-around;
-    background-color: rgba(42, 53, 169, 0.5);
+    background-color: rgba(43, 49, 115, 0.5);
     list-style: none;
     margin: 0;
 }
@@ -64,35 +64,8 @@ h1 a img {width: 400px; height: 400px;}
     animation-fill-mode: forwards;
 }
 
-.image .image1 {position: absolute; top: 800px; left: 200px;}
-.image .image2 {position: absolute; top: 300px; left: 1100px;}
-.image .image3 {position: absolute; top: 400px; left: 300px;}
-.image .image4 {position: absolute; top: 600px; left: 600px;}
-.image .image5 {position: absolute; top: 200px; left: 900px;}
-.image .image6 {position: absolute; top: 400px; left: 100px;}
-.image .image7 {position: absolute; top: 200px; left: 400px;}
-.image .image8 {position: absolute; top: 300px; left: 1300px;}
-.image .image9 {position: absolute; top: 300px; left: 600px;}
-.image .image10 {position: absolute; top: 500px; left: 1400px;}
-.image .image11 {position: absolute; top: 140px; left: 1200px;}
-.image .image12 {position: absolute; top: 150px; left: 1600px;}
 
 
-@keyframes snow {
-    0% { transform: skew(0,0); opacity: 1}
-    20% { transform: skew(-15deg,20deg); opacity: 0.8}
-    50% { transform: skew(0deg,25deg); opacity: 0.6}
-    70% { transform: skew(-15deg,30deg); opacity: 0.3}
-    100% { transform: skew(0deg,35deg) ; opacity: 0}
-}
-
-@keyframes snow2 {
-    0% { transform: skew(0,0); opacity: 1}
-    20% { transform: skew(15deg,5deg); opacity: 0.8}
-    50% { transform: skew(0deg,10deg); opacity: 0.6}
-    70% { transform: skew(15deg,15deg); opacity: 0.3 }
-    100% { transform: skew(0deg,20deg) ; opacity: 0 }
-}
 
 
 #main div{
@@ -119,6 +92,6 @@ h1 a img {width: 400px; height: 400px;}
 
 #footer {
     text-align: right; padding: 100px 50px 50px 0; font-size: 1rem; color: #8f8a8a;
-    background: url("../img/mainfooter.png") no-repeat center white;
+    background: url("../img/mainfooter.png") no-repeat center black;
     background-size: 500px;
 }
